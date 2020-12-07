@@ -1,0 +1,353 @@
+// Lightbox - dark background
+// Click to close modal
+
+#modalLightbox{
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+
+
+// Modal Structure
+// Modal Structure
+.modal-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    padding: 0 6%;
+    background-color: fade-out(black, 0.4);
+    z-index: 10000;
+	backdrop-filter: blur(3px);
+
+    @media only screen and (max-width: fullMobile) {
+        justify-content: flex-end;
+        padding: 0;
+    }
+
+    .modal{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-width: 400px;
+        max-width: 680px;
+        border-radius: borderRadiusL;
+        background-color: white;
+        min-height: 240px;
+        max-height: 90vh;
+        margin: 0 auto;
+
+        @media only screen and (max-width: fullMobile) {
+            width: 100%;
+            min-width: none;
+            max-width: none;
+            max-height: 85vh;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        
+
+        // Modal header - title and close button
+        .modal-header{
+            display: flex;
+            justify-content: space-between;
+            box-sizing: border-box;
+            padding: 15px 20px;
+            font-family: poppins;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: -0.4px;
+            border-bottom: 1px solid #e5e5e5;
+
+            @media only screen and (max-width: fullMobile) {
+                padding: 15px 20px 5px 20px;
+            }
+
+            .modal-close{
+                font-weight: 500;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                font-size: 42px;
+                line-height: 0;
+                transition: 0.2s;
+                color: fade-out(black, 0.7);
+
+                &:hover{
+                    cursor: pointer;
+                    transition: 0.2s;
+                    color: red;
+                }
+                &:active{
+                    opacity: 0.5;
+                }
+            }
+        }
+
+        // Modal content
+        .modal-content{
+            box-sizing: border-box;
+            padding: 0 0;
+            margin-bottom: 10px;
+            flex-grow: 3;
+            overflow: auto;
+
+            &.nopadding{
+                padding: 0;
+            }
+
+            p{
+                &:last-child{
+                    padding-bottom: 0;
+                }
+            }
+
+            .user-guide-header{
+                display: block;
+                text-align: center;
+                font-size: 16pt;
+                box-sizing: border-box;
+                padding: 10px 0 25px 0;
+            }
+
+            .user-guide-item{
+                display: block;
+                box-sizing: border-box;
+                padding: 35px 15px 35px 0;
+                border-bottom: 1px solid rgba(0,0,0,0.1);
+
+                &:nth-child(even){
+                    background-color: rgba(0,0,0,0.04);
+                }
+
+                p{
+                    display: -webkit-flex;
+                    display: flex;
+                    -webkit-flex-direction: column;
+                    flex-direction: column;
+                    -webkit-justify-content: center;
+                    justify-content: center;
+                    -webkit-flex-grow: 2;
+                    flex-grow: 2;
+                    padding-left: 15px !important;
+                    padding-right: 20px !important;
+                    box-sizing: border-box;
+                    font-size: 12pt;
+
+                    b{
+                        color: rgba(0,0,0,0.6);
+                        display: block;
+                        font-weight: bolder;
+                        padding-bottom: 10px;
+                    }
+                }
+
+                img{
+                    display: block;
+                    height: 100%;
+                    margin: 10px auto;
+                    width: auto;
+                    max-height: 200px;
+                    max-width: 100%;
+                    min-height: 70px;
+                    min-width: 120px;
+                    border: 4px solid rgba(0,0,0,0.15);
+                }
+
+                .user-guide-item-image{
+                    display: inline-block;
+                    width: 100%;
+                    height: 100px;
+                }
+            }
+
+            @media only screen and (max-width: fullMobile) {
+                max-height: 50vh;
+            }
+        }
+        // Modal Actions/buttons
+        .modal-actions{
+            display: flex;
+            justify-content: space-between;
+            box-sizing: border-box;
+			padding: 15px 17px;
+			border-top: 1px solid #e5e5e5;
+
+            @media only screen and (max-width: fullMobile) {
+                padding: 0;
+            }
+            &.left{
+                justify-content: flex-start;
+            }
+            &.right{
+                justify-content: flex-end;
+            }
+            &.center{
+                justify-content: center;
+            }
+
+            button{
+                margin: 0 3px;
+
+                @media only screen and (max-width: fullMobile) {
+                    margin: 0 0 0 0;
+                    flex-grow: 3;
+                    border-radius: 0;
+                    padding: 12px 10px;
+                }
+            }
+        }
+
+
+        // A little bigger modal (on large screens)
+        // A little bigger modal (on large screens)
+        &.big{
+            max-width: 880px;
+        }
+
+        // A tiny modal - for confirmations
+        // A tiny modal - for confirmations
+        &.tiny{
+            max-width: 380px;
+            min-width: 340px;
+            min-height: 200px;
+            
+            @media only screen and (max-width: fullMobile) {
+                max-width: none;
+
+                .modal-content{
+                    margin-bottom: 20px;
+                }
+            }
+        }
+    }
+}
+
+
+
+// Toast
+// Toast
+// Toast
+#toast{
+    z-index: 4999;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    width: 300px;
+    left: 50%;
+    bottom: -200px;
+    margin-left: -150px;
+    box-sizing: border-box;
+    padding: 12px 8px 12px 12px;
+    border-radius: borderRadiusM;
+    transition: bottom .3s ease-in-out,opacity 0s 0.3s ease-in-out;
+    opacity: 0;
+    box-shadow: 0 5px 25px -5px rgba(30,16,84,.3);
+    background-color: black;
+
+    #toastIcon{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        font-size: 32px;
+        margin-right: 12px;
+        width: 55px;
+        text-align: center;
+        color: white;
+    }
+
+    #toastText{
+        flex-grow: 3;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        color: white;
+
+        #toastTitle{
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 14px;
+            padding-bottom: 4px;
+            letter-spacing: 0.25px;
+        }
+        #toastBody{
+            font-size: 12.5px;
+            font-weight: 500;
+            line-height: 14px;
+            letter-spacing: 0.25px;
+        }
+    }
+
+    // Alt Toast Colors
+    &.red{
+        background-color: red;
+    }
+    &.blue{
+        background-color: blue;
+    }
+    &.black{
+        background-color: black;
+    }
+    &.white{
+        background-color: white;
+
+        #toastIcon,
+        #toastText{
+            color: black;
+        }
+    }
+
+    // When visible
+    &.visible{
+        bottom: 25px;
+        opacity: 1;
+        transition: bottom .3s ease-in-out,opacity .3s ease-in-out;
+
+        @media only screen and (max-width: fullMobile) {
+            bottom: 0px;
+        }
+    }
+
+    // Mobile toast - full width
+    @media only screen and (max-width: fullMobile) {
+        width: 100%;
+        margin-left: 0;
+        left: 0;
+        bottom: -200px;
+        padding: 18px 14px 18px 18px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        box-shadow: 0 5px 25px 5px rgba(30,16,84,.2);
+    }
+
+}
+
+
+// About Modal
+#aboutModal{
+
+    .modal-content{
+        width: 620px;
+        overflow: hidden;
+        display: flex;
+
+        tabs{
+            display: flex;
+            flex-direction: column;
+        }
+
+        tab{
+            flex-grow: 3;
+            overflow: auto;
+        }
+    }
+}

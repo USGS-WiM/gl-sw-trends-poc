@@ -1,0 +1,54 @@
+  
+<i
+class="far"
+id="sidebarToggle"
+(click)="expandSidebar = !expandSidebar"
+[ngClass]="{ 'fa-bars': !expandSidebar, 'fa-times': expandSidebar }"
+></i>
+
+<div id="sidebar" [ngClass]="{ 'expanded': expandSidebar }">
+
+
+<!-- Scrolling sidebar content -->
+<div class="sidebar-scroll">
+
+
+  <!--  Sidebar Basemaps  -->
+  <div class="sidebar-header" (click)="showBasemaps = !showBasemaps" [ngClass]="{ expanded: showBasemaps }">
+    <i class="fal fa-map"></i>
+    <b><span>Basemaps</span></b>
+  </div>
+
+  <!-- Basemaps content -->
+  <div class="sidebar-content" [ngClass]="{ expanded: showBasemaps }">
+    <div id="sidebarBasemaps" class="sidebarLayer">
+      <div class="basemap" id="basemap1" (click)="toggleLayer('OpenStreetMap')" [ngClass]="{ active: chosenBaseLayer == 'OpenStreetMap' }">Streets</div>
+      <div class="basemap" id="basemap2" (click)="toggleLayer('Topo')" [ngClass]="{ active: chosenBaseLayer == 'Topo' }">Topographic</div>
+      <div class="basemap" id="basemap4" (click)="toggleLayer('Terrain')" [ngClass]="{ active: chosenBaseLayer == 'Terrain' }">Terrain</div>
+      <div class="basemap" id="basemap5" (click)="toggleLayer('Satellite')" [ngClass]="{ active: chosenBaseLayer == 'Satellite' }">Satellite</div>
+      <div class="basemap" id="basemap5" (click)="toggleLayer('Gray')" [ngClass]="{ active: chosenBaseLayer == 'Gray' }">Gray</div>
+      <!-- <div class="basemap" id="basemap6" (click)="toggleLayer('Nautical')" [ngClass]="{ active: chosenBaseLayer == 'Nautical' }">Nautical</div> -->
+    </div>
+  </div>
+
+  <div class="sidebar-header" (click)="showAuxLayers = !showAuxLayers" [ngClass]="{ expanded: showAuxLayers }">
+    <i class="fal fa-object-group"></i>
+    <b><span>Additional Layers</span></b>
+  </div>
+
+  <!-- Auxlayer content -->
+  <div class="sidebar-content" [ngClass]="{ expanded: showAuxLayers }">
+    <div id="sidebarAuxLayers" class="sidebarLayer">
+      <div class="basemap">
+        <label>
+        <!-- <input type="checkbox" checked (click)="toggleAuxLayer('basinArea')"/>Great Lakes Basins<br> -->
+        </label>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- End Sidebar -->
+
+<!-- Sidebar lightbox for mobile -->
+<div id="sidebarLightbox" [ngClass]="{ visible: expandSidebar }" (click)="expandSidebar = false"></div>

@@ -1,0 +1,39 @@
+@import '../../styles/styleguide/variables.less';
+
+#dataView{
+    display: block;
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    height: fit-content;
+
+    &.data-blur{
+        // Blur everything except the loader
+        *:not(#dataLoader){
+            filter: blur(3px);
+        }
+    }
+    
+    &.collapsed {
+		display: none;
+    }
+
+    // Site meta
+    // Name, id, etc
+    .site-meta{
+        display: block;
+        box-sizing: border-box;
+        padding: 15px 25px;
+
+        h1{
+            font-size: 26px;
+            font-weight: 600;
+        }
+    }
+
+    .dataview-padding{
+        padding: 15px 25px;
+    }
+}

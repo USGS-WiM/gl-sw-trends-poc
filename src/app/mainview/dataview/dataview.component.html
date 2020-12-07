@@ -1,0 +1,24 @@
+
+<div id="dataView" [ngClass]="{'data-blur': dataLoading == true, 'collapsed': collapsedPanel }">
+
+    <app-dataloader-div id="dataLoader"></app-dataloader-div>
+
+    <div  class='site-meta dataview-padding'>
+    <app-tabs>
+        <tab [tabTitle]="'Summary Stats'">
+            <br/>
+            <p>
+                <br>
+            </p>
+        </tab>
+        <tab [tabTitle]="'Site Information'">
+            <br/>
+            <p style="margin-bottom: 0;">
+                <br>
+            </p>
+        </tab>
+    </app-tabs>
+
+    </div>
+
+</div>

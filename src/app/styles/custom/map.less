@@ -1,0 +1,129 @@
+// Map and legend tweaks
+
+#mapWrapper{
+    display: block;
+    width: 100%;
+	position: relative;
+	background-color: white;
+
+    #map{
+        display: block;
+        width: 100%;
+        height: 400px;
+        background-color: fade-out(black, 0.8);
+        border-bottom-left-radius: borderRadiusL;
+        transition: 0.175s ease;
+    }
+
+    #toggleMap{
+        transition: transition;
+        background-color: transparent;
+        text-align: right;     
+        box-sizing: border-box;
+        padding: 14px 8px;   
+		display: flex;
+		justify-content: center;
+		position: relative;
+		z-index: 50;
+
+		div{
+            display: flex;
+            justify-content: center;
+            opacity: 0.85;
+			transition: transition;
+			margin: 0 15px;
+
+            i,b{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            i{
+                margin-right: 5px;
+                font-size: 16px;
+            }
+            b{
+                font-size: 13px;
+                font-weight: 600;
+                font-family: sans;
+            }
+
+            &:hover{
+                cursor: pointer;
+                opacity: 1;
+				transition: transition;
+				text-decoration: underline;
+            }
+        }
+    }
+
+    // Map collapsed/minimized
+    // Map collapsed/minimized
+    &.collapsed{
+
+        #map{
+            height: 110px;
+            transition: 0.175s ease;
+
+            .leaflet-control-container,
+            .leaflet-control{
+                display: none;
+            }
+        }
+
+        #toggleMap{
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            background-color: fade-out(black, 0.35);
+            z-index: 401;
+            display: flex;
+            transition: transition;
+
+            &:hover{
+                background-color: fade-out(black, 0.525);
+			}
+			
+			div{
+				height: 100%;
+			}
+        }
+
+    }
+
+    // Map expanded/maximized
+    // Map expanded/maximized
+    &.expanded{
+		
+        #map{
+            transition: 0.175s ease;
+            top: 0;
+			position: absolute;
+			height: 100vh;
+			height: calc(100vh - 100px);
+			transition: 0.175s ease;
+		}
+		
+		#toggleMap{
+			height: 43px;
+			padding: 0;
+
+			div{
+				height: 100%;
+				width: 100%;
+			}
+        }
+
+    }
+}
+
+
+// .leaflet-control-attribution{
+// }

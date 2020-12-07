@@ -1,0 +1,122 @@
+// Structure.scss
+// Scaffolding and flex styles for basic structure of page
+// Including Sidebar
+
+#outer{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    transition: 0.15s;
+
+    header#main{
+        display: flex;
+        height: auto;
+        min-height: auto;
+        width: 100%;
+        background-color: black;
+    }
+
+    // Body wrapper
+	//  Includes sidebar and main content
+    #body{
+        display: flex;
+        flex-grow: 3;
+		height: 100%;
+
+
+        // 5000 Z-index
+        #sidebar{
+            display: block;
+            width: 280px;
+            background-color: white;
+            box-sizing: border-box;
+            overflow: auto;
+            transition: all 0.15s ease, width 0s 0.15s;
+			height: 100%;
+			height: calc(100% - 54px);
+            overflow: auto;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        
+
+            @media only screen and (max-width: 1200px) {
+                position: fixed;
+                top: auto;
+                padding-bottom: 69px;
+                left: -280px;
+                height: 100vh;
+                border-right: 1px solid fade-out(black, 0.8);
+                z-index: 5000;
+            }
+
+            // Full Mobile - menu on bottom
+            @media only screen and (max-width: 550px) {
+                top: auto;
+                bottom: -60vh;
+                padding-bottom: 15px;
+                left: 0;
+                height: 60vh;
+                border-right: none;
+                //border-top-left-radius: borderRadiusL;
+                //border-top-right-radius: borderRadiusL;
+            }
+
+            &.expanded{
+                left: 0px;
+                transition: all 0.15s ease, width 0s;
+
+                // Full Mobile
+                @media only screen and (max-width: 550px) {
+                    bottom: 0;
+                    width: 100%;
+                    border-top: 1px solid fade-out(black, 0.8);
+                }
+            }
+
+            // Scroll content within sidebar
+            .sidebar-scroll{
+                display: block;
+                overflow: auto;
+                flex-grow: 3;
+                box-sizing: border-box;
+                padding-bottom: 25px;
+            }
+        } 
+
+        main{
+            display: block;
+            flex-grow: 3;
+            overflow: auto;
+            height: 100%;
+        }
+    }
+}
+
+
+// Sidebar Lightbox
+// Sidebar Lightbox
+// Sidebar Lightbox
+// Sidebar Lightbox
+#sidebarLightbox{
+    display: block;
+    position: fixed;
+    top: auto;
+    left: 0;
+    z-index: 4999;
+    background-color: fade-out(black, 0.6);
+    height: 0px;
+    width: 100vw;
+    opacity: 0;
+    transition: height 0s 0.2s, opacity 0.2s;
+
+    &.visible{
+        opacity: 1;
+        height: 100vh;
+        transition: height 0s, opacity 0.2s;
+    }
+}
+

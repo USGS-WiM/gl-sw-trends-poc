@@ -1,0 +1,111 @@
+.loader-hidden {
+    visibility: hidden;
+}
+.sideloader-hidden {
+    visibility: hidden;
+}
+.loader-overlay {
+    position: absolute;
+    width:100%;
+    height: 100%;
+    top:0;
+    left: 0;
+    z-index: 500000;
+}
+.page-loader {
+    position: fixed!important;
+    width:100%;
+    height: 100%;
+    opacity: 1;
+    z-index: 5000;
+    background-color: rgba(0,0,30,0.6);
+    background-image:url('https://wim.usgs.gov/website-assets/branding/usgsanimated.svg');
+    display: block !important;
+    background-repeat: no-repeat;
+    background-size: 120px auto;
+    background-position: center center;
+
+    &:after{
+        content: 'Loading...';
+        position: fixed;
+        top: 64%;
+        font-size: 22px;
+        color: white;
+        width: 100%;
+        text-align: center;
+        z-index: 5001;
+      }
+}
+
+.side-loader {
+    position: absolute;
+    width:100%;
+    height: 100%;
+    z-index: 5000;
+    /*margin-left: -20px;
+    margin-top: -20px;*/
+    opacity: 1;
+    background-color: rgba(0,0,30,0.6);
+    background-image: url(https://wim.usgs.gov/website-assets/branding/usgsanimated.svg);
+    background-repeat: no-repeat;
+    background-size: 120px auto;
+    background-position: center 50px;
+    min-height: 715px;
+
+    &:after{
+        display: block;
+        content: 'Loading...';
+        width: 100%;
+        text-align: center;
+        font-size: 18px;
+        color: white;
+        box-sizing: border-box;
+        padding-top: 20px;
+        font-weight: 400;
+    }
+}
+
+// Data Loader
+// Data Loader
+// Data Loader
+
+#dataLoader{
+    width: 100%;
+    height: 100%;
+    display: block;
+    top: 0;
+    left: 0;
+    position: absolute;
+    z-index: 1;
+}
+.dataloader-hidden {
+    visibility: hidden;
+}
+
+.data-loader {
+    position: absolute;
+    width:100%;
+    height: 100%;
+    z-index: 5000;
+    /*margin-left: -20px;
+    margin-top: -20px;*/
+    opacity: 1;
+    background-color: rgba(0,0,30,0.8);
+    background-image: url(https://wim.usgs.gov/website-assets/branding/usgsanimated.svg);
+    background-repeat: no-repeat;
+    background-size: 120px auto;
+    background-position: center 50px;
+    min-height: 715px;
+    
+    &:after{
+        display: block;
+        content: 'Loading...';
+        width: 100%;
+        text-align: center;
+        font-size: 18px;
+        color: white;
+        box-sizing: border-box;
+        padding-top: 20px;
+        font-weight: 400;
+    }
+}

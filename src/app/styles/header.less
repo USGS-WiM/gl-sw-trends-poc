@@ -1,0 +1,84 @@
+header#main{
+
+    // Branding
+    #branding{
+        display: flex;
+        height: 100%;
+        box-sizing: border-box;
+        padding: 0 0 0 15px;
+
+        @media only screen and (max-width: 1200px) {
+            padding: 0 0 0 40px;
+        }
+
+        #nydecLogo,
+        #usgsLogo{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-right: 8px;
+
+            img{
+                display: block;
+                height: 38px;
+                width: auto;
+            }
+        }
+
+        #nydecLogo{
+            filter: invert(100%);
+            margin-right: 10px;
+
+            img{
+                height: 50px;
+            }
+        }
+    }
+
+    // Links on right
+    #headerLinks{
+        display: flex;
+        flex-grow: 3;
+        justify-content: flex-end;
+        box-sizing: border-box;
+        padding: 0 10px 0 0;
+
+        a{
+            display: inline-block;
+            flex-direction: column;
+            justify-content: center;
+            box-sizing: border-box;
+            padding: 0 10px;
+            margin: 12px 0;
+            color: black;
+            font-family: sans;
+            font-weight: 600;
+            font-size: 13px;
+            box-sizing: border-box;
+            padding-bottom: 2px;
+            transition: transition;
+            background-color: white;
+            border-radius: 4px;
+            margin-left: 10px;
+            padding-top: 5px;
+
+            &:hover{
+                text-decoration: underline;
+                cursor: pointer;
+            }
+            &:focus{
+                text-decoration: underline;
+            }
+            &:active{
+                text-decoration: none;
+                opacity: 0.75;
+                transition: transition;
+            }
+        }
+    }
+    #demoLabel{
+        color: white;
+        margin: 14px;
+        font-size: 22px;
+    }
+}
