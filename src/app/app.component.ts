@@ -9,6 +9,7 @@ import { SharedModule } from './shared/shared.module';
 export class AppComponent {
   title = 'gl-sw-trends';
   aboutModule: any;
+  aboutModal: any;
   expandSidebar: any;
 
   constructor(private _SharedModule: SharedModule){}

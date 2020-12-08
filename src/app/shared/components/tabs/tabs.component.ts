@@ -3,7 +3,7 @@ import { Component, OnInit, ContentChildren, QueryList, AfterContentInit } from 
 import { TabComponent } from '../tab/tab.component';
 
 @Component({
-    selector: 'tabs',
+    selector: 'app-tabs',
     templateUrl: './tabs.component.html',
     styleUrls: ['./tabs.component.less']
 })

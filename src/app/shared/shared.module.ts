@@ -6,6 +6,7 @@ import { MapService } from './services/map.service';
 import { TabsComponent } from './components/tabs/tabs.component';
 import { TabComponent } from './components/tab/tab.component';
 import { LoaderService } from './services/loader.service';
+import { DataLoaderComponent } from './components/loader/dataloader.component';
 //import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 //import { Observable } from 'rxjs';
@@ -13,9 +14,9 @@ import { HttpClient } from '@angular/common/http';
 //@Injectable()
 
 @NgModule({
-    declarations: [TabsComponent, TabComponent, LoaderComponent],
+    declarations: [TabsComponent, TabComponent, LoaderComponent, DataLoaderComponent],
     imports: [CommonModule],
-    exports: [TabsComponent, TabComponent, LoaderComponent],
+    exports: [TabsComponent, TabComponent, LoaderComponent, DataLoaderComponent],
     providers: [MapService, LoaderService]
 })
 export class SharedModule {
