@@ -145,7 +145,7 @@ export class MapService {
         url:
           'https://services7.arcgis.com/Tk0IbKIKhaoYn5sa/ArcGIS/rest/services/GreatLakesCommissionBasinBoundary/FeatureServer/0',
       }),
-      Watersheds: esri.dynamicMapLayer({
+      watersheds: esri.dynamicMapLayer({
         url:
           'https://gis.streamstats.usgs.gov/arcgis/rest/services/StreamStats/nationalLayer/MapServer',
         layers: [2, 3, 4, 5, 6, 7],
