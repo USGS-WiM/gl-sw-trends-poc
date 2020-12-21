@@ -54,6 +54,8 @@ export class SidebarComponent implements OnInit {
       this._mapService.map.removeLayer(this._mapService.auxLayers[newVal]);
     }
   }
+
+  //when an Additional Layer is checked, add/remove that layer from the map
   public toggleAuxLayer(newVal: string, layerID: string) {
     // this._mapService.chosenAuxLayer = newVal;
     let checkboxID = document.getElementById(layerID) as HTMLInputElement;

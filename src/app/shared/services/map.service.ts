@@ -145,7 +145,7 @@ export class MapService {
         url:
           'https://services7.arcgis.com/Tk0IbKIKhaoYn5sa/ArcGIS/rest/services/GreatLakesCommissionBasinBoundary/FeatureServer/0',
       }),
-      huc8: esri.dynamicMapLayer({
+      Watersheds: esri.dynamicMapLayer({
         url:
           'https://gis.streamstats.usgs.gov/arcgis/rest/services/StreamStats/nationalLayer/MapServer',
         layers: [2, 3, 4, 5, 6, 7],
@@ -153,13 +153,6 @@ export class MapService {
         minZoom: 4,
         useCors: false,
       }),
-      /*
-      huc8: esri.featureLayer({
-        url:
-          'https://hydro.nationalmap.gov/arcgis/rest/services/wbd/MapServer/4',
-
-        //layerDefs: { 4: "HUC8 LIKE '04%'" }
-      }), */
     };
   }
 } //END Mapservice Class
