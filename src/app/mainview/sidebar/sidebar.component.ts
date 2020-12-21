@@ -13,12 +13,12 @@ export class SidebarComponent implements OnInit {
   showBasemaps: any;
   showAuxLayers: any;
   chosenBaseLayer: any;
-  displayedAuxLayers!: [];
+  displayedAuxLayers: string[]=[];
 
   constructor(private _mapService: MapService, private _formBuilder: FormBuilder) {}
 
   ngOnInit() {
-    this.displayedAuxLayers = [];
+    //this.displayedAuxLayers = [];
 
     // this.onChanges();
   }
@@ -34,15 +34,25 @@ export class SidebarComponent implements OnInit {
     this._mapService.map.addLayer(this._mapService.baseMaps[newVal]);
   }
 
-  // public toggleAuxLayer(newVal: string){
-  //   let index = this.displayedAuxLayers.indexOf(newVal);
-  //   if (index > -1){
-  //     this.displayedAuxLayers.splice(index,1);
-  //     this._mapService.map.addLayer(this._mapService.auxLayers[newVal]);
-  //   } else {
-  //     this.displayedAuxLayers.push(newVal);
-  //     this._mapService.map.removeLayer(this._mapService.auxLayers[newVal]);
-  //   }
+  //called from aux layer button click in sidebar
+  // public toggleAuxLayer(newVal: string) {
+  //   this._mapService.chosenAuxLayer = newVal;
+  //   this._mapService.map.removeLayer(this._mapService.auxLayers['basinArea']);
+  //   this._mapService.map.addLayer(this._mapService.baseMaps[newVal]);
   // }
+
+  public toggleAuxLayer2(newVal: string) {
+    let index = this.displayedAuxLayers.indexOf(newVal);
+    if (index > -1){
+      this.displayedAuxLayers.splice(index,1);
+      this._mapService.map.addLayer(this._mapService.auxLayers[newVal]);
+    } else {
+      this.displayedAuxLayers.push(newVal);
+      this._mapService.map.removeLayer(this._mapService.auxLayers[newVal]);
+    }
+  }
+  public toggleAuxLayer(newVal: string) {
+    this._mapService.chosenAuxLayer = newVal;
+  }
 
 }

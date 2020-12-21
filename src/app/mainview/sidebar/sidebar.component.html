@@ -41,7 +41,10 @@ id="sidebarToggle"
     <div id="sidebarAuxLayers" class="sidebarLayer">
       <div class="basemap">
         <label>
-        <!-- <input type="checkbox" checked (click)="toggleAuxLayer('basinArea')"/>Great Lakes Basins<br> -->
+        <input type="checkbox" id ="aux1" checked (click)="toggleAuxLayer('basinArea')"/>Great Lakes Basin<br>
+        <input type="checkbox" id ="aux2" checked (click)="toggleAuxLayer('basin')"/>Basin<br>
+        <input type="checkbox" id ="aux3" checked (click)="toggleAuxLayer('huc8')"/>HUC8<br>
+        <!-- <input type="checkbox" id ="aux4" checked (click)="toggleAuxLayer()"/>Aux4<br> -->
         </label>
       </div>
     </div>

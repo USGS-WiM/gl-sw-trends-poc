@@ -15,8 +15,13 @@ export class MapService {
   public map!: Map;
   public legend: any;
   public baseMaps: any;
-  //public auxLayers: any;
+  public auxLayers: any;
+  public chosenAuxLayer!: string;
   public chosenBaseLayer: string;
+  public sitesLayer!: L.FeatureGroup<any>;
+  public basinLayer!: any;
+  public huc8Layer!: any;
+  public overlayLayers: any;
 
 //   public siteColors = ['red', 'blue', 'green', 'gray'];
 //   public siteCategories = ['Active', 'Suspected', 'Closed', 'Other']
@@ -77,15 +82,46 @@ export class MapService {
       //   zIndex: 1
       // })
     };
+    this.chosenAuxLayer = 'basin';
 
-    // this.auxLayers = {
-    //   basinArea: esri.dynamicMapLayer({
-    //     url: 'https://gis.wim.usgs.gov/arcgis/rest/services/SIGL/SIGLMapper/MapServer',
-    //     layers: [3],
-    //     pane: 'basins',
-    //     f: 'image',
-    //     opacity: .4
-    //   })
-    // };
+    this.basinLayer = {
+      basin: esri.featureLayer({
+        url: 'https://services7.arcgis.com/Tk0IbKIKhaoYn5sa/ArcGIS/rest/services/GreatLakesCommissionBasinBoundary/FeatureServer/0'
+      })
+    };
+    this.huc8Layer = {
+      huc8: esri.dynamicMapLayer({
+        url: 'https://hydro.nationalmap.gov/arcgis/rest/services/wbd/MapServer',
+        layers: [4],
+        layerDefs: { 4: "HUC8 LIKE '04%'" }
+      })
+    };
+
+    this.auxLayers = L.layerGroup([this.basinLayer, this.huc8Layer])
+    
+    this.overlayLayers = {
+      "Great Lakes Basin": this.basinLayer,
+      "HUC8 Subbasin": this.huc8Layer
+    };
+
+    this.auxLayers = {
+      basinArea: esri.dynamicMapLayer({
+        url: 'https://gis.wim.usgs.gov/arcgis/rest/services/SIGL/SIGLMapper/MapServer',
+        layers: [3],
+        pane: 'basins',
+        f: 'image',
+        opacity: .4
+      }),
+      basin: esri.featureLayer({
+        url: 'https://services7.arcgis.com/Tk0IbKIKhaoYn5sa/ArcGIS/rest/services/GreatLakesCommissionBasinBoundary/FeatureServer/0'
+      }),
+      huc8: esri.dynamicMapLayer({
+        url: 'https://hydro.nationalmap.gov/arcgis/rest/services/wbd/MapServer',
+        layers: [4],
+        //layerDefs: { 4: "HUC8 LIKE '04%'" }
+      })
+    };
+
    }
+
 }//END Mapservice Class
