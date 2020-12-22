@@ -7,7 +7,16 @@
   <div id="map">
     <div class="leaflet-bottom leaflet-left">
       <div id="latLngScale" class="latLngScale">
-        <span class="hover-content"> <b>Map scale </b></span>
+        <span class="hover-content" style="background-color: white">
+          <b>Map scale </b></span
+        >1:<span id="scale">{{ mapScale }}</span> |
+        <span class="hover-content"> <b>Zoom level</b></span>
+        <span id="zoomLevel"> {{ mapZoomLevel }}</span
+        ><br />
+        <span class="hover-content"><b>Latitude</b></span>
+        <span id="latitude"> {{ latitude }}</span> |
+        <span class="hover-content"> <b>Longitude</b></span>
+        <span id="longitude"> {{ longitude }}</span>
       </div>
     </div>
   </div>
