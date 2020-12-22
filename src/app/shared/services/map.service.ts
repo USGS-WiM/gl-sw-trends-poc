@@ -22,6 +22,7 @@ export class MapService {
   public huc8Layer!: any;
   public overlayLayers: any;
   public basinAreaStyle: any;
+  public basinOutlineStyle: any;
 
   //   public siteColors = ['red', 'blue', 'green', 'gray'];
   //   public siteCategories = ['Active', 'Suspected', 'Closed', 'Other']
@@ -136,6 +137,12 @@ export class MapService {
       weight: 2,
     };
 
+    this.basinOutlineStyle = {
+      color: 'black',
+      fillOpacity: 0,
+      weight: 2
+    };
+
     this.auxLayers = {
       basinArea: esri.featureLayer({
         url:
@@ -144,7 +151,8 @@ export class MapService {
       }),
       basin: esri.featureLayer({
         url:
-          'https://services7.arcgis.com/Tk0IbKIKhaoYn5sa/ArcGIS/rest/services/GreatLakesCommissionBasinBoundary/FeatureServer/0',
+          'https://arcgis-server.lsa.umich.edu/arcgis/rest/services/IFR/glahf_boundaries/MapServer/0',
+        style: this.basinOutlineStyle,
       }),
       watersheds: esri.dynamicMapLayer({
         url:
