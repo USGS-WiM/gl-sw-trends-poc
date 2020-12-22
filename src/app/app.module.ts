@@ -8,9 +8,7 @@ import { SharedModule } from './shared/shared.module';
 import { MainviewModule } from './mainview/mainview.module';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     FormsModule,
@@ -18,9 +16,9 @@ import { MainviewModule } from './mainview/mainview.module';
     AppRoutingModule,
     HttpClientModule,
     MainviewModule,
-    SharedModule
+    SharedModule,
   ],
   providers: [SharedModule],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

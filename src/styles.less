@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-@import './app/styles/styleguide/styleguide.less';
+@import "./app/styles/styleguide/styleguide.less";
+@import "./assets/makers.css";
 
 // styles.scss
 // Default styling for body, html, links, etc
@@ -8,46 +9,60 @@
 // Poppins wt 300,400,700 - headers etc
 // Source Sans Pro wt 400,600,700 - Body text
 
-html{
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+html {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
-body,html{
-    display: block;
-    margin: 0;
-    padding: 0;
-    font-family: 'Source Sans Pro', sans-serif;
+body,
+html {
+  display: block;
+  margin: 0;
+  padding: 0;
+  font-family: "Source Sans Pro", sans-serif;
 }
 
-*{
-    -webkit-overflow-scrolling: touch;
-    text-rendering: optimizeLegibility;
+* {
+  -webkit-overflow-scrolling: touch;
+  text-rendering: optimizeLegibility;
+  outline: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:focus {
+    text-decoration: none;
+  }
+
+  &:active {
     outline: none;
-    
-    &:hover{
-        text-decoration: none;
-    }
-
-    &:focus{
-        text-decoration: none;
-    }
-
-    &:active{
-        outline: none;
-    }
+  }
 }
 
-@import './app/app.component.less';
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@import "./app/app.component.less";
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 .highcharts-contextbutton text {
-    fill: #fff!important;
+  fill: #fff !important;
 }
 
-.ng-option-label, .ng-value-label {
-    white-space: pre-wrap;
+.ng-option-label,
+.ng-value-label {
+  white-space: pre-wrap;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
