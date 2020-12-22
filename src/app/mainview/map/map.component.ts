@@ -3,8 +3,6 @@ import { MapService } from '../../shared/services/map.service';
 import { Map } from 'leaflet';
 import * as L from 'leaflet';
 import * as esri from 'esri-leaflet';
-import { SitelistService } from '../../data/sitelist.service';
-
 @Component({
   selector: 'app-mainview-map',
   templateUrl: './map.component.html',
@@ -15,14 +13,10 @@ export class MapComponent implements OnInit {
   collapsedDataPanel: any;
   legendExpanded = true;
 
-  constructor(
-    private _mapService: MapService,
-    private siteListService: SitelistService
-  ) {}
+  constructor(private _mapService: MapService) {}
 
   ngOnInit() {
     this.expandCollapseDataPanel();
-    this.siteListService.createSitesLayer(this.siteListService.sites);
 
     this._mapService.map = L.map('map', {
       center: L.latLng(45.0522, -82.4846), //[-82.4846, 45.0522] - GL Geo Center

@@ -22,7 +22,6 @@ export class MapService {
   public huc8Layer!: any;
   public overlayLayers: any;
   public basinAreaStyle: any;
-  public usgsGages: any;
 
   //   public siteColors = ['red', 'blue', 'green', 'gray'];
   //   public siteCategories = ['Active', 'Suspected', 'Closed', 'Other']
@@ -48,9 +47,6 @@ export class MapService {
   }
 
   constructor(private siteListService: SitelistService) {
-    this.usgsGages = this.siteListService.createSitesLayer(
-      this.siteListService.sites
-    );
     this.chosenBaseLayer = 'Topo';
 
     this.baseMaps = {
