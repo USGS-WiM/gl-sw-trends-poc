@@ -157,6 +157,10 @@ export class MapService {
       gageSites: this.siteListService.createSitesLayer(
         this.siteListService.sites
       ),
+      majorStreamlines: esri.featureLayer({
+        url:
+          'https://hydro.nationalmap.gov/arcgis/rest/services/nhd/MapServer/6',
+      }),
     };
   }
 } //END Mapservice Class
