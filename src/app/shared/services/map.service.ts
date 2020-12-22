@@ -140,19 +140,19 @@ export class MapService {
     this.basinOutlineStyle = {
       color: 'black',
       fillOpacity: 0,
-      weight: 2
+      weight: 2.5
     };
 
     this.auxLayers = {
-      basinArea: esri.featureLayer({
-        url:
-          'https://gis.wim.usgs.gov/arcgis/rest/services/SIGL/SIGLMapper/MapServer/3',
-        style: this.basinAreaStyle,
-      }),
       basin: esri.featureLayer({
         url:
           'https://arcgis-server.lsa.umich.edu/arcgis/rest/services/IFR/glahf_boundaries/MapServer/0',
         style: this.basinOutlineStyle,
+      }),
+      basinArea: esri.featureLayer({
+        url:
+          'https://gis.wim.usgs.gov/arcgis/rest/services/SIGL/SIGLMapper/MapServer/3',
+        style: this.basinAreaStyle,
       }),
       watersheds: esri.dynamicMapLayer({
         url:

@@ -80,16 +80,16 @@
         <div class="basemap">
           <label>
             <input
-              type="checkbox"
-              id="aux1"
-              (click)="toggleAuxLayer('basinArea', 'aux1')"
-            />Great Lakes Basin<br />
+            type="checkbox"
+            id="aux1"
+            checked
+            (click)="toggleAuxLayer('basin', 'aux1')"
+            />Great Lakes Basin Boundary<br />
             <input
               type="checkbox"
               id="aux2"
-              checked
-              (click)="toggleAuxLayer('basin', 'aux2')"
-            />Basin<br />
+              (click)="toggleAuxLayer('basinArea', 'aux2')"
+            />Great Lakes Sub-Basins<br />
             <input
               type="checkbox"
               id="aux3"
