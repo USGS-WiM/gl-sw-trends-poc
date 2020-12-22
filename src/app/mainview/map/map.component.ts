@@ -3,7 +3,6 @@ import { MapService } from '../../shared/services/map.service';
 import { Map } from 'leaflet';
 import * as L from 'leaflet';
 import * as esri from 'esri-leaflet';
-
 @Component({
   selector: 'app-mainview-map',
   templateUrl: './map.component.html',

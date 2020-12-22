@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Map, GeoJSON, latLng, LatLng } from 'leaflet';
+import { SitelistService } from '../../data/sitelist.service';
 
 import 'leaflet';
 import * as esri from 'esri-leaflet';
@@ -45,7 +46,7 @@ export class MapService {
     return this.dataPanelCollapseSubject.asObservable();
   }
 
-  constructor() {
+  constructor(private siteListService: SitelistService) {
     this.chosenBaseLayer = 'Topo';
 
     this.baseMaps = {
@@ -153,6 +154,9 @@ export class MapService {
         minZoom: 4,
         useCors: false,
       }),
+      gageSites: this.siteListService.createSitesLayer(
+        this.siteListService.sites
+      ),
     };
   }
 } //END Mapservice Class
