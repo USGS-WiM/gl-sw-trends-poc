@@ -170,7 +170,14 @@ export class SitelistService {
     for (let site of siteJSON) {
       let lat = Number(site.dec_lat_va);
       let lng = Number(site.dec_long_va);
-      L.marker([lat, lng], { icon: siteIcon }).addTo(this.siteMarkers);
+      let siteInfo =
+        '<b> Site Number: </b>' +
+        site.site_no +
+        '<br><b> Station Name: </b>' +
+        site.station_nm;
+      L.marker([lat, lng], { icon: siteIcon })
+        .bindPopup(siteInfo)
+        .addTo(this.siteMarkers);
     }
     return this.siteMarkers;
   }
