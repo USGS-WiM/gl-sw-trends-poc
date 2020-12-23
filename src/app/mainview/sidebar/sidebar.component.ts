@@ -11,6 +11,7 @@ export class SidebarComponent implements OnInit {
   expandSidebar: any;
   showBasemaps: any;
   showAuxLayers: any;
+  showFilters: any;
   chosenBaseLayer: any;
   displayedAuxLayers: string[] = [];
 

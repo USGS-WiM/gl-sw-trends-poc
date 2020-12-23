@@ -80,10 +80,10 @@
         <div class="basemap">
           <label>
             <input
-            type="checkbox"
-            id="aux1"
-            checked
-            (click)="toggleAuxLayer('basin', 'aux1')"
+              type="checkbox"
+              id="aux1"
+              checked
+              (click)="toggleAuxLayer('basin', 'aux1')"
             />Great Lakes Basin Boundary<br />
             <input
               type="checkbox"
@@ -110,8 +110,62 @@
         </div>
       </div>
     </div>
+
+    <div
+      class="sidebar-header"
+      (click)="showFilters = !showFilters"
+      [ngClass]="{ expanded: showFilters }"
+    >
+      <i class="fal fa-bars"></i>
+      <b><span>Constituent Select</span></b>
+    </div>
+    <!-- Filter Content-->
+    <div class="sidebar-content" [ngClass]="{ expanded: showFilters }">
+      <div id="sidebarFilters" class="sidebarLayer">
+        <div
+          id="constPanel"
+          class="panel-collapse collapse in constituent-panel"
+          role="tabpanel"
+          aria-labelledby="constPanelHeader"
+        >
+          <div id="constDropdowns" style="padding: 2px 2px">
+            <label for="typeSelect" class="constLabel">Constituent Group</label>
+            <span>
+              <select id="typeSelect">
+                <option value="Nutrients" select="#nutrientsSelect">
+                  Nutrients
+                </option>
+                <option value="TBD" select="#tbdSelect">TBD</option>
+              </select>
+            </span>
+            <br />
+          </div>
+          <div>
+            <label class="constLabel">Constituent</label>
+            <span>
+              <select id="typeSelect">
+                <option value="TP" select="#tpSelect">
+                  Total Phosphorus (TP)
+                </option>
+                <option value="orthoP" select="#orthoPSelect">
+                  Dissolved Phosphorus (ortho P)
+                </option>
+                <option value="SS" select="#ssSelect">
+                  Suspended Sediment (SS)
+                </option>
+                <option value="NO3" select="#no3Select">Nitrate (NO3)</option>
+                <option value="KJ" select="#kjSelect">
+                  Kjedahl Nitrogen (KJ)
+                </option>
+                <option value="NH4" select="#nh4Select">Ammonia (NH4)</option>
+                <option value="Cl" select="#clSelect">Chloride (Cl)</option>
+              </select>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <!-- End Sidebar -->
 
   <!-- Sidebar lightbox for mobile -->
   <div
