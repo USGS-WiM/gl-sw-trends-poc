@@ -21,24 +21,21 @@ export class MapComponent implements OnInit {
 
   ngOnInit() {
     this.expandCollapseDataPanel();
-
+    //init map
     this._mapService.map = L.map('map', {
       center: L.latLng(45.522, -82.4846), //[-82.4846, 45.0522] - GL Geo Center
       zoom: 6,
       renderer: L.canvas(),
     });
-
+    //basemaps
     this._mapService.map.addLayer(
       this._mapService.baseMaps[this._mapService.chosenBaseLayer]
     );
+    //add legend/scale
     this.addLegend();
     this.addScale();
 
-    //this._mapService.map.addLayer(this._mapService.auxLayers);
-
-    //this._mapService.basinLayer.addTo(this._mapService.map);
     this._mapService.map.addLayer(this._mapService.auxLayers['basin']);
-    //L.control.layers(this._mapService.overlayLayers).addTo(this._mapService.map)
   }
 
   expandCollapseDataPanel() {
@@ -132,32 +129,47 @@ export class MapComponent implements OnInit {
         return '591,657,550';
     }
   }
+  
 
   addLegend() {
-    this._mapService.legend = new L.Control({ position: 'bottomright' });
+    this._mapService.legend = new L.Control({ position: 'topright'});
+    const self = this;
     this._mapService.legend.onAdd = function () {
       const div = L.DomUtil.create('div', 'info legend');
       let item = '';
+      console.log(div)
+      console.log(self)
+      console.log(document.getElementById('sidebarAuxLegend'))
 
-      item +=
-        '<div id="LegendHeader" ><span><i class="fa fa-list"></i>Explanation</span></div>' +
-        '<div id="legendDiv"><br>';
-      item += '<i class="site multiple-types"></i>Multiple</div>';
+      const layerNames: any[] = [];
+      //for (var i=0; i<layerNames.length; i++)
+      //layerNames.push();
+      
+
+      // item +=
+      //   '<div id="legendHeader" ><span><i class="fa fa-list"></i>Explanation</span></div>' +
+      //   '<div id="legendDiv"><br>';
+
+      item += '<div id="legendHeader"><i class="fa fa-list"></i>Explanation</div>' +
+      '<div id="legendDiv">';
+      item += '<div>Test</div>'
+
       div.innerHTML = item;
       div.id = 'legend';
+      
 
-      //  L.DomEvent.on(div, 'click', (event) => {
-      //   // if click is in Explanation title, collapse/expand it.
-      //   const id = event.target['id'];
-      //   if ('legendHeader') {
-      //       const classes = document.getElementById('legendDiv').classList;
-      //       if (classes.contains('legendDiv-collapsed')) {
-      //           classes.remove('legendDiv-collapsed');
-      //       } else {
-      //           classes.add('legendDiv-collapsed');
-      //       }
-      //   }
-      // });
+      L.DomEvent.on(div, 'click', function(event) {
+        //if click is in Explanation title, collapse/expand it.
+        //const id = event.target;
+        if("legendHeader") {
+          const classes = document.getElementById("legendDiv")?.classList;
+          if (classes?.contains("legendDiv-collapsed")) {
+            classes.remove("legendDiv-collapsed");
+          } else {
+            classes?.add("legendDiv-collapsed");
+          }
+        }
+      });
       return div;
     };
     this._mapService.legend.addTo(this._mapService.map);

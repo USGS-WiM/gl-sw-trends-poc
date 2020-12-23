@@ -45,16 +45,16 @@ export class SidebarComponent implements OnInit {
   //   this._mapService.map.addLayer(this._mapService.baseMaps[newVal]);
   // }
 
-  public toggleAuxLayer2(newVal: string) {
-    let index = this.displayedAuxLayers.indexOf(newVal);
-    if (index > -1) {
-      this.displayedAuxLayers.splice(index, 1);
-      this._mapService.map.addLayer(this._mapService.auxLayers[newVal]);
-    } else {
-      this.displayedAuxLayers.push(newVal);
-      this._mapService.map.removeLayer(this._mapService.auxLayers[newVal]);
-    }
-  }
+  // public toggleAuxLayer2(newVal: string) {
+  //   let index = this.displayedAuxLayers.indexOf(newVal);
+  //   if (index > -1) {
+  //     this.displayedAuxLayers.splice(index, 1);
+  //     this._mapService.map.addLayer(this._mapService.auxLayers[newVal]);
+  //   } else {
+  //     this.displayedAuxLayers.push(newVal);
+  //     this._mapService.map.removeLayer(this._mapService.auxLayers[newVal]);
+  //   }
+  // }
 
   //when an Additional Layer is checked, add/remove that layer from the map
   public toggleAuxLayer(mapLayer: string, layerID: string) {

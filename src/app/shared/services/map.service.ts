@@ -109,26 +109,26 @@ export class MapService {
     };
     this.chosenAuxLayer = 'basin';
 
-    this.basinLayer = {
-      basin: esri.featureLayer({
-        url:
-          'https://services7.arcgis.com/Tk0IbKIKhaoYn5sa/ArcGIS/rest/services/GreatLakesCommissionBasinBoundary/FeatureServer/0',
-      }),
-    };
-    this.huc8Layer = {
-      huc8: esri.dynamicMapLayer({
-        url: 'https://hydro.nationalmap.gov/arcgis/rest/services/wbd/MapServer',
-        layers: [4],
-        layerDefs: { 4: "HUC8 LIKE '04%'" },
-      }),
-    };
+    // this.basinLayer = {
+    //   basin: esri.featureLayer({
+    //     url:
+    //       'https://services7.arcgis.com/Tk0IbKIKhaoYn5sa/ArcGIS/rest/services/GreatLakesCommissionBasinBoundary/FeatureServer/0',
+    //   }),
+    // };
+    // this.huc8Layer = {
+    //   huc8: esri.dynamicMapLayer({
+    //     url: 'https://hydro.nationalmap.gov/arcgis/rest/services/wbd/MapServer',
+    //     layers: [4],
+    //     layerDefs: { 4: "HUC8 LIKE '04%'" },
+    //   }),
+    // };
 
-    this.auxLayers = L.layerGroup([this.basinLayer, this.huc8Layer]);
+    // this.auxLayers = L.layerGroup([this.basinLayer, this.huc8Layer]);
 
-    this.overlayLayers = {
-      'Great Lakes Basin': this.basinLayer,
-      'HUC8 Subbasin': this.huc8Layer,
-    };
+    // this.overlayLayers = {
+    //   'Great Lakes Basin': this.basinLayer,
+    //   'HUC8 Subbasin': this.huc8Layer,
+    // };
 
     this.basinAreaStyle = {
       color: 'green',
