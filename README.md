@@ -1,16 +1,18 @@
 ![WiM](wim.png)
 
 
-# Project Title
+# Great Lake Water Quality Trends DEMO
 
-One Paragraph of project description goes here
+Development of this DEMO is to show period of trends in water quality-related measurements at sites within the Great Lakes basin. 
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+This project has dependencies that require Angular CLI, Node 10.13.0 or higher, and NPM 6.11.0 or higher. NPM is downloaded with Node.js here: https://nodejs.org/en/.
+
+Once npm is installed, install the Angular CLI:
 
 ```
-Give examples
+npm install -g @angular/cli
 ```
 
 ## Getting Started
@@ -19,36 +21,28 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Installing
 
-A step by step series of examples that tell you have to get a development env running
-
-Say what the step will be
+Clone the repo and install it with npm.
 
 ```
-Give the example
-```
-
-And repeat
-
-```
-until finished
+git clone https://github.com/USGS-WiM/gl-sw-trends-poc.git
+cd /gl-sw-trends-poc
+npm install
 ```
 
 ## Building and testing
 
-Explain how to run the debugging 'watch' script for this repo, if applicable
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app wil auto matically reload if you change any of the source files. 
 
-Explain how to run unit tests, if applicable
+Run `ng test` to execute the unit test via [Karma](https://karma-runner.github.io/latest/index.html).
 
-## Deployment
+<!-- ## Deployment
 
-Add additional notes about how to deploy this on a live system. **Do not include any credentials, IP addresses, or other sensitive information**
+Add additional notes about how to deploy this on a live system. **Do not include any credentials, IP addresses, or other sensitive information** -->
 
 ## Built With
 
 * [Angular](https://angular.io/) - The main web framework used
-* [Clarity UI](https://vmware.github.io/clarity/) - Top-level UI framework if you have one
 * [NPM](https://www.npmjs.com/) - Dependency Management
-* [Others](https://www.npmjs.com/) - Any other high-level dependencies
 
 ## Contributing
 
@@ -65,9 +59,9 @@ To push tags to remote origin: `git push origin --tags`
 *Note that your alias for the remote origin may differ.
 
 ## Authors
-
-* **[Jordan Doe](PROFILE_PAGE_URL_HERE)**  - *Lead Developer* - [USGS Web Informatics & Mapping](https://wim.usgs.gov/)
-* **[Jessie Smith](PROFILE_PAGE_URL_HERE)** - *Developer* -  [USGS Web Informatics & Mapping](https://wim.usgs.gov/)
+<!-- Putting WIM profile link instead of USGS profile page, until one exists.  -->
+* **[Kathy Dooley](https://wim.usgs.gov/team/#/lorraine)**  - *Developer* - [USGS Web Informatics & Mapping](https://wim.usgs.gov/) 
+* **[Lorraine Metz](https://wim.usgs.gov/team/#/kathy)** - *Developer* -  [USGS Web Informatics & Mapping](https://wim.usgs.gov/)
 
 See also the list of [contributors](../../graphs/contributors) who participated in this project.
 
@@ -81,12 +75,12 @@ In the spirit of open source, please cite any re-use of the source code stored i
 `This project contains code produced by the Web Informatics and Mapping (WIM) team at the United States Geological Survey (USGS). As a work of the United States Government, this project is in the public domain within the United States. https://wim.usgs.gov`
 
 
-## Acknowledgments
+<!-- ## Acknowledgments
 
 * Hat tip to anyone who's code was used
-* Inspiration Note
+* Inspiration Note -->
 
 ## About WIM
 * This project authored by the [USGS WIM team](https://wim.usgs.gov)
 * WIM is a team of developers and technologists who build and manage tools, software, web services, and databases to support USGS science and other federal government cooperators.
-* WIM is a part of the [Upper Midwest Water Science Center](https://www.usgs.gov/centers/wisconsin-water-science-center).
+* WIM is a part of the [Upper Midwest Water Science Center](https://www.usgs.gov/centers/umid-water).

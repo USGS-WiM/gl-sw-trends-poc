@@ -1,10 +1,10 @@
 [
   {
-    "name": "wimpo",
+    "name": "gl-sw-trends",
     "organization": "U.S. Geological Survey",
-    "description": "Documents best practices for software development within WIM",
+    "description": "Great Lakes Water Quality Trends DEMO project",
     "version": "v0.0.0",
-    "status": ["Ideation", "Development", "Alpha", "Beta", "Release Candidate", "Production", "Archival"],
+    "status": ["Ideation"],
 
     "permissions": {
       "usageType": "openSource",
@@ -17,39 +17,30 @@
     },
 
     "homepageURL": "https://wim.usgs.gov",
-    "downloadURL": "https://github.com/USGS-WiM/wimpo/archive/master.zip",
-    "disclaimerURL": "https://github.com/USGS-WiM/wimpo/blob/master/DISCLAIMER.md",
-    "repositoryUrl": "https://github.com/USGS-WiM/wimpo",
+    "downloadURL": "https://github.com/USGS-WiM/gl-sw-trends-poc/archive/master.zip",
+    "disclaimerURL": "https://github.com/USGS-WiM/gl-sw-trends-poc/blob/master/DISCLAIMER.md",
+    "repositoryUrl": "https://github.com/USGS-WiM/gl-sw-trends-poc",
     "vcs": "git",
 
     "laborHours": null,
 
     "tags": [
-      "client",
-      "service",
-      "script",
-      "guidance",
-      "template",
       "interactive map",
-      "api",
       "webapp"
     ],
 
     "languages": [
-      "markdown",
-      "jquery",
-      "python",
-      "leaflet",
-      "etc"
+      "Angular",
+      "leaflet"
     ],
 
     "contact": {
-      "name": "jessie doe",
-      "email": "jdoe@usgs.gov"
+      "name": "Lorraine Metz",
+      "email": "lmetz@usgs.gov"
     },
 
     "date": {
-      "metadataLastUpdated": "2017-10-25"
+      "metadataLastUpdated": "2020-12-23"
     }
   }
 ]
