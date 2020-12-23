@@ -23,7 +23,7 @@ export class MapComponent implements OnInit {
     this.expandCollapseDataPanel();
 
     this._mapService.map = L.map('map', {
-      center: L.latLng(45.0522, -82.4846), //[-82.4846, 45.0522] - GL Geo Center
+      center: L.latLng(45.522, -82.4846), //[-82.4846, 45.0522] - GL Geo Center
       zoom: 6,
       renderer: L.canvas(),
     });
