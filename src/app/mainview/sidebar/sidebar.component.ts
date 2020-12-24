@@ -61,10 +61,20 @@ export class SidebarComponent implements OnInit {
     // this._mapService.chosenAuxLayer = newVal;
     let checkboxID = document.getElementById(layerID) as HTMLInputElement;
     if (checkboxID.checked == false) {
-      this._mapService.map.removeLayer(this._mapService.auxLayers[mapLayer]);
+      if (mapLayer !== 'trends') {
+        this._mapService.map.removeLayer(this._mapService.auxLayers[mapLayer]);
+      } else {
+        this._mapService.map.removeLayer(this._mapService.auxLayers['trends0']);
+        this._mapService.map.removeLayer(this._mapService.auxLayers['trends1']);
+      }
     }
     if (checkboxID.checked == true) {
-      this._mapService.map.addLayer(this._mapService.auxLayers[mapLayer]);
+      if (mapLayer !== 'trends') {
+        this._mapService.map.addLayer(this._mapService.auxLayers[mapLayer]);
+      } else {
+        this._mapService.map.addLayer(this._mapService.auxLayers['trends0']);
+        this._mapService.map.addLayer(this._mapService.auxLayers['trends1']);
+      }
     }
   }
 }

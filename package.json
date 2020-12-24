@@ -20,8 +20,10 @@
     "@angular/platform-browser-dynamic": "~11.0.3",
     "@angular/router": "~11.0.3",
     "esri-leaflet": "^2.5.1",
+    "esri-leaflet-renderers": "^2.1.2",
     "esri-loader": "^2.16.0",
     "leaflet": "^1.7.1",
+    "leaflet-shape-markers": "^1.0.6",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

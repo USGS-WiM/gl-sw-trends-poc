@@ -140,7 +140,7 @@ export class MapService {
     this.basinOutlineStyle = {
       color: 'black',
       fillOpacity: 0,
-      weight: 2.5
+      weight: 2.5,
     };
 
     this.auxLayers = {
@@ -168,6 +168,14 @@ export class MapService {
       majorStreamlines: esri.featureLayer({
         url:
           'https://hydro.nationalmap.gov/arcgis/rest/services/nhd/MapServer/6',
+      }),
+      trends1: esri.featureLayer({
+        url:
+          'https://gis.wim.usgs.gov/arcgis/rest/services/SWTrends/swTrendSites/MapServer/3',
+      }),
+      trends0: esri.featureLayer({
+        url:
+          'https://gis.wim.usgs.gov/arcgis/rest/services/SWTrends/swTrendSites/MapServer/1',
       }),
     };
   }

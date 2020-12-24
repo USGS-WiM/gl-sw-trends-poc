@@ -1,59 +1,81 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Great Lakes Water Quality Trends</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="utf-8" />
+    <title>Great Lakes Water Quality Trends</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <link rel="icon" type="image/png" href="./assets/images/favicon.png"/>
+    <link rel="icon" type="image/png" href="./assets/images/favicon.png" />
 
-  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.1.0/css/all.css"
-  integrity="sha384-87DrmpqHRiY8hPLIr7ByqhPIywuSsjuQAfMXAE0sMUpY3BM7nXjf+mLIUSvhDArs" 
-  crossorigin="anonymous"/>
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.1.0/css/all.css"
+      integrity="sha384-87DrmpqHRiY8hPLIr7ByqhPIywuSsjuQAfMXAE0sMUpY3BM7nXjf+mLIUSvhDArs"
+      crossorigin="anonymous"
+    />
 
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-  crossorigin=""/>
-  
-  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-  integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-  crossorigin=""></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+      crossorigin=""
+    />
 
-  <style>
-    body,html{
-      margin: 0;
-      padding: 0;
-    }
-    .initial-loader {
-      position: fixed!important;
-      width:100%;
-      height: 100%;
-      opacity: 1;
-      z-index: 5000;
-      background-color: #101010;
-      background-image:url('https://wim.usgs.gov/website-assets/branding/usgsanimated.svg');
-      display: block !important;
-      background-repeat: no-repeat;
-      background-size: 120px auto;
-      background-position: center 58.5%;
-    }
-    .initial-loader:after{
-      content: 'Loading...';
-      position: fixed;
-      top: 63.75%;
-      font-size: 22px;
-      color: white;
-      width: 100%;
-      text-align: center;
-      z-index: 5001;
-    }
-  </style>
+    <script
+      src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+      integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+      crossorigin=""
+    ></script>
 
-</head>
-<body>
-  <app-root>
-    <div class="initial-loader"></div>
-  </app-root>
-</body>
+    <!-- Load Esri Leaflet from CDN -->
+    <script
+      src="https://unpkg.com/esri-leaflet@2.5.0/dist/esri-leaflet.js"
+      integrity="sha512-ucw7Grpc+iEQZa711gcjgMBnmd9qju1CICsRaryvX7HJklK0pGl/prxKvtHwpgm5ZHdvAil7YPxI1oWPOWK3UQ=="
+      crossorigin=""
+    ></script>
+
+    <!-- Load Esri Leaflet Renderers plugin to use feature service symbology -->
+    <script
+      src="https://unpkg.com/esri-leaflet-renderers@2.1.2"
+      integrity="sha512-/McnqdlwYvfeOEWqoniEagFRQnLi/TNbkHe4EJypmZI02LBT7vBU/+PZ5W3FSsFFlRbnMCsJvnbp5MX8XOBrnQ=="
+      crossorigin=""
+    ></script>
+
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+      }
+      .initial-loader {
+        position: fixed !important;
+        width: 100%;
+        height: 100%;
+        opacity: 1;
+        z-index: 5000;
+        background-color: #101010;
+        background-image: url("https://wim.usgs.gov/website-assets/branding/usgsanimated.svg");
+        display: block !important;
+        background-repeat: no-repeat;
+        background-size: 120px auto;
+        background-position: center 58.5%;
+      }
+      .initial-loader:after {
+        content: "Loading...";
+        position: fixed;
+        top: 63.75%;
+        font-size: 22px;
+        color: white;
+        width: 100%;
+        text-align: center;
+        z-index: 5001;
+      }
+    </style>
+  </head>
+  <body>
+    <app-root>
+      <div class="initial-loader"></div>
+    </app-root>
+  </body>
 </html>
