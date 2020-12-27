@@ -34,6 +34,39 @@ export class MapComponent implements OnInit {
     this.addLegend();
     this.addScale();
 
+    let trendsx = esri.featureLayer({
+      url:
+        'https://gis.wim.usgs.gov/arcgis/rest/services/SWTrends/swTrendSites/MapServer/1',
+      onEachFeature: function (feature: any, layer: any) {
+        console.log('feature', feature);
+        //console.log('layer', layer);
+        console.log(
+          'EcoTrendResults_likelihood',
+          feature.properties.EcoTrendResults_likelihood
+        );
+        if (feature.properties.EcoTrendResults_likelihood > 0) {
+          console.log('greater than 0');
+          console.log('layer', layer);
+          layer.setIcon(
+            L.divIcon({
+              className:
+                'wmm-diamond wmm-yellow wmm-icon-diamond wmm-icon-black wmm-size-20',
+            })
+          );
+        } else {
+          console.log('not greater than zero');
+          layer.setIcon(
+            L.divIcon({
+              className:
+                'wmm-diamond wmm-yellow wmm-icon-diamond wmm-icon-black wmm-size-20',
+            })
+          );
+        }
+        //feature.setIcon(L.divIcon({ className: 'wmm-size-15.wmm-triangle' }));
+      },
+    });
+    trendsx.addTo(this._mapService.map);
+
     //this._mapService.map.addLayer(this._mapService.auxLayers);
 
     //this._mapService.basinLayer.addTo(this._mapService.map);

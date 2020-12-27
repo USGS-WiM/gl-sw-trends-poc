@@ -169,10 +169,12 @@ export class MapService {
         url:
           'https://hydro.nationalmap.gov/arcgis/rest/services/nhd/MapServer/6',
       }),
+      //~20 sites in the basin
       trends1: esri.featureLayer({
         url:
-          'https://gis.wim.usgs.gov/arcgis/rest/services/SWTrends/swTrendSites/MapServer/3',
+          'https://gis.wim.usgs.gov/arcgis/rest/services/SWTrends/swTrendSites/MapServer/2',
       }),
+      //4 sites in the basin
       trends0: esri.featureLayer({
         url:
           'https://gis.wim.usgs.gov/arcgis/rest/services/SWTrends/swTrendSites/MapServer/1',
