@@ -38,35 +38,27 @@ export class MapComponent implements OnInit {
       url:
         'https://gis.wim.usgs.gov/arcgis/rest/services/SWTrends/swTrendSites/MapServer/1',
       onEachFeature: function (feature: any, layer: any) {
-        console.log('feature', feature);
-        //console.log('layer', layer);
-        console.log(
-          'EcoTrendResults_likelihood',
-          feature.properties.EcoTrendResults_likelihood
-        );
         if (feature.properties.EcoTrendResults_likelihood <= -0.8500001) {
-          console.log('break1');
-          console.log('layer', layer);
           layer.setIcon(
             L.divIcon({
-              className: 'wmm-triangle wmm-black wmm-icon-triangle wmm-size-20',
+              className:
+                'wmm-inverse-triangle wmm-black wmm-icon-inverse-triangle wmm-size-20 ',
             })
           );
         } else if (
-          feature.properties.EcoTrendResults_likelihood > -0.85 &&
+          feature.properties.EcoTrendResults_likelihood > -0.8500001 &&
           feature.properties.EcoTrendResults_likelihood <= -0.700001
         ) {
-          console.log('break2');
           layer.setIcon(
             L.divIcon({
-              className: 'wmm-triangle wmm-white wmm-icon-triangle wmm-size-20',
+              className:
+                'wmm-inverse-triangle wmm-white wmm-icon-inverse-triangle wmm-size-20 ',
             })
           );
         } else if (
           feature.properties.EcoTrendResults_likelihood > -0.700001 &&
           feature.properties.EcoTrendResults_likelihood <= 0.7
         ) {
-          console.log('break3');
           layer.setIcon(
             L.divIcon({
               className:
@@ -77,24 +69,31 @@ export class MapComponent implements OnInit {
           feature.properties.EcoTrendResults_likelihood > 0.7 &&
           feature.properties.EcoTrendResults_likelihood <= 0.849999
         ) {
-          console.log('break4');
           layer.setIcon(
             L.divIcon({
-              className: 'wmm-triangle wmm-red wmm-icon-triangle wmm-size-20',
+              className:
+                'wmm-triangle wmm-red-hollow wmm-icon-triangle wmm-size-20',
             })
           );
         } else if (feature.properties.EcoTrendResults_likelihood > 0.849999) {
-          console.log('break5');
           layer.setIcon(
             L.divIcon({
               className: 'wmm-triangle wmm-red wmm-icon-triangle wmm-size-20',
             })
           );
         } else {
-          console.log('Skipped x because null');
+          console.log('feature.properties', feature.properties);
+          layer.setIcon(
+            L.divIcon({
+              className: 'wmm-triangle',
+            })
+          );
+          console.log(
+            'Skipped site ' +
+              feature.properties.EcoSiteSummary_no_headers_csv_Ecology_site_ID +
+              ' because null EcoTrendResults_likelihood'
+          );
         }
-
-        //feature.setIcon(L.divIcon({ className: 'wmm-size-15.wmm-triangle' }));
       },
     });
     trendsx.addTo(this._mapService.map);
