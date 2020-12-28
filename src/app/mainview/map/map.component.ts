@@ -3,6 +3,7 @@ import { MapService } from '../../shared/services/map.service';
 import { Map } from 'leaflet';
 import * as L from 'leaflet';
 import * as esri from 'esri-leaflet';
+
 @Component({
   selector: 'app-mainview-map',
   templateUrl: './map.component.html',
@@ -35,7 +36,13 @@ export class MapComponent implements OnInit {
     this.addLegend();
     this.addScale();
 
-    this._mapService.map.addLayer(this._mapService.auxLayers['basin']);
+    //add aux layers
+    this._mapService.map.addLayer(
+      this._mapService.auxLayers[this._mapService.chosenAuxLayer[0]]
+    );
+    this._mapService.map.addLayer(
+      this._mapService.auxLayers[this._mapService.chosenAuxLayer[1]]
+    );
   }
 
   expandCollapseDataPanel() {
@@ -133,34 +140,33 @@ export class MapComponent implements OnInit {
 
   addLegend() {
     this._mapService.legend = new L.Control({ position: 'topright'});
-    const self = this;
     this._mapService.legend.onAdd = function () {
       const div = L.DomUtil.create('div', 'info legend');
+      const layerNames: string | any[] = [];
       let item = '';
       console.log(div)
-      console.log(self)
-      console.log(document.getElementById('sidebarAuxLegend'))
-
-      const layerNames: any[] = [];
-      //for (var i=0; i<layerNames.length; i++)
-      //layerNames.push();
-      
-
-      // item +=
-      //   '<div id="legendHeader" ><span><i class="fa fa-list"></i>Explanation</span></div>' +
-      //   '<div id="legendDiv"><br>';
 
       item += '<div id="legendHeader"><i class="fa fa-list"></i>Explanation</div>' +
       '<div id="legendDiv">';
-      item += '<div>Test</div>'
+
+      if("sidebarAuxLayers") {
+        const children = document.getElementsByTagName('input');
+        for (let i=0; i<children.length; i++) {
+          if(children[i].checked) {
+            layerNames.push((children[i].nextSibling as HTMLInputElement).nodeValue);
+          }
+        }
+      }
+
+      for (let i=0; i<layerNames.length; i++) {
+        item += layerNames[i] + '<br>';
+      }
 
       div.innerHTML = item;
       div.id = 'legend';
-      
 
-      L.DomEvent.on(div, 'click', function(event) {
+      L.DomEvent.on(div, 'click', function() {
         //if click is in Explanation title, collapse/expand it.
-        //const id = event.target;
         if("legendHeader") {
           const classes = document.getElementById("legendDiv")?.classList;
           if (classes?.contains("legendDiv-collapsed")) {

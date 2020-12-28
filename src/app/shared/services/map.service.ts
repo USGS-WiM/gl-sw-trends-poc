@@ -15,7 +15,7 @@ export class MapService {
   public legend: any;
   public baseMaps: any;
   public auxLayers: any;
-  public chosenAuxLayer!: string;
+  public chosenAuxLayer!: any;
   public chosenBaseLayer: string;
   public sitesLayer!: L.FeatureGroup<any>;
   public basinLayer!: any;
@@ -26,21 +26,6 @@ export class MapService {
 
   //   public siteColors = ['red', 'blue', 'green', 'gray'];
   //   public siteCategories = ['Active', 'Suspected', 'Closed', 'Other']
-
-  //   public _selectedSiteSubject = new Subject();
-  //   public get SelectedSite(): Observable<any> {
-  //       return this._selectedSiteSubject.asObservable();
-  //   }
-
-  //   public _selectedCanSiteSubject = new Subject();
-  //   public get SelectedCanSite(): Observable<any> {
-  //     return this._selectedCanSiteSubject.asObservable();
-  //   }
-
-  //   public _selectedCanadaSiteSubject = new Subject();
-  //   public get SelectedCanadaSite(): Observable<any> {
-  //       return this._selectedCanadaSiteSubject.asObservable();
-  //   }
 
   public dataPanelCollapseSubject = new Subject();
   public get DataPanelCollapse(): Observable<any> {
@@ -107,28 +92,8 @@ export class MapService {
       //   zIndex: 1
       // })
     };
-    this.chosenAuxLayer = 'basin';
-
-    // this.basinLayer = {
-    //   basin: esri.featureLayer({
-    //     url:
-    //       'https://services7.arcgis.com/Tk0IbKIKhaoYn5sa/ArcGIS/rest/services/GreatLakesCommissionBasinBoundary/FeatureServer/0',
-    //   }),
-    // };
-    // this.huc8Layer = {
-    //   huc8: esri.dynamicMapLayer({
-    //     url: 'https://hydro.nationalmap.gov/arcgis/rest/services/wbd/MapServer',
-    //     layers: [4],
-    //     layerDefs: { 4: "HUC8 LIKE '04%'" },
-    //   }),
-    // };
-
-    // this.auxLayers = L.layerGroup([this.basinLayer, this.huc8Layer]);
-
-    // this.overlayLayers = {
-    //   'Great Lakes Basin': this.basinLayer,
-    //   'HUC8 Subbasin': this.huc8Layer,
-    // };
+    
+    this.chosenAuxLayer = ['basin', 'gageSites'];
 
     this.basinAreaStyle = {
       color: 'green',
