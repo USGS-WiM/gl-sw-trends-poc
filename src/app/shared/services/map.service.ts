@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Map, GeoJSON, latLng, LatLng } from 'leaflet';
 import { SitelistService } from '../../data/sitelist.service';
+import booleanPointInPolygon from '@turf/points-within-polygon';
+import flatten from '../../../../node_modules/@turf/flatten';
+import { polygon, point } from '@turf/helpers';
 
 import 'leaflet';
 import * as esri from 'esri-leaflet';
@@ -23,6 +26,7 @@ export class MapService {
   public overlayLayers: any;
   public basinAreaStyle: any;
   public basinOutlineStyle: any;
+  public basinOutline: any;
 
   //   public siteColors = ['red', 'blue', 'green', 'gray'];
   //   public siteCategories = ['Active', 'Suspected', 'Closed', 'Other']
@@ -174,64 +178,80 @@ export class MapService {
         url:
           'https://gis.wim.usgs.gov/arcgis/rest/services/SWTrends/swTrendSites/MapServer/2',
         onEachFeature: function (feature: any, layer: any) {
-          console.log('new feature', feature);
-
-          if (feature.properties['wrtds_trends_wm_new.likeC'] <= -0.8500001) {
-            layer.setIcon(
-              L.divIcon({
-                className:
-                  'wmm-inverse-triangle wmm-black wmm-icon-inverse-triangle wmm-size-20 ',
-              })
-            );
-          } else if (
-            feature.properties['wrtds_trends_wm_new.likeC'] > -0.8500001 &&
-            feature.properties['wrtds_trends_wm_new.likeC'] <= -0.700001
-          ) {
-            layer.setIcon(
-              L.divIcon({
-                className:
-                  'wmm-inverse-triangle wmm-white wmm-icon-inverse-triangle wmm-size-20 ',
-              })
-            );
-          } else if (
-            feature.properties['wrtds_trends_wm_new.likeC'] > -0.700001 &&
-            feature.properties['wrtds_trends_wm_new.likeC'] <= 0.7
-          ) {
-            layer.setIcon(
-              L.divIcon({
-                className:
-                  'wmm-circle wmm-yellow wmm-icon-circle wmm-icon-black wmm-size-20',
-              })
-            );
-          } else if (
-            feature.properties['wrtds_trends_wm_new.likeC'] > 0.7 &&
-            feature.properties['wrtds_trends_wm_new.likeC'] <= 0.849999
-          ) {
-            layer.setIcon(
-              L.divIcon({
-                className:
-                  'wmm-triangle wmm-red-hollow wmm-icon-triangle wmm-size-20',
-              })
-            );
-          } else if (
-            feature.properties['wrtds_trends_wm_new.likeC'] > 0.849999
-          ) {
-            layer.setIcon(
-              L.divIcon({
-                className: 'wmm-triangle wmm-red wmm-icon-triangle wmm-size-20',
-              })
-            );
-          } else {
-            layer.setIcon(
-              L.divIcon({
-                className: 'wmm-triangle',
-              })
-            );
-            console.log(
-              'Skipped site ' +
-                feature.properties['wrtds_trends_wm_new.likeC'] +
-                ' due to null EcoTrendResults_likelihood'
-            );
+          let simpPoly = polygon([
+            [
+              [-95, 51],
+              [-95, 39],
+              [-73, 39],
+              [-73, 51],
+              [-95, 51],
+            ],
+          ]);
+          let coords = point([
+            feature.geometry.coordinates[1],
+            feature.geometry.coordinates[0],
+          ]);
+          console.log('coords', coords);
+          let pointInBasin = booleanPointInPolygon(coords, simpPoly);
+          if (pointInBasin) {
+            if (feature.properties['wrtds_trends_wm_new.likeC'] <= -0.8500001) {
+              layer.setIcon(
+                L.divIcon({
+                  className:
+                    'wmm-inverse-triangle wmm-black wmm-icon-inverse-triangle wmm-size-20 ',
+                })
+              );
+            } else if (
+              feature.properties['wrtds_trends_wm_new.likeC'] > -0.8500001 &&
+              feature.properties['wrtds_trends_wm_new.likeC'] <= -0.700001
+            ) {
+              layer.setIcon(
+                L.divIcon({
+                  className:
+                    'wmm-inverse-triangle wmm-white wmm-icon-inverse-triangle wmm-size-20 ',
+                })
+              );
+            } else if (
+              feature.properties['wrtds_trends_wm_new.likeC'] > -0.700001 &&
+              feature.properties['wrtds_trends_wm_new.likeC'] <= 0.7
+            ) {
+              layer.setIcon(
+                L.divIcon({
+                  className:
+                    'wmm-circle wmm-yellow wmm-icon-circle wmm-icon-black wmm-size-20',
+                })
+              );
+            } else if (
+              feature.properties['wrtds_trends_wm_new.likeC'] > 0.7 &&
+              feature.properties['wrtds_trends_wm_new.likeC'] <= 0.849999
+            ) {
+              layer.setIcon(
+                L.divIcon({
+                  className:
+                    'wmm-triangle wmm-red-hollow wmm-icon-triangle wmm-size-20',
+                })
+              );
+            } else if (
+              feature.properties['wrtds_trends_wm_new.likeC'] > 0.849999
+            ) {
+              layer.setIcon(
+                L.divIcon({
+                  className:
+                    'wmm-triangle wmm-red wmm-icon-triangle wmm-size-20',
+                })
+              );
+            } else {
+              layer.setIcon(
+                L.divIcon({
+                  className: 'wmm-triangle',
+                })
+              );
+              console.log(
+                'Skipped site ' +
+                  feature.properties['wrtds_trends_wm_new.likeC'] +
+                  ' due to null EcoTrendResults_likelihood'
+              );
+            }
           }
         },
       }),

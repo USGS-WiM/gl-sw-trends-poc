@@ -688,7 +688,7 @@
   color: #ffffff;
 }
 .wmm-inverse-triangle.wmm-white {
-  border-top-color: white;
+  border-top-color: transparent;
 }
 
 .wmm-inverse-triangle.wmm-white:after {
