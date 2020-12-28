@@ -44,24 +44,56 @@ export class MapComponent implements OnInit {
           'EcoTrendResults_likelihood',
           feature.properties.EcoTrendResults_likelihood
         );
-        if (feature.properties.EcoTrendResults_likelihood > 0) {
-          console.log('greater than 0');
+        if (feature.properties.EcoTrendResults_likelihood <= -0.8500001) {
+          console.log('break1');
           console.log('layer', layer);
           layer.setIcon(
             L.divIcon({
-              className:
-                'wmm-diamond wmm-yellow wmm-icon-diamond wmm-icon-black wmm-size-20',
+              className: 'wmm-triangle wmm-black wmm-icon-triangle wmm-size-20',
             })
           );
-        } else {
-          console.log('not greater than zero');
+        } else if (
+          feature.properties.EcoTrendResults_likelihood > -0.85 &&
+          feature.properties.EcoTrendResults_likelihood <= -0.700001
+        ) {
+          console.log('break2');
+          layer.setIcon(
+            L.divIcon({
+              className: 'wmm-triangle wmm-white wmm-icon-triangle wmm-size-20',
+            })
+          );
+        } else if (
+          feature.properties.EcoTrendResults_likelihood > -0.700001 &&
+          feature.properties.EcoTrendResults_likelihood <= 0.7
+        ) {
+          console.log('break3');
           layer.setIcon(
             L.divIcon({
               className:
-                'wmm-diamond wmm-yellow wmm-icon-diamond wmm-icon-black wmm-size-20',
+                'wmm-circle wmm-yellow wmm-icon-circle wmm-icon-black wmm-size-20',
             })
           );
+        } else if (
+          feature.properties.EcoTrendResults_likelihood > 0.7 &&
+          feature.properties.EcoTrendResults_likelihood <= 0.849999
+        ) {
+          console.log('break4');
+          layer.setIcon(
+            L.divIcon({
+              className: 'wmm-triangle wmm-red wmm-icon-triangle wmm-size-20',
+            })
+          );
+        } else if (feature.properties.EcoTrendResults_likelihood > 0.849999) {
+          console.log('break5');
+          layer.setIcon(
+            L.divIcon({
+              className: 'wmm-triangle wmm-red wmm-icon-triangle wmm-size-20',
+            })
+          );
+        } else {
+          console.log('Skipped x because null');
         }
+
         //feature.setIcon(L.divIcon({ className: 'wmm-size-15.wmm-triangle' }));
       },
     });
