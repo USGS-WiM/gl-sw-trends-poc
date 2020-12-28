@@ -91,12 +91,12 @@ export class MapComponent implements OnInit {
           console.log(
             'Skipped site ' +
               feature.properties.EcoSiteSummary_no_headers_csv_Ecology_site_ID +
-              ' because null EcoTrendResults_likelihood'
+              ' due to null EcoTrendResults_likelihood'
           );
         }
       },
     });
-    trendsx.addTo(this._mapService.map);
+    //trendsx.addTo(this._mapService.map);
 
     //this._mapService.map.addLayer(this._mapService.auxLayers);
 
