@@ -5,7 +5,11 @@
   [ngClass]="{ 'fa-bars': !expandSidebar, 'fa-times': expandSidebar }"
 ></i>
 
-<div id="sidebar" [ngClass]="{ expanded: expandSidebar }">
+<div
+  id="sidebar"
+  [ngClass]="{ expanded: expandSidebar }"
+  style="background-color: #eceef3"
+>
   <!-- Scrolling sidebar content -->
   <div class="sidebar-scroll">
     <!--  Sidebar Basemaps  -->
@@ -17,6 +21,7 @@
       <i class="fal fa-map"></i>
       <b><span>Basemaps</span></b>
     </div>
+    <hr class="below" />
 
     <!-- Basemaps content -->
     <div class="sidebar-content" [ngClass]="{ expanded: showBasemaps }">
@@ -58,7 +63,7 @@
         </label>
       </div>
     </div>
-
+    <hr class="below" />
     <div
       class="sidebar-header"
       (click)="showAuxLayers = !showAuxLayers"
@@ -67,6 +72,7 @@
       <i class="fal fa-object-group"></i>
       <b><span>Additional Layers</span></b>
     </div>
+    <hr class="below" />
 
     <!-- Auxlayer content -->
     <div class="sidebar-content" [ngClass]="{ expanded: showAuxLayers }">
@@ -107,7 +113,7 @@
         </label>
       </div>
     </div>
-
+    <hr class="below" />
     <div
       class="sidebar-header"
       (click)="showFilters = !showFilters"
@@ -116,6 +122,7 @@
       <i class="fal fa-bars"></i>
       <b><span>Constituent Select</span></b>
     </div>
+    <hr class="below" />
     <!-- Filter Content-->
     <div class="sidebar-content" [ngClass]="{ expanded: showFilters }">
       <div
@@ -165,6 +172,9 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="wimCred">
+      <a href="https://wim.usgs.gov/" class="wimCred">Powered by WIM</a>
     </div>
   </div>
 
