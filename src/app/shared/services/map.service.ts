@@ -17,10 +17,10 @@ export class MapService {
   public auxLayers: any;
   public chosenAuxLayer!: any;
   public chosenBaseLayer: string;
-  public sitesLayer!: L.FeatureGroup<any>;
-  public basinLayer!: any;
-  public huc8Layer!: any;
-  public overlayLayers: any;
+  // public sitesLayer!: L.FeatureGroup<any>;
+  // public basinLayer!: any;
+  // public huc8Layer!: any;
+  // public overlayLayers: any;
   public basinAreaStyle: any;
   public basinOutlineStyle: any;
 
@@ -92,7 +92,7 @@ export class MapService {
       //   zIndex: 1
       // })
     };
-    
+
     this.chosenAuxLayer = ['basin', 'gageSites'];
 
     this.basinAreaStyle = {

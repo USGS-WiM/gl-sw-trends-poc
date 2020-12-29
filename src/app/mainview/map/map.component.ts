@@ -17,6 +17,7 @@ export class MapComponent implements OnInit {
   mapScale: any;
   latitude: any;
   longitude: any;
+  layerNames: any[] = [];
 
   constructor(private _mapService: MapService) {}
 
@@ -43,6 +44,7 @@ export class MapComponent implements OnInit {
     this._mapService.map.addLayer(
       this._mapService.auxLayers[this._mapService.chosenAuxLayer[1]]
     );
+    //console.log(this._mapService.auxLayers)
   }
 
   expandCollapseDataPanel() {
@@ -137,34 +139,36 @@ export class MapComponent implements OnInit {
     }
   }
   
-
+  getActiveLayers() {
+    //this.layerNames = [];
+    this._mapService.map.on('layeradd', e => {
+      console.log(e, "hello")
+      if(e.layer._leaflet_id === this._mapService.auxLayers.basin._leaflet_id || 
+        e.layer._leaflet_id === this._mapService.auxLayers.basinArea._leaflet_id ||
+        e.layer._leaflet_id === this._mapService.auxLayers.watersheds._leaflet_id ||
+        e.layer._leaflet_id === this._mapService.auxLayers.gageSites._leaflet_id ||
+        e.layer._leaflet_id === this._mapService.auxLayers.majorStreamlines._leaflet_id) {
+        console.log("true")
+        const layerNames: string | any[] = [];
+        if("sidebarAuxLayers") {
+          const children = document.getElementsByTagName('input');
+          for (let i=0; i<children.length; i++) {
+            if(children[i].checked) {
+              layerNames.push((children[i].nextSibling as HTMLInputElement).nodeValue);
+            }
+          }
+        }
+        console.log(layerNames)
+      }
+    })
+  }
+  
   addLegend() {
+    this.getActiveLayers();
+    
     this._mapService.legend = new L.Control({ position: 'topright'});
     this._mapService.legend.onAdd = function () {
       const div = L.DomUtil.create('div', 'info legend');
-      const layerNames: string | any[] = [];
-      let item = '';
-      console.log(div)
-
-      item += '<div id="legendHeader"><i class="fa fa-list"></i>Explanation</div>' +
-      '<div id="legendDiv">';
-
-      if("sidebarAuxLayers") {
-        const children = document.getElementsByTagName('input');
-        for (let i=0; i<children.length; i++) {
-          if(children[i].checked) {
-            layerNames.push((children[i].nextSibling as HTMLInputElement).nodeValue);
-          }
-        }
-      }
-
-      for (let i=0; i<layerNames.length; i++) {
-        item += layerNames[i] + '<br>';
-      }
-
-      div.innerHTML = item;
-      div.id = 'legend';
-
       L.DomEvent.on(div, 'click', function() {
         //if click is in Explanation title, collapse/expand it.
         if("legendHeader") {
@@ -176,6 +180,37 @@ export class MapComponent implements OnInit {
           }
         }
       });
+      const sidebar = L.DomUtil.get('sidebarAuxLayers');
+      console.log(sidebar)
+      // L.DomEvent.on(sidebar, 'click', function() {
+
+      // })
+
+      //Get layer names for legend
+      console.log(this.layerNames)    
+      const activeLayers = this.layerNames;
+      console.log(activeLayers)
+      //const layerNames: string | any[] = [];
+      let item = '';
+
+      item += '<div id="legendHeader"><i class="fa fa-list"></i>Explanation</div>' +
+      '<div id="legendDiv">';
+
+      // if("sidebarAuxLayers") {
+      //   const children = document.getElementsByTagName('input');
+      //   for (let i=0; i<children.length; i++) {
+      //     if(children[i].checked) {
+      //       layerNames.push((children[i].nextSibling as HTMLInputElement).nodeValue);
+      //     }
+      //   }
+      // }
+
+      // for (let i=0; i<activeLayers.length; i++) {
+      //   item += activeLayers[i] + '<br>';
+      // }
+      div.innerHTML = item;
+      div.id = 'legend';
+
       return div;
     };
     this._mapService.legend.addTo(this._mapService.map);
