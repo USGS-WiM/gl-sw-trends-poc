@@ -16,15 +16,10 @@ export class SidebarComponent implements OnInit {
   chosenBaseId: any;
   displayedAuxLayers: string[] = [];
 
-  constructor(
-    private _mapService: MapService,
-    private _formBuilder: FormBuilder
-  ) {}
+  constructor(private _mapService: MapService) {}
 
   ngOnInit() {
-    this.chosenBaseId = 'basemap3';
-    //this.displayedAuxLayers = [];
-    // this.onChanges();
+    this.chosenBaseId = 'basemap2';
   }
   // called from basemap button click in sidebar
   public toggleBasemap(selectedBase: string, selectedBaseId: string) {
