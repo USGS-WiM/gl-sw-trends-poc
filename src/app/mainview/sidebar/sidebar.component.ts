@@ -64,16 +64,24 @@ export class SidebarComponent implements OnInit {
       if (mapLayer !== 'trends') {
         this._mapService.map.removeLayer(this._mapService.auxLayers[mapLayer]);
       } else {
-        this._mapService.map.removeLayer(this._mapService.auxLayers['trends0']);
-        this._mapService.map.removeLayer(this._mapService.auxLayers['trends1']);
+        this._mapService.map.removeLayer(
+          this._mapService.auxLayers['allEcoTrends']
+        );
+        this._mapService.map.removeLayer(
+          this._mapService.auxLayers['wrtdsTrends']
+        );
       }
     }
     if (checkboxID.checked == true) {
       if (mapLayer !== 'trends') {
         this._mapService.map.addLayer(this._mapService.auxLayers[mapLayer]);
       } else {
-        this._mapService.map.addLayer(this._mapService.auxLayers['trends0']);
-        this._mapService.map.addLayer(this._mapService.auxLayers['trends1']);
+        this._mapService.map.addLayer(
+          this._mapService.auxLayers['allEcoTrends']
+        );
+        this._mapService.map.addLayer(
+          this._mapService.auxLayers['wrtdsTrends']
+        );
       }
     }
   }

@@ -174,7 +174,7 @@ export class MapService {
           'https://hydro.nationalmap.gov/arcgis/rest/services/nhd/MapServer/6',
       }),
       //~20 sites in the basin
-      trends1: esri.featureLayer({
+      wrtdsTrends: esri.featureLayer({
         url:
           'https://gis.wim.usgs.gov/arcgis/rest/services/SWTrends/swTrendSites/MapServer/2',
         onEachFeature: function (feature: any, layer: any) {
@@ -239,7 +239,7 @@ export class MapService {
         },
       }),
       //4 sites in the basin
-      trends0: esri.featureLayer({
+      allEcoTrends: esri.featureLayer({
         url:
           'https://gis.wim.usgs.gov/arcgis/rest/services/SWTrends/swTrendSites/MapServer/1',
         onEachFeature: function (feature: any, layer: any) {
