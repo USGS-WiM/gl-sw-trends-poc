@@ -23,6 +23,7 @@ export class MapService {
   // public overlayLayers: any;
   public basinAreaStyle: any;
   public basinOutlineStyle: any;
+  public basinOutline: any;
 
   //   public siteColors = ['red', 'blue', 'green', 'gray'];
   //   public siteCategories = ['Active', 'Suspected', 'Closed', 'Other']
@@ -105,7 +106,7 @@ export class MapService {
     this.basinOutlineStyle = {
       color: 'black',
       fillOpacity: 0,
-      weight: 2.5
+      weight: 2.5,
     };
 
     this.auxLayers = {
@@ -133,6 +134,134 @@ export class MapService {
       majorStreamlines: esri.featureLayer({
         url:
           'https://hydro.nationalmap.gov/arcgis/rest/services/nhd/MapServer/6',
+      }),
+      //~20 sites in the basin
+      wrtdsTrends: esri.featureLayer({
+        url:
+          'https://gis.wim.usgs.gov/arcgis/rest/services/SWTrends/swTrendSites/MapServer/2',
+        onEachFeature: function (feature: any, layer: any) {
+          if (feature.properties['wrtds_trends_wm_new.likeC'] <= -0.8500001) {
+            layer.setIcon(
+              L.divIcon({
+                className:
+                  'wmm-inverse-triangle wmm-black wmm-icon-inverse-triangle wmm-size-20 ',
+              })
+            );
+          } else if (
+            feature.properties['wrtds_trends_wm_new.likeC'] > -0.8500001 &&
+            feature.properties['wrtds_trends_wm_new.likeC'] <= -0.700001
+          ) {
+            layer.setIcon(
+              L.divIcon({
+                className:
+                  'wmm-inverse-triangle wmm-white wmm-icon-inverse-triangle wmm-size-20 ',
+              })
+            );
+          } else if (
+            feature.properties['wrtds_trends_wm_new.likeC'] > -0.700001 &&
+            feature.properties['wrtds_trends_wm_new.likeC'] <= 0.7
+          ) {
+            layer.setIcon(
+              L.divIcon({
+                className:
+                  'wmm-circle wmm-yellow wmm-icon-circle wmm-icon-black wmm-size-20',
+              })
+            );
+          } else if (
+            feature.properties['wrtds_trends_wm_new.likeC'] > 0.7 &&
+            feature.properties['wrtds_trends_wm_new.likeC'] <= 0.849999
+          ) {
+            layer.setIcon(
+              L.divIcon({
+                className:
+                  'wmm-triangle wmm-red-hollow wmm-icon-triangle wmm-size-20',
+              })
+            );
+          } else if (
+            feature.properties['wrtds_trends_wm_new.likeC'] > 0.849999
+          ) {
+            layer.setIcon(
+              L.divIcon({
+                className: 'wmm-triangle wmm-red wmm-icon-triangle wmm-size-20',
+              })
+            );
+          } else {
+            layer.setIcon(
+              L.divIcon({
+                className: 'wmm-triangle',
+              })
+            );
+            console.log(
+              'Skipped site ' +
+                feature.properties['wrtds_trends_wm_new.likeC'] +
+                ' due to null wrtds_trends_wm_new.likeC'
+            );
+            console.log('feature.properties', feature.properties);
+          }
+        },
+      }),
+      //4 sites in the basin
+      allEcoTrends: esri.featureLayer({
+        url:
+          'https://gis.wim.usgs.gov/arcgis/rest/services/SWTrends/swTrendSites/MapServer/1',
+        onEachFeature: function (feature: any, layer: any) {
+          if (feature.properties.EcoTrendResults_likelihood <= -0.8500001) {
+            layer.setIcon(
+              L.divIcon({
+                className:
+                  'wmm-inverse-triangle wmm-black wmm-icon-inverse-triangle wmm-size-20 ',
+              })
+            );
+          } else if (
+            feature.properties.EcoTrendResults_likelihood > -0.8500001 &&
+            feature.properties.EcoTrendResults_likelihood <= -0.700001
+          ) {
+            layer.setIcon(
+              L.divIcon({
+                className:
+                  'wmm-inverse-triangle wmm-white wmm-icon-inverse-triangle wmm-size-20 ',
+              })
+            );
+          } else if (
+            feature.properties.EcoTrendResults_likelihood > -0.700001 &&
+            feature.properties.EcoTrendResults_likelihood <= 0.7
+          ) {
+            layer.setIcon(
+              L.divIcon({
+                className:
+                  'wmm-circle wmm-yellow wmm-icon-circle wmm-icon-black wmm-size-20',
+              })
+            );
+          } else if (
+            feature.properties.EcoTrendResults_likelihood > 0.7 &&
+            feature.properties.EcoTrendResults_likelihood <= 0.849999
+          ) {
+            layer.setIcon(
+              L.divIcon({
+                className:
+                  'wmm-triangle wmm-red-hollow wmm-icon-triangle wmm-size-20',
+              })
+            );
+          } else if (feature.properties.EcoTrendResults_likelihood > 0.849999) {
+            layer.setIcon(
+              L.divIcon({
+                className: 'wmm-triangle wmm-red wmm-icon-triangle wmm-size-20',
+              })
+            );
+          } else {
+            layer.setIcon(
+              L.divIcon({
+                className: 'wmm-triangle',
+              })
+            );
+            console.log(
+              'Skipped site ' +
+                feature.properties
+                  .EcoSiteSummary_no_headers_csv_Ecology_site_ID +
+                ' due to null EcoTrendResults_likelihood'
+            );
+          }
+        },
       }),
     };
   }
