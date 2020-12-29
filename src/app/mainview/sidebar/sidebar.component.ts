@@ -13,6 +13,7 @@ export class SidebarComponent implements OnInit {
   showAuxLayers: any;
   showFilters: any;
   chosenBaseLayer: any;
+  chosenBaseId: any;
   displayedAuxLayers: string[] = [];
 
   constructor(
@@ -21,21 +22,27 @@ export class SidebarComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.chosenBaseId = 'basemap3';
     //this.displayedAuxLayers = [];
     // this.onChanges();
   }
   // called from basemap button click in sidebar
-  public toggleLayer(newVal: string) {
-    this._mapService.chosenBaseLayer = newVal;
+  public toggleLayer(selectedBase: string, selectedBaseId: string) {
+    let oldRadioID = document.getElementById(
+      this.chosenBaseId
+    ) as HTMLInputElement;
+    oldRadioID.checked = false;
+    let newRadioID = document.getElementById(
+      selectedBaseId
+    ) as HTMLInputElement;
+    newRadioID.checked = true;
     this._mapService.map.removeLayer(
-      this._mapService.baseMaps['OpenStreetMap']
+      this._mapService.baseMaps[this._mapService.chosenBaseLayer]
     );
-    this._mapService.map.removeLayer(this._mapService.baseMaps['Topo']);
-    this._mapService.map.removeLayer(this._mapService.baseMaps['Terrain']);
-    this._mapService.map.removeLayer(this._mapService.baseMaps['Satellite']);
-    this._mapService.map.removeLayer(this._mapService.baseMaps['Gray']);
-    // this._mapService.map.removeLayer(this._mapService.baseMaps['Nautical']);
-    this._mapService.map.addLayer(this._mapService.baseMaps[newVal]);
+    this._mapService.chosenBaseLayer = selectedBase;
+    this._mapService.map.addLayer(this._mapService.baseMaps[selectedBase]);
+    this.chosenBaseId = selectedBaseId;
+    console.log('chosenBaseId', this.chosenBaseId);
   }
 
   //called from aux layer button click in sidebar

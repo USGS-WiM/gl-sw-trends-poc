@@ -21,47 +21,41 @@
     <!-- Basemaps content -->
     <div class="sidebar-content" [ngClass]="{ expanded: showBasemaps }">
       <div id="sidebarBasemaps" class="sidebarLayer">
-        <div
-          class="basemap"
-          id="basemap1"
-          (click)="toggleLayer('OpenStreetMap')"
-          [ngClass]="{ active: chosenBaseLayer == 'OpenStreetMap' }"
-        >
+        <label>
+          <input
+            type="radio"
+            id="basemap1"
+            (click)="toggleLayer('OpenStreetMap', 'basemap1')"
+          />
           Streets
-        </div>
-        <div
-          class="basemap"
-          id="basemap2"
-          (click)="toggleLayer('Topo')"
-          [ngClass]="{ active: chosenBaseLayer == 'Topo' }"
-        >
-          Topographic
-        </div>
-        <div
-          class="basemap"
-          id="basemap4"
-          (click)="toggleLayer('Terrain')"
-          [ngClass]="{ active: chosenBaseLayer == 'Terrain' }"
-        >
+          <br />
+          <input
+            type="radio"
+            id="basemap2"
+            (click)="toggleLayer('Topo', 'basemap2')"
+          />
+          Topographic <br />
+          <input
+            type="radio"
+            checked
+            id="basemap3"
+            (click)="toggleLayer('Terrain', 'basemap3')"
+          />
           Terrain
-        </div>
-        <div
-          class="basemap"
-          id="basemap5"
-          (click)="toggleLayer('Satellite')"
-          [ngClass]="{ active: chosenBaseLayer == 'Satellite' }"
-        >
-          Satellite
-        </div>
-        <div
-          class="basemap"
-          id="basemap5"
-          (click)="toggleLayer('Gray')"
-          [ngClass]="{ active: chosenBaseLayer == 'Gray' }"
-        >
-          Gray
-        </div>
-        <!-- <div class="basemap" id="basemap6" (click)="toggleLayer('Nautical')" [ngClass]="{ active: chosenBaseLayer == 'Nautical' }">Nautical</div> -->
+          <br />
+          <input
+            type="radio"
+            id="basemap4"
+            (click)="toggleLayer('Satellite', 'basemap4')"
+          />
+          Satellite <br />
+          <input
+            type="radio"
+            id="basemap5"
+            (click)="toggleLayer('Gray', 'basemap5')"
+          />
+          Gray <br />
+        </label>
       </div>
     </div>
 
@@ -77,42 +71,40 @@
     <!-- Auxlayer content -->
     <div class="sidebar-content" [ngClass]="{ expanded: showAuxLayers }">
       <div id="sidebarAuxLayers" class="sidebarLayer">
-        <div class="basemap">
-          <label>
-            <input
-              type="checkbox"
-              id="aux1"
-              checked
-              (click)="toggleAuxLayer('basin', 'aux1')"
-            />Great Lakes Basin Boundary<br />
-            <input
-              type="checkbox"
-              id="aux2"
-              (click)="toggleAuxLayer('basinArea', 'aux2')"
-            />Great Lakes Sub-Basins<br />
-            <input
-              type="checkbox"
-              id="aux3"
-              (click)="toggleAuxLayer('watersheds', 'aux3')"
-            />Watersheds<br />
-            <input
-              type="checkbox"
-              id="aux4"
-              (click)="toggleAuxLayer('majorStreamlines', 'aux4')"
-            />Major Tributaries<br />
-            <input
-              type="checkbox"
-              id="aux5"
-              (click)="toggleAuxLayer('gageSites', 'aux5')"
-            />Gages<br />
-            <input
-              type="checkbox"
-              id="aux6"
-              (click)="toggleAuxLayer('trends', 'aux6')"
-            />All Trends<br />
-            <!-- <input type="checkbox" id ="aux4" checked (click)="toggleAuxLayer()"/>Aux4<br> -->
-          </label>
-        </div>
+        <label>
+          <input
+            type="checkbox"
+            id="aux1"
+            checked
+            (click)="toggleAuxLayer('basin', 'aux1')"
+          />Great Lakes Basin Boundary<br />
+          <input
+            type="checkbox"
+            id="aux2"
+            (click)="toggleAuxLayer('basinArea', 'aux2')"
+          />Great Lakes Sub-Basins<br />
+          <input
+            type="checkbox"
+            id="aux3"
+            (click)="toggleAuxLayer('watersheds', 'aux3')"
+          />Watersheds<br />
+          <input
+            type="checkbox"
+            id="aux4"
+            (click)="toggleAuxLayer('majorStreamlines', 'aux4')"
+          />Major Tributaries<br />
+          <input
+            type="checkbox"
+            id="aux5"
+            (click)="toggleAuxLayer('gageSites', 'aux5')"
+          />Gages<br />
+          <input
+            type="checkbox"
+            id="aux6"
+            (click)="toggleAuxLayer('trends', 'aux6')"
+          />All Trends<br />
+          <!-- <input type="checkbox" id ="aux4" checked (click)="toggleAuxLayer()"/>Aux4<br> -->
+        </label>
       </div>
     </div>
 
