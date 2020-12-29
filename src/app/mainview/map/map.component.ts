@@ -4,7 +4,6 @@ import { Map } from 'leaflet';
 import * as L from 'leaflet';
 import * as esri from 'esri-leaflet';
 import booleanPointInPolygon from '@turf/boolean-point-in-polygon';
-import flatten from '../../../../node_modules/@turf/flatten';
 import { polygon, point } from '@turf/helpers';
 @Component({
   selector: 'app-mainview-map',

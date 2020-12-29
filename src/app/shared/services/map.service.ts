@@ -2,9 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Map, GeoJSON, latLng, LatLng } from 'leaflet';
 import { SitelistService } from '../../data/sitelist.service';
-import booleanPointInPolygon from '@turf/points-within-polygon';
-import flatten from '../../../../node_modules/@turf/flatten';
-import { polygon, point } from '@turf/helpers';
 
 import 'leaflet';
 import * as esri from 'esri-leaflet';
