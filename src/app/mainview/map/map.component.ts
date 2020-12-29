@@ -3,6 +3,9 @@ import { MapService } from '../../shared/services/map.service';
 import { Map } from 'leaflet';
 import * as L from 'leaflet';
 import * as esri from 'esri-leaflet';
+import booleanPointInPolygon from '@turf/boolean-point-in-polygon';
+import flatten from '../../../../node_modules/@turf/flatten';
+import { polygon, point } from '@turf/helpers';
 @Component({
   selector: 'app-mainview-map',
   templateUrl: './map.component.html',
@@ -36,67 +39,213 @@ export class MapComponent implements OnInit {
 
     let trendsx = esri.featureLayer({
       url:
-        'https://gis.wim.usgs.gov/arcgis/rest/services/SWTrends/swTrendSites/MapServer/1',
+        'https://gis.wim.usgs.gov/arcgis/rest/services/SWTrends/swTrendSites/MapServer/2',
       onEachFeature: function (feature: any, layer: any) {
-        if (feature.properties.EcoTrendResults_likelihood <= -0.8500001) {
-          layer.setIcon(
-            L.divIcon({
-              className:
-                'wmm-inverse-triangle wmm-black wmm-icon-inverse-triangle wmm-size-20 ',
-            })
-          );
-        } else if (
-          feature.properties.EcoTrendResults_likelihood > -0.8500001 &&
-          feature.properties.EcoTrendResults_likelihood <= -0.700001
-        ) {
-          layer.setIcon(
-            L.divIcon({
-              className:
-                'wmm-inverse-triangle wmm-white wmm-icon-inverse-triangle wmm-size-20 ',
-            })
-          );
-        } else if (
-          feature.properties.EcoTrendResults_likelihood > -0.700001 &&
-          feature.properties.EcoTrendResults_likelihood <= 0.7
-        ) {
-          layer.setIcon(
-            L.divIcon({
-              className:
-                'wmm-circle wmm-yellow wmm-icon-circle wmm-icon-black wmm-size-20',
-            })
-          );
-        } else if (
-          feature.properties.EcoTrendResults_likelihood > 0.7 &&
-          feature.properties.EcoTrendResults_likelihood <= 0.849999
-        ) {
-          layer.setIcon(
-            L.divIcon({
-              className:
-                'wmm-triangle wmm-red-hollow wmm-icon-triangle wmm-size-20',
-            })
-          );
-        } else if (feature.properties.EcoTrendResults_likelihood > 0.849999) {
-          layer.setIcon(
-            L.divIcon({
-              className: 'wmm-triangle wmm-red wmm-icon-triangle wmm-size-20',
-            })
-          );
+        //Create very simplified outline of basin
+        let simpBasin = polygon([
+          [
+            [51.19, -90.9],
+            [50.31, -90.79],
+            [48.69, -90.85],
+            [47.72, -93.27],
+            [46, -93.27],
+            [45.98, -89.05],
+            [43.72, -89.41],
+            [42.51, -87.51],
+            [41.53, -87.05],
+            [40.38, -84.38],
+            [41.26, -80.86],
+            [41.76, -80.57],
+            [42.42, -79.05],
+            [42.21, -76.83],
+            [42.33, -75.97],
+            [43.02, -76.0],
+            [51.19, -90.9],
+          ],
+        ]);
+        //feature coordinates
+        let coords = point([
+          feature.geometry.coordinates[1],
+          feature.geometry.coordinates[0],
+        ]);
+        //is the feature inside the basin?
+        let pointInBasin = booleanPointInPolygon(coords, simpBasin);
+        //if the feature is inside of the basin, plot it
+        if (pointInBasin) {
+          if (feature.properties['wrtds_trends_wm_new.likeC'] <= -0.8500001) {
+            layer.setIcon(
+              L.divIcon({
+                className:
+                  'wmm-inverse-triangle wmm-black wmm-icon-inverse-triangle wmm-size-20 ',
+              })
+            );
+          } else if (
+            feature.properties['wrtds_trends_wm_new.likeC'] > -0.8500001 &&
+            feature.properties['wrtds_trends_wm_new.likeC'] <= -0.700001
+          ) {
+            layer.setIcon(
+              L.divIcon({
+                className:
+                  'wmm-inverse-triangle wmm-white wmm-icon-inverse-triangle wmm-size-20 ',
+              })
+            );
+          } else if (
+            feature.properties['wrtds_trends_wm_new.likeC'] > -0.700001 &&
+            feature.properties['wrtds_trends_wm_new.likeC'] <= 0.7
+          ) {
+            layer.setIcon(
+              L.divIcon({
+                className:
+                  'wmm-circle wmm-yellow wmm-icon-circle wmm-icon-black wmm-size-20',
+              })
+            );
+          } else if (
+            feature.properties['wrtds_trends_wm_new.likeC'] > 0.7 &&
+            feature.properties['wrtds_trends_wm_new.likeC'] <= 0.849999
+          ) {
+            layer.setIcon(
+              L.divIcon({
+                className:
+                  'wmm-triangle wmm-red-hollow wmm-icon-triangle wmm-size-20',
+              })
+            );
+          } else if (
+            feature.properties['wrtds_trends_wm_new.likeC'] > 0.849999
+          ) {
+            layer.setIcon(
+              L.divIcon({
+                className: 'wmm-triangle wmm-red wmm-icon-triangle wmm-size-20',
+              })
+            );
+            //There are lots of sites that don't have a 'wrtds_trends_wm_new.likeC', but they do have
+            //'likeCDown' and 'likeCUp'. Not sure what to do with these, so skipping them for now.
+          } else {
+            layer.setIcon(
+              L.divIcon({
+                className: 'wmm-triangle',
+              })
+            );
+            /* There are so many of these that, for now, I'm not flagging them
+            console.log(
+              'Skipped site ' +
+                feature.properties['wrtds_trends_wm_new.likeC'] +
+                ' due to null wrtds_trends_wm_new.likeC'
+            );
+            */
+          }
+          //If point is outside of the basin, plot an invisible marker
         } else {
-          console.log('feature.properties', feature.properties);
+          //There is probably a way to skip this feature instead of adding a blank one
           layer.setIcon(
             L.divIcon({
               className: 'wmm-triangle',
             })
           );
-          console.log(
-            'Skipped site ' +
-              feature.properties.EcoSiteSummary_no_headers_csv_Ecology_site_ID +
-              ' due to null EcoTrendResults_likelihood'
+        }
+      },
+    });
+    let trendsxx = esri.featureLayer({
+      url:
+        'https://gis.wim.usgs.gov/arcgis/rest/services/SWTrends/swTrendSites/MapServer/1',
+      onEachFeature: function (feature: any, layer: any) {
+        let simpBasin = polygon([
+          [
+            [51.19, -90.9],
+            [50.31, -90.79],
+            [48.69, -90.85],
+            [47.72, -93.27],
+            [46, -93.27],
+            [45.98, -89.05],
+            [43.72, -89.41],
+            [42.51, -87.51],
+            [41.53, -87.05],
+            [40.38, -84.38],
+            [41.26, -80.86],
+            [41.76, -80.57],
+            [42.42, -79.05],
+            [42.21, -76.83],
+            [42.33, -75.97],
+            [43.02, -76.0],
+            [51.19, -90.9],
+          ],
+        ]);
+        //feature coordinates
+        let coords = point([
+          feature.geometry.coordinates[1],
+          feature.geometry.coordinates[0],
+        ]);
+        //is the feature inside the basin?
+        let pointInBasin = booleanPointInPolygon(coords, simpBasin);
+        //if the feature is inside of the basin, plot it
+        if (pointInBasin) {
+          if (feature.properties.EcoTrendResults_likelihood <= -0.8500001) {
+            layer.setIcon(
+              L.divIcon({
+                className:
+                  'wmm-inverse-triangle wmm-black wmm-icon-inverse-triangle wmm-size-20 ',
+              })
+            );
+          } else if (
+            feature.properties.EcoTrendResults_likelihood > -0.8500001 &&
+            feature.properties.EcoTrendResults_likelihood <= -0.700001
+          ) {
+            layer.setIcon(
+              L.divIcon({
+                className:
+                  'wmm-inverse-triangle wmm-white wmm-icon-inverse-triangle wmm-size-20 ',
+              })
+            );
+          } else if (
+            feature.properties.EcoTrendResults_likelihood > -0.700001 &&
+            feature.properties.EcoTrendResults_likelihood <= 0.7
+          ) {
+            layer.setIcon(
+              L.divIcon({
+                className:
+                  'wmm-circle wmm-yellow wmm-icon-circle wmm-icon-black wmm-size-20',
+              })
+            );
+          } else if (
+            feature.properties.EcoTrendResults_likelihood > 0.7 &&
+            feature.properties.EcoTrendResults_likelihood <= 0.849999
+          ) {
+            layer.setIcon(
+              L.divIcon({
+                className:
+                  'wmm-triangle wmm-red-hollow wmm-icon-triangle wmm-size-20',
+              })
+            );
+          } else if (feature.properties.EcoTrendResults_likelihood > 0.849999) {
+            layer.setIcon(
+              L.divIcon({
+                className: 'wmm-triangle wmm-red wmm-icon-triangle wmm-size-20',
+              })
+            );
+          } else {
+            layer.setIcon(
+              L.divIcon({
+                className: 'wmm-triangle',
+              })
+            );
+            console.log(
+              'Skipped site ' +
+                feature.properties
+                  .EcoSiteSummary_no_headers_csv_Ecology_site_ID +
+                ' due to null EcoTrendResults_likelihood'
+            );
+          }
+        } else {
+          //There is probably a way to skip this feature instead of adding a blank one
+          layer.setIcon(
+            L.divIcon({
+              className: 'wmm-triangle',
+            })
           );
         }
       },
     });
-    //trendsx.addTo(this._mapService.map);
+    trendsx.addTo(this._mapService.map);
+    trendsxx.addTo(this._mapService.map);
 
     //this._mapService.map.addLayer(this._mapService.auxLayers);
 
