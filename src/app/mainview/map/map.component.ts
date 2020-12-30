@@ -18,6 +18,8 @@ export class MapComponent implements OnInit {
   mapScale: any;
   latitude: any;
   longitude: any;
+  previousZoom: any;
+  currentZoom: any;
 
   constructor(private _mapService: MapService) {}
 
@@ -36,6 +38,7 @@ export class MapComponent implements OnInit {
     this.addLegend();
     this.addScale();
     this.addTrendPoints();
+    this.getZooms();
 
     //this._mapService.map.addLayer(this._mapService.auxLayers);
 
@@ -378,6 +381,48 @@ export class MapComponent implements OnInit {
     //Add the trend points that are inside of the basin to the map on load
     wrtdsTrendsBasin.addTo(this._mapService.map);
     allEcoTrendsBasin.addTo(this._mapService.map);
+  }
+
+  getZooms() {
+    //Get the value of the previous zoom
+    this._mapService.map.on('zoomstart', () => {
+      this.previousZoom = this._mapService.map.getZoom();
+    });
+    let riverID = document.getElementById('streamRiver') as HTMLInputElement;
+    //Get the value of the current zoom
+    this._mapService.map.on('zoomend', () => {
+      this.currentZoom = this._mapService.map.getZoom();
+      //when zoom greater than 12, enable rivers and streams checkbox
+      //add the layer if the checkbox is checked
+      if (this.currentZoom >= 12) {
+        riverID.disabled = false;
+        if (
+          riverID.checked === true &&
+          this._mapService.map.hasLayer(
+            this._mapService.auxLayers['majorStreamlines']
+          ) === false
+        ) {
+          this._mapService.map.addLayer(
+            this._mapService.auxLayers['majorStreamlines']
+          );
+        }
+      }
+      //if zoom is less than 12, rivers and streams checkbox is disabled
+      //layer is removed
+      if (this.currentZoom < 12) {
+        riverID.disabled = true;
+        this._mapService.map.removeLayer(
+          this._mapService.auxLayers['majorStreamlines']
+        );
+      }
+      if (
+        this.previousZoom == 12 &&
+        this.currentZoom == 11 &&
+        riverID.checked === true
+      ) {
+        console.log('Rivers and Streams layer removed');
+      }
+    });
   }
 
   // When data or map is collapsed or expanded,
