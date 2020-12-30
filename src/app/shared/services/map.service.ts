@@ -134,6 +134,32 @@ export class MapService {
       majorStreamlines: esri.featureLayer({
         url:
           'https://hydro.nationalmap.gov/arcgis/rest/services/nhd/MapServer/6',
+        style: function (feature) {
+          var riverColor;
+          var riverOpacity;
+          switch (feature.properties.FCODE) {
+            case 46000:
+              riverColor = '#73A8F3';
+              riverOpacity = 1;
+              break;
+            case 46003:
+              riverColor = '#73A8F3';
+              riverOpacity = 1;
+              break;
+            case 46006:
+              riverColor = '#73A8F3';
+              riverOpacity = 1;
+              break;
+            case 46007:
+              riverColor = '#73A8F3';
+              riverOpacity = 1;
+              break;
+            default:
+              riverColor = '#000000';
+              riverOpacity = 0;
+          }
+          return { color: riverColor, opacity: riverOpacity, weight: 5 };
+        },
       }),
       //~20 sites in the basin
       wrtdsTrends: esri.featureLayer({
