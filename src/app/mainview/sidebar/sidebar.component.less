@@ -29,14 +29,27 @@
   }
 }
 
+.wimCred {
+  color: gray;
+  text-align: center;
+  font-size: 12px;
+  margin-top: 10px;
+  text-decoration: none;
+  &:hover {
+    color: black;
+  }
+}
+
 // Sidebar
 #sidebar {
   .sidebar-header {
     //font-family: poppins;
-    font-family: sans-serif;
+    background-color: #eceef3;
+    font-family: "Glyphicons Halflings";
+    border-bottom: green;
     font-weight: 500;
     font-size: 18px;
-    color: black;
+    color: #6f758e;
     letter-spacing: -0.3px;
     display: flex;
     box-sizing: border-box;
@@ -82,12 +95,10 @@
 
     &:hover {
       cursor: pointer;
+      background-color: white;
+      color: black;
 
       b {
-        span {
-          text-decoration: underline;
-        }
-
         &:after {
           color: black;
         }
@@ -95,11 +106,16 @@
     }
   }
 
+  hr.below {
+    margin-top: -2px;
+    margin-bottom: -1px;
+  }
   // Content Blocks
   // Expand with class .expanded
   .sidebar-content {
     display: block;
     box-sizing: border-box;
+    background-color: white;
     // max-height: 0px;
     // transition: max-height 0.15s 0.15s, transform 0.15s 0s ease;
     overflow: visible;

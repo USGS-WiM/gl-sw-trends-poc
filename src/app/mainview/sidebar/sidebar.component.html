@@ -5,7 +5,11 @@
   [ngClass]="{ 'fa-bars': !expandSidebar, 'fa-times': expandSidebar }"
 ></i>
 
-<div id="sidebar" [ngClass]="{ expanded: expandSidebar }">
+<div
+  id="sidebar"
+  [ngClass]="{ expanded: expandSidebar }"
+  style="background-color: #eceef3"
+>
   <!-- Scrolling sidebar content -->
   <div class="sidebar-scroll">
     <!--  Sidebar Basemaps  -->
@@ -17,62 +21,58 @@
       <i class="fal fa-map"></i>
       <b><span>Basemaps</span></b>
     </div>
+    <hr class="below" />
 
     <!-- Basemaps content -->
     <div class="sidebar-content" [ngClass]="{ expanded: showBasemaps }">
       <div id="sidebarBasemaps" class="sidebarLayer">
-        <div
-          class="basemap"
-          id="basemap1"
-          (click)="toggleLayer('OpenStreetMap')"
-          [ngClass]="{ active: chosenBaseLayer == 'OpenStreetMap' }"
-        >
+        <label>
+          <input
+            type="radio"
+            id="basemap1"
+            (click)="toggleBasemap('OpenStreetMap', 'basemap1')"
+          />
           Streets
-        </div>
-        <div
-          class="basemap"
-          id="basemap2"
-          (click)="toggleLayer('Topo')"
-          [ngClass]="{ active: chosenBaseLayer == 'Topo' }"
-        >
-          Topographic
-        </div>
-        <div
-          class="basemap"
-          id="basemap4"
-          (click)="toggleLayer('Terrain')"
-          [ngClass]="{ active: chosenBaseLayer == 'Terrain' }"
-        >
+          <br />
+          <input
+            type="radio"
+            checked
+            id="basemap2"
+            (click)="toggleBasemap('Topo', 'basemap2')"
+          />
+          Topographic <br />
+          <input
+            type="radio"
+            id="basemap3"
+            (click)="toggleBasemap('Terrain', 'basemap3')"
+          />
           Terrain
-        </div>
-        <div
-          class="basemap"
-          id="basemap5"
-          (click)="toggleLayer('Satellite')"
-          [ngClass]="{ active: chosenBaseLayer == 'Satellite' }"
-        >
-          Satellite
-        </div>
-        <div
-          class="basemap"
-          id="basemap5"
-          (click)="toggleLayer('Gray')"
-          [ngClass]="{ active: chosenBaseLayer == 'Gray' }"
-        >
-          Gray
-        </div>
-        <!-- <div class="basemap" id="basemap6" (click)="toggleLayer('Nautical')" [ngClass]="{ active: chosenBaseLayer == 'Nautical' }">Nautical</div> -->
+          <br />
+          <input
+            type="radio"
+            id="basemap4"
+            (click)="toggleBasemap('Satellite', 'basemap4')"
+          />
+          Satellite <br />
+          <input
+            type="radio"
+            id="basemap5"
+            (click)="toggleBasemap('Gray', 'basemap5')"
+          />
+          Gray <br />
+        </label>
       </div>
     </div>
-
+    <hr class="below" />
     <div
       class="sidebar-header"
       (click)="showAuxLayers = !showAuxLayers"
       [ngClass]="{ expanded: showAuxLayers }"
     >
       <i class="fal fa-object-group"></i>
-      <b><span>Additional Layers</span></b>
+      <b><span>Map Layers</span></b>
     </div>
+    <hr class="below" />
 
     <!-- Auxlayer content -->
     <div class="sidebar-content" [ngClass]="{ expanded: showAuxLayers }">
@@ -119,7 +119,7 @@
         </div>
       </div>
     </div>
-
+    <hr class="below" />
     <div
       class="sidebar-header"
       (click)="showFilters = !showFilters"
@@ -128,9 +128,14 @@
       <i class="fal fa-bars"></i>
       <b><span>Constituent Select</span></b>
     </div>
+    <hr class="below" />
     <!-- Filter Content-->
     <div class="sidebar-content" [ngClass]="{ expanded: showFilters }">
-      <div id="sidebarFilters" class="sidebarLayer">
+      <div
+        id="sidebarFilters"
+        class="sidebarLayer"
+        style="margin-right: 50px; margin-left: -20px"
+      >
         <div
           id="constPanel"
           class="panel-collapse collapse in constituent-panel"
@@ -173,6 +178,9 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="wimCred">
+      <a href="https://wim.usgs.gov/" class="wimCred">Powered by WIM</a>
     </div>
   </div>
 
