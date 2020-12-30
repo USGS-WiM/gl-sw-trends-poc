@@ -97,9 +97,10 @@
             />Watersheds<br />
             <input
               type="checkbox"
-              id="aux4"
-              (click)="toggleAuxLayer('majorStreamlines', 'aux4')"
-            />Major Tributaries<br />
+              id="streamRiver"
+              disabled
+              (click)="toggleAuxLayer('majorStreamlines', 'streamRiver')"
+            />Streams and Rivers*<br />
             <input
               type="checkbox"
               id="aux5"
@@ -110,7 +111,9 @@
               id="aux6"
               (click)="toggleAuxLayer('trends', 'aux6')"
             />All Trends<br />
-            <!-- <input type="checkbox" id ="aux4" checked (click)="toggleAuxLayer()"/>Aux4<br> -->
+            <div class="zoomWarning">
+              *Available at zoom level 12 and greater
+            </div>
           </label>
         </div>
       </div>
