@@ -194,10 +194,6 @@ export class MapService {
               riverOpacity = 0;
           }
           return { color: riverColor, opacity: riverOpacity, weight: 5 };
-          console.log(
-            'major streamline feature',
-            typeof feature.properties.FCODE
-          );
         },
       }),
       //~20 sites in the basin
