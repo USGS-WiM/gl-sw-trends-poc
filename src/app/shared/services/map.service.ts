@@ -24,6 +24,7 @@ export class MapService {
   public basinAreaStyle: any;
   public basinOutlineStyle: any;
   public basinOutline: any;
+  public epaConcernStyle: any;
 
   //   public siteColors = ['red', 'blue', 'green', 'gray'];
   //   public siteCategories = ['Active', 'Suspected', 'Closed', 'Other']
@@ -144,6 +145,12 @@ export class MapService {
       weight: 2.5,
     };
 
+    this.epaConcernStyle = {
+      color: 'brown',
+      fillOpacity: 0.2,
+      weight: 1,
+    };
+
     this.auxLayers = {
       basin: esri.featureLayer({
         url:
@@ -195,6 +202,11 @@ export class MapService {
           }
           return { color: riverColor, opacity: riverOpacity, weight: 5 };
         },
+      }),
+      epaAreasOfConcern: esri.featureLayer({
+        url:
+          'https://gis.wim.usgs.gov/arcgis/rest/services/SIGL/SIGLMapper/MapServer/1',
+        style: this.epaConcernStyle,
       }),
       //~20 sites in the basin
       wrtdsTrends: esri.featureLayer({
