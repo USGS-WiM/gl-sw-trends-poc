@@ -5,7 +5,11 @@
   [ngClass]="{ 'fa-bars': !expandSidebar, 'fa-times': expandSidebar }"
 ></i>
 
-<div id="sidebar" [ngClass]="{ expanded: expandSidebar }">
+<div
+  id="sidebar"
+  [ngClass]="{ expanded: expandSidebar }"
+  style="background-color: #eceef3"
+>
   <!-- Scrolling sidebar content -->
   <div class="sidebar-scroll">
     <!--  Sidebar Basemaps  -->
@@ -17,62 +21,58 @@
       <i class="fal fa-map"></i>
       <b><span>Basemaps</span></b>
     </div>
+    <hr class="below" />
 
     <!-- Basemaps content -->
     <div class="sidebar-content" [ngClass]="{ expanded: showBasemaps }">
       <div id="sidebarBasemaps" class="sidebarLayer">
-        <div
-          class="basemap"
-          id="basemap1"
-          (click)="toggleLayer('OpenStreetMap')"
-          [ngClass]="{ active: chosenBaseLayer == 'OpenStreetMap' }"
-        >
+        <label>
+          <input
+            type="radio"
+            id="basemap1"
+            (click)="toggleBasemap('OpenStreetMap', 'basemap1')"
+          />
           Streets
-        </div>
-        <div
-          class="basemap"
-          id="basemap2"
-          (click)="toggleLayer('Topo')"
-          [ngClass]="{ active: chosenBaseLayer == 'Topo' }"
-        >
-          Topographic
-        </div>
-        <div
-          class="basemap"
-          id="basemap4"
-          (click)="toggleLayer('Terrain')"
-          [ngClass]="{ active: chosenBaseLayer == 'Terrain' }"
-        >
+          <br />
+          <input
+            type="radio"
+            checked
+            id="basemap2"
+            (click)="toggleBasemap('Topo', 'basemap2')"
+          />
+          Topographic <br />
+          <input
+            type="radio"
+            id="basemap3"
+            (click)="toggleBasemap('Terrain', 'basemap3')"
+          />
           Terrain
-        </div>
-        <div
-          class="basemap"
-          id="basemap5"
-          (click)="toggleLayer('Satellite')"
-          [ngClass]="{ active: chosenBaseLayer == 'Satellite' }"
-        >
-          Satellite
-        </div>
-        <div
-          class="basemap"
-          id="basemap5"
-          (click)="toggleLayer('Gray')"
-          [ngClass]="{ active: chosenBaseLayer == 'Gray' }"
-        >
-          Gray
-        </div>
-        <!-- <div class="basemap" id="basemap6" (click)="toggleLayer('Nautical')" [ngClass]="{ active: chosenBaseLayer == 'Nautical' }">Nautical</div> -->
+          <br />
+          <input
+            type="radio"
+            id="basemap4"
+            (click)="toggleBasemap('Satellite', 'basemap4')"
+          />
+          Satellite <br />
+          <input
+            type="radio"
+            id="basemap5"
+            (click)="toggleBasemap('Gray', 'basemap5')"
+          />
+          Gray <br />
+        </label>
       </div>
     </div>
-
+    <hr class="below" />
     <div
       class="sidebar-header"
       (click)="showAuxLayers = !showAuxLayers"
       [ngClass]="{ expanded: showAuxLayers }"
     >
       <i class="fal fa-object-group"></i>
-      <b><span>Additional Layers</span></b>
+      <b><span>Map Layers</span></b>
     </div>
+    <hr class="below" />
 
     <!-- Auxlayer content -->
     <div class="sidebar-content" [ngClass]="{ expanded: showAuxLayers }">
@@ -80,10 +80,10 @@
         <div class="basemap">
           <label>
             <input
-            type="checkbox"
-            id="aux1"
-            checked
-            (click)="toggleAuxLayer('basin', 'aux1')"
+              type="checkbox"
+              id="aux1"
+              checked
+              (click)="toggleAuxLayer('basin', 'aux1')"
             />Great Lakes Basin Boundary<br />
             <input
               type="checkbox"
@@ -97,21 +97,91 @@
             />Watersheds<br />
             <input
               type="checkbox"
-              id="aux4"
-              (click)="toggleAuxLayer('majorStreamlines', 'aux4')"
-            />Major Tributaries<br />
+              id="streamRiver"
+              disabled
+              (click)="toggleAuxLayer('majorStreamlines', 'streamRiver')"
+            />Streams and Rivers*<br />
             <input
               type="checkbox"
               id="aux5"
               (click)="toggleAuxLayer('gageSites', 'aux5')"
             />Gages<br />
-            <!-- <input type="checkbox" id ="aux4" checked (click)="toggleAuxLayer()"/>Aux4<br> -->
+            <input
+              type="checkbox"
+              id="aux6"
+              (click)="toggleAuxLayer('trends', 'aux6')"
+            />All Trends<br />
+            <div class="zoomWarning">
+              *Available at zoom level 12 and greater
+            </div>
           </label>
         </div>
       </div>
     </div>
+    <hr class="below" />
+    <div
+      class="sidebar-header"
+      (click)="showFilters = !showFilters"
+      [ngClass]="{ expanded: showFilters }"
+    >
+      <i class="fal fa-bars"></i>
+      <b><span>Constituent Select</span></b>
+    </div>
+    <hr class="below" />
+    <!-- Filter Content-->
+    <div class="sidebar-content" [ngClass]="{ expanded: showFilters }">
+      <div
+        id="sidebarFilters"
+        class="sidebarLayer"
+        style="margin-right: 50px; margin-left: -20px"
+      >
+        <div
+          id="constPanel"
+          class="panel-collapse collapse in constituent-panel"
+          role="tabpanel"
+          aria-labelledby="constPanelHeader"
+        >
+          <div id="constDropdowns" style="padding: 2px 2px">
+            <label for="typeSelect" class="constLabel">Constituent Group</label>
+            <span>
+              <select id="typeSelect">
+                <option value="Nutrients" select="#nutrientsSelect">
+                  Nutrients
+                </option>
+                <option value="TBD" select="#tbdSelect">TBD</option>
+              </select>
+            </span>
+            <br />
+          </div>
+          <div>
+            <label class="constLabel">Constituent</label>
+            <span>
+              <select id="typeSelect">
+                <option value="TP" select="#tpSelect">
+                  Total Phosphorus (TP)
+                </option>
+                <option value="orthoP" select="#orthoPSelect">
+                  Dissolved Phosphorus (ortho P)
+                </option>
+                <option value="SS" select="#ssSelect">
+                  Suspended Sediment (SS)
+                </option>
+                <option value="NO3" select="#no3Select">Nitrate (NO3)</option>
+                <option value="KJ" select="#kjSelect">
+                  Kjedahl Nitrogen (KJ)
+                </option>
+                <option value="NH4" select="#nh4Select">Ammonia (NH4)</option>
+                <option value="Cl" select="#clSelect">Chloride (Cl)</option>
+              </select>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="wimCred">
+      <a href="https://wim.usgs.gov/" class="wimCred">Powered by WIM</a>
+    </div>
   </div>
-  <!-- End Sidebar -->
 
   <!-- Sidebar lightbox for mobile -->
   <div
