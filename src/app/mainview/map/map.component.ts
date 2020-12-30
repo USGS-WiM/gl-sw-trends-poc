@@ -35,7 +35,7 @@ export class MapComponent implements OnInit {
     this._mapService.map.addLayer(
       this._mapService.baseMaps[this._mapService.chosenBaseLayer]
     );
-    this.addLegend();
+    // this.addLegend();
     this.addScale();
     this.addTrendPoints();
     this.getZooms();
@@ -139,14 +139,15 @@ export class MapComponent implements OnInit {
     }
   }
 
+  /*
   addLegend() {
-    this._mapService.legend = new L.Control({ position: 'bottomright' });
+    this._mapService.legend = new L.Control({ position: 'topright' });
     this._mapService.legend.onAdd = function () {
       const div = L.DomUtil.create('div', 'info legend');
       let item = '';
 
       item +=
-        '<div id="LegendHeader" ><span><i class="fa fa-list"></i>Explanation</span></div>' +
+        '<div id="LegendHeader" ><span><i class="fa fa-list"></i>Map Layers</span></div>' +
         '<div id="legendDiv"><br>';
       item += '<i class="site multiple-types"></i>Multiple</div>';
       div.innerHTML = item;
@@ -168,6 +169,7 @@ export class MapComponent implements OnInit {
     };
     this._mapService.legend.addTo(this._mapService.map);
   }
+  */
 
   addTrendPoints() {
     let wrtdsTrendsBasin = esri.featureLayer({
@@ -384,6 +386,10 @@ export class MapComponent implements OnInit {
   }
 
   getZooms() {
+    this._mapService.map.on('overlayadd', (e) => {
+      console.log('this is e', e);
+    });
+
     //Get the value of the previous zoom
     this._mapService.map.on('zoomstart', () => {
       this.previousZoom = this._mapService.map.getZoom();

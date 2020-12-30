@@ -1,3 +1,4 @@
+import { Variable } from '@angular/compiler/src/render3/r3_ast';
 import { Component, OnInit, Directive, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MapService } from 'src/app/shared/services/map.service';
@@ -15,6 +16,11 @@ export class SidebarComponent implements OnInit {
   chosenBaseLayer: any;
   chosenBaseId: any;
   displayedAuxLayers: string[] = [];
+  basinVisible: boolean = false;
+  subBasinVisible: boolean = false;
+  watershedsVisible: boolean = false;
+  streamVisible: boolean = false;
+  gageVisible: boolean = false;
 
   constructor(private _mapService: MapService) {}
 
@@ -62,31 +68,19 @@ export class SidebarComponent implements OnInit {
   }
 
   //when an Additional Layer is checked, add/remove that layer from the map
-  public toggleMapLayer(mapLayer: string, layerID: string) {
-    // this._mapService.chosenAuxLayer = newVal;
+  public toggleMapLayer(mapLayer: string, layerID: string, visible: any) {
     let checkboxID = document.getElementById(layerID) as HTMLInputElement;
+    console.log('visible', visible);
     if (checkboxID.checked == false) {
-      if (mapLayer !== 'trends') {
-        this._mapService.map.removeLayer(this._mapService.auxLayers[mapLayer]);
-      } else {
-        this._mapService.map.removeLayer(
-          this._mapService.auxLayers['allEcoTrends']
-        );
-        this._mapService.map.removeLayer(
-          this._mapService.auxLayers['wrtdsTrends']
-        );
+      this._mapService.map.removeLayer(this._mapService.auxLayers[mapLayer]);
+      if (layerID === 'gageID') {
+        this.gageVisible = false;
       }
     }
     if (checkboxID.checked == true) {
-      if (mapLayer !== 'trends') {
-        this._mapService.map.addLayer(this._mapService.auxLayers[mapLayer]);
-      } else {
-        this._mapService.map.addLayer(
-          this._mapService.auxLayers['allEcoTrends']
-        );
-        this._mapService.map.addLayer(
-          this._mapService.auxLayers['wrtdsTrends']
-        );
+      this._mapService.map.addLayer(this._mapService.auxLayers[mapLayer]);
+      if (layerID === 'gageID') {
+        this.gageVisible = true;
       }
     }
   }
