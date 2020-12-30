@@ -77,45 +77,41 @@
     <!-- Auxlayer content -->
     <div class="sidebar-content" [ngClass]="{ expanded: showAuxLayers }">
       <div id="sidebarAuxLayers" class="sidebarLayer">
-        <div class="basemap">
-          <label>
-            <input
-              type="checkbox"
-              id="aux1"
-              checked
-              (click)="toggleAuxLayer('basin', 'aux1')"
-            />Great Lakes Basin Boundary<br />
-            <input
-              type="checkbox"
-              id="aux2"
-              (click)="toggleAuxLayer('basinArea', 'aux2')"
-            />Great Lakes Sub-Basins<br />
-            <input
-              type="checkbox"
-              id="aux3"
-              (click)="toggleAuxLayer('watersheds', 'aux3')"
-            />Watersheds<br />
-            <input
-              type="checkbox"
-              id="streamRiver"
-              disabled
-              (click)="toggleAuxLayer('majorStreamlines', 'streamRiver')"
-            />Streams and Rivers*<br />
-            <input
-              type="checkbox"
-              id="aux5"
-              (click)="toggleAuxLayer('gageSites', 'aux5')"
-            />Gages<br />
-            <input
-              type="checkbox"
-              id="aux6"
-              (click)="toggleAuxLayer('trends', 'aux6')"
-            />All Trends<br />
-            <div class="zoomWarning">
-              *Available at zoom level 12 and greater
-            </div>
-          </label>
-        </div>
+        <label>
+          <input
+            type="checkbox"
+            id="aux1"
+            checked
+            (click)="toggleMapLayer('basin', 'aux1')"
+          />Great Lakes Basin Boundary<br />
+          <input
+            type="checkbox"
+            id="aux2"
+            (click)="toggleMapLayer('basinArea', 'aux2')"
+          />Great Lakes Sub-Basins<br />
+          <input
+            type="checkbox"
+            id="aux3"
+            (click)="toggleMapLayer('watersheds', 'aux3')"
+          />Watersheds<br />
+          <input
+            type="checkbox"
+            id="streamRiver"
+            disabled
+            (click)="toggleMapLayer('majorStreamlines', 'streamRiver')"
+          />Streams and Rivers*<br />
+          <input
+            type="checkbox"
+            id="aux5"
+            (click)="toggleMapLayer('gageSites', 'aux5')"
+          />Gages<br />
+          <input
+            type="checkbox"
+            id="aux6"
+            (click)="toggleMapLayer('trends', 'aux6')"
+          />All Trends<br />
+          <div class="zoomWarning">*Available at zoom level 12 and greater</div>
+        </label>
       </div>
     </div>
     <hr class="below" />
