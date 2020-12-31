@@ -22,17 +22,6 @@
   </div>
 
   <div id="toggleMap">
-    <div *ngIf="!collapsedDataPanel" (click)="collapsedMap = !collapsedMap">
-      <i
-        class="far"
-        [ngClass]="{
-          'fa-expand': collapsedMap,
-          'fa-minus-square': !collapsedMap
-        }"
-      ></i>
-      <b *ngIf="collapsedMap">Expand Map</b>
-      <b *ngIf="!collapsedMap">Collapse Map</b>
-    </div>
     <div *ngIf="!collapsedMap" (click)="expandCollapseDataPanel()">
       <i
         class="far"
@@ -41,8 +30,8 @@
           'fa-minus-square': !collapsedDataPanel
         }"
       ></i>
-      <b *ngIf="!collapsedDataPanel">Collapse Data Panel</b>
-      <b *ngIf="collapsedDataPanel">Expand Data Panel</b>
+      <b *ngIf="!collapsedDataPanel">Collapse Results Panel</b>
+      <b *ngIf="collapsedDataPanel">Expand Results Panel</b>
     </div>
   </div>
 </div>
