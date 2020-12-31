@@ -5,6 +5,70 @@
   [ngClass]="{ 'fa-bars': !expandSidebar, 'fa-times': expandSidebar }"
 ></i>
 
+<!-- Start legend -->
+<div class="leaflet-top leaflet-right legendStyle">
+  <div *ngIf="activeLayers">
+    <span class="mapLayerTitle"> <b>Map Layers</b></span>
+    <hr />
+    <div *ngIf="basinVisible" class="legend-icon">
+      <div class="wmm-square wmm-icon-circle wmm-size-20 basin-icon"></div>
+      <label>Great Lakes Basin Boundary</label>
+    </div>
+    <div *ngIf="subBasinVisible" class="legend-icon">
+      <div class="wmm-square wmm-icon-circle wmm-size-20 subbasin-icon"></div>
+      <label>Great Lakes Sub-Basins</label>
+    </div>
+    <div *ngIf="watershedsVisible" class="legend-icon">
+      <div class="wmm-square wmm-icon-circle wmm-size-20 watershed-icon"></div>
+      <label>Watersheds</label>
+    </div>
+    <div *ngIf="gageVisible" class="legend-icon">
+      <div
+        class="wmm-pin wmm-altblue wmm-icon-circle wmm-icon-white wmm-size-20"
+      ></div>
+      <label>Gages</label>
+    </div>
+    <div *ngIf="streamVisible" class="legend-icon streamAlign">
+      <div class="stream-icon"></div>
+      <label>Streams and Rivers</label>
+    </div>
+    <hr class="legendBreak" />
+  </div>
+  <div>
+    <span class="mapLayerTitle"> <b>Trends</b></span>
+    <hr />
+    <div style="margin-left: 8px">
+      <div class="legend-icon">
+        <div class="wmm-triangle wmm-red wmm-icon-triangle wmm-size-20"></div>
+        <label>Likely up</label>
+      </div>
+      <div class="legend-icon">
+        <div class="wmm-triangle-legend wmm-red-hollow wmm-size-20"></div>
+        <label>Somewhat likely up</label>
+      </div>
+      <div class="legend-icon">
+        <div
+          class="wmm-circle wmm-yellow wmm-icon-circle wmm-icon-black wmm-size-20"
+        ></div>
+        <label>About as likely as not</label>
+      </div>
+      <div class="legend-icon">
+        <div
+          class="wmm-inverse-triangle-legend wmm-inverse-triangle-legend-hollow triangle-margin-large wmm-white wmm-icon-inverse-triangle wmm-size-20"
+        ></div>
+        <label>Somewhat likely down</label>
+      </div>
+      <div class="legend-icon">
+        <div
+          class="wmm-inverse-triangle-legend wmm-black wmm-size-20 triangle-margin-small"
+        ></div>
+        <label>Likely down</label>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End legend -->
+
 <div
   id="sidebar"
   [ngClass]="{ expanded: expandSidebar }"
@@ -80,36 +144,33 @@
         <label>
           <input
             type="checkbox"
-            id="aux1"
+            id="basinID"
             checked
-            (click)="toggleMapLayer('basin', 'aux1')"
+            (click)="toggleMapLayer('basin', 'basinID', basinVisible)"
           />Great Lakes Basin Boundary<br />
           <input
             type="checkbox"
-            id="aux2"
-            (click)="toggleMapLayer('basinArea', 'aux2')"
+            id="subBasinID"
+            (click)="toggleMapLayer('basinArea', 'subBasinID', subBasinVisible)"
           />Great Lakes Sub-Basins<br />
           <input
             type="checkbox"
-            id="aux3"
-            (click)="toggleMapLayer('watersheds', 'aux3')"
+            id="waterID"
+            (click)="toggleMapLayer('watersheds', 'waterID', watershedsVisible)"
           />Watersheds<br />
+          <input
+            type="checkbox"
+            id="gageID"
+            (click)="toggleMapLayer('gageSites', 'gageID', this.gageVisible)"
+          />Gages<br />
           <input
             type="checkbox"
             id="streamRiver"
             disabled
-            (click)="toggleMapLayer('majorStreamlines', 'streamRiver')"
+            (click)="
+              toggleMapLayer('majorStreamlines', 'streamRiver', streamVisible)
+            "
           />Streams and Rivers*<br />
-          <input
-            type="checkbox"
-            id="aux5"
-            (click)="toggleMapLayer('gageSites', 'aux5')"
-          />Gages<br />
-          <input
-            type="checkbox"
-            id="aux6"
-            (click)="toggleMapLayer('trends', 'aux6')"
-          />All Trends<br />
           <div class="zoomWarning">*Available at zoom level 12 and greater</div>
         </label>
       </div>

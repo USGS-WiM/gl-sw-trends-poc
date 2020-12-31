@@ -1,5 +1,4 @@
 import { Component, OnInit, Directive, Input } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { MapService } from 'src/app/shared/services/map.service';
 
 @Component({
@@ -15,6 +14,15 @@ export class SidebarComponent implements OnInit {
   chosenBaseLayer: any;
   chosenBaseId: any;
   displayedAuxLayers: string[] = [];
+  //If true, layer is on and corresponding layer will appear in legend
+  basinVisible: boolean = true;
+  subBasinVisible: boolean = false;
+  watershedsVisible: boolean = false;
+  streamVisible: boolean = false;
+  gageVisible: boolean = false;
+  //If there are any map layers on, map legend section will appear
+  activeLayers: boolean = true;
+  layerCount: number = 1;
 
   constructor(private _mapService: MapService) {}
 
@@ -62,32 +70,53 @@ export class SidebarComponent implements OnInit {
   }
 
   //when an Additional Layer is checked, add/remove that layer from the map
-  public toggleMapLayer(mapLayer: string, layerID: string) {
-    // this._mapService.chosenAuxLayer = newVal;
+  public toggleMapLayer(mapLayer: string, layerID: string, visible: any) {
     let checkboxID = document.getElementById(layerID) as HTMLInputElement;
+    //when a checkbox is checked, add layer to map and icon to legend
     if (checkboxID.checked == false) {
-      if (mapLayer !== 'trends') {
-        this._mapService.map.removeLayer(this._mapService.auxLayers[mapLayer]);
-      } else {
-        this._mapService.map.removeLayer(
-          this._mapService.auxLayers['allEcoTrends']
-        );
-        this._mapService.map.removeLayer(
-          this._mapService.auxLayers['wrtdsTrends']
-        );
+      this._mapService.map.removeLayer(this._mapService.auxLayers[mapLayer]);
+      if (layerID === 'gageID') {
+        this.gageVisible = false;
       }
+      if (layerID === 'basinID') {
+        this.basinVisible = false;
+      }
+      if (layerID === 'subBasinID') {
+        this.subBasinVisible = false;
+      }
+      if (layerID === 'streamRiver') {
+        this.streamVisible = false;
+      }
+      if (layerID === 'waterID') {
+        this.watershedsVisible = false;
+      }
+      this.layerCount -= 1;
     }
+    //when a checkbox is unchecked, remove layer from map and icon from legend
     if (checkboxID.checked == true) {
-      if (mapLayer !== 'trends') {
-        this._mapService.map.addLayer(this._mapService.auxLayers[mapLayer]);
-      } else {
-        this._mapService.map.addLayer(
-          this._mapService.auxLayers['allEcoTrends']
-        );
-        this._mapService.map.addLayer(
-          this._mapService.auxLayers['wrtdsTrends']
-        );
+      this._mapService.map.addLayer(this._mapService.auxLayers[mapLayer]);
+      if (layerID === 'gageID') {
+        this.gageVisible = true;
       }
+      if (layerID === 'basinID') {
+        this.basinVisible = true;
+      }
+      if (layerID === 'subBasinID') {
+        this.subBasinVisible = true;
+      }
+      if (layerID === 'streamRiver') {
+        this.streamVisible = true;
+      }
+      if (layerID === 'waterID') {
+        this.watershedsVisible = true;
+      }
+      this.layerCount += 1;
+    }
+    //if there is at least one map layer, show map layer section of legend
+    if (this.layerCount > 0) {
+      this.activeLayers = true;
+    } else if (this.layerCount === 0) {
+      this.activeLayers = false;
     }
   }
 }
