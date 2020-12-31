@@ -176,74 +176,67 @@ export class MapComponent implements OnInit {
         //is the feature inside the basin?
         let pointInBasin = booleanPointInPolygon(coords, simpBasin);
         //if the feature is inside of the basin, plot it
-        if (pointInBasin) {
-          if (
-            feature.properties['wrtds_trends_wm_new.yearStart'] === 2002 &&
-            feature.properties['wrtds_trends_wm_new.param_nm'] ===
-              'Total Phosphorus'
-          ) {
-            if (feature.properties['wrtds_trends_wm_new.likeC'] <= -0.8500001) {
-              layer.setIcon(
-                L.divIcon({
-                  className:
-                    'wmm-inverse-triangle wmm-black wmm-icon-inverse-triangle wmm-size-20 ',
-                })
-              );
-            } else if (
-              feature.properties['wrtds_trends_wm_new.likeC'] > -0.8500001 &&
-              feature.properties['wrtds_trends_wm_new.likeC'] <= -0.700001
-            ) {
-              layer.setIcon(
-                L.divIcon({
-                  className:
-                    'wmm-inverse-triangle wmm-white wmm-icon-inverse-triangle wmm-size-20 ',
-                })
-              );
-            } else if (
-              feature.properties['wrtds_trends_wm_new.likeC'] > -0.700001 &&
-              feature.properties['wrtds_trends_wm_new.likeC'] <= 0.7
-            ) {
-              layer.setIcon(
-                L.divIcon({
-                  className:
-                    'wmm-circle wmm-yellow wmm-icon-circle wmm-icon-black wmm-size-20',
-                })
-              );
-            } else if (
-              feature.properties['wrtds_trends_wm_new.likeC'] > 0.7 &&
-              feature.properties['wrtds_trends_wm_new.likeC'] <= 0.849999
-            ) {
-              layer.setIcon(
-                L.divIcon({
-                  className:
-                    'wmm-triangle wmm-red-hollow wmm-icon-triangle wmm-size-20',
-                })
-              );
-            } else if (
-              feature.properties['wrtds_trends_wm_new.likeC'] > 0.849999
-            ) {
-              layer.setIcon(
-                L.divIcon({
-                  className:
-                    'wmm-triangle wmm-red wmm-icon-triangle wmm-size-20',
-                })
-              );
-              //There are lots of sites that don't have a 'wrtds_trends_wm_new.likeC', but they do have
-              //'likeCDown' and 'likeCUp'. Not sure what to do with these, so skipping them for now.
-            } else {
-              layer.setIcon(
-                L.divIcon({
-                  className: 'wmm-triangle',
-                })
-              );
-              /* There are so many of these that, for now, I'm not flagging them
-            console.log(
-              'Skipped site ' +
-                feature.properties['wrtds_trends_wm_new.likeC'] +
-                ' due to null wrtds_trends_wm_new.likeC'
+        if (
+          pointInBasin &&
+          feature.properties['wrtds_trends_wm_new.yearStart'] === 2002 &&
+          feature.properties['wrtds_trends_wm_new.param_nm'] ===
+            'Total Phosphorus'
+        ) {
+          layer.bindPopup(
+            '<div style="font-weight: bold">WRTDS Site</div>' +
+              'Site ID: ' +
+              feature.properties['wrtds_sites.Gage_number'] +
+              '<br>' +
+              'Site Name: ' +
+              feature.properties['wrtds_sites.Station_nm']
+          );
+          if (feature.properties['wrtds_trends_wm_new.likeC'] <= -0.8500001) {
+            layer.setIcon(
+              L.divIcon({
+                className:
+                  'wmm-inverse-triangle wmm-black wmm-icon-inverse-triangle wmm-size-20 ',
+              })
             );
-            */
-            }
+          } else if (
+            feature.properties['wrtds_trends_wm_new.likeC'] > -0.8500001 &&
+            feature.properties['wrtds_trends_wm_new.likeC'] <= -0.700001
+          ) {
+            layer.setIcon(
+              L.divIcon({
+                className:
+                  'wmm-inverse-triangle wmm-white wmm-icon-inverse-triangle wmm-size-20 ',
+              })
+            );
+          } else if (
+            feature.properties['wrtds_trends_wm_new.likeC'] > -0.700001 &&
+            feature.properties['wrtds_trends_wm_new.likeC'] <= 0.7
+          ) {
+            layer.setIcon(
+              L.divIcon({
+                className:
+                  'wmm-circle wmm-yellow wmm-icon-circle wmm-icon-black wmm-size-20',
+              })
+            );
+          } else if (
+            feature.properties['wrtds_trends_wm_new.likeC'] > 0.7 &&
+            feature.properties['wrtds_trends_wm_new.likeC'] <= 0.849999
+          ) {
+            layer.setIcon(
+              L.divIcon({
+                className:
+                  'wmm-triangle wmm-red-hollow wmm-icon-triangle wmm-size-20',
+              })
+            );
+          } else if (
+            feature.properties['wrtds_trends_wm_new.likeC'] > 0.849999
+          ) {
+            layer.setIcon(
+              L.divIcon({
+                className: 'wmm-triangle wmm-red wmm-icon-triangle wmm-size-20',
+              })
+            );
+            //There are lots of sites that don't have a 'wrtds_trends_wm_new.likeC', but they do have
+            //'likeCDown' and 'likeCUp'. Not sure what to do with these, so skipping them for now.
           } else {
             layer.setIcon(
               L.divIcon({
@@ -251,21 +244,26 @@ export class MapComponent implements OnInit {
               })
             );
             /* There are so many of these that, for now, I'm not flagging them
+            console.log(
+              'Skipped site ' +
+                feature.properties['wrtds_trends_wm_new.likeC'] +
+                ' due to null wrtds_trends_wm_new.likeC'
+            );
+            */
+          }
+        } else {
+          layer.setIcon(
+            L.divIcon({
+              className: 'wmm-triangle',
+            })
+          );
+          /* There are so many of these that, for now, I'm not flagging them
           console.log(
             'Skipped site ' +
               feature.properties['wrtds_trends_wm_new.likeC'] +
               ' due to null wrtds_trends_wm_new.likeC'
           );
           */
-          }
-        } else {
-          //If point is outside of the basin, plot an invisible marker
-          //There is probably a way to skip this feature instead of adding a blank one
-          layer.setIcon(
-            L.divIcon({
-              className: 'wmm-triangle',
-            })
-          );
         }
       },
     });
@@ -309,6 +307,14 @@ export class MapComponent implements OnInit {
           pointInBasin &&
           feature.properties.EcoTrendResults_y === 'FishPhos'
         ) {
+          layer.bindPopup(
+            '<div style="font-weight: bold">Eco Trends Site</div>' +
+              'Site ID: ' +
+              feature.properties.EcoTrendResults_EcoSiteID +
+              '<br>' +
+              'Site Name: ' +
+              feature.properties.EcoTrendResults_EcoSiteName
+          );
           if (feature.properties.EcoTrendResults_likelihood <= -0.8500001) {
             layer.setIcon(
               L.divIcon({
