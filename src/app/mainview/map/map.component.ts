@@ -35,7 +35,6 @@ export class MapComponent implements OnInit {
     this._mapService.map.addLayer(
       this._mapService.baseMaps[this._mapService.chosenBaseLayer]
     );
-    // this.addLegend();
     this.addScale();
     this.addTrendPoints();
     this.getZooms();
@@ -138,38 +137,6 @@ export class MapComponent implements OnInit {
         return '591,657,550';
     }
   }
-
-  /*
-  addLegend() {
-    this._mapService.legend = new L.Control({ position: 'topright' });
-    this._mapService.legend.onAdd = function () {
-      const div = L.DomUtil.create('div', 'info legend');
-      let item = '';
-
-      item +=
-        '<div id="LegendHeader" ><span><i class="fa fa-list"></i>Map Layers</span></div>' +
-        '<div id="legendDiv"><br>';
-      item += '<i class="site multiple-types"></i>Multiple</div>';
-      div.innerHTML = item;
-      div.id = 'legend';
-
-      //  L.DomEvent.on(div, 'click', (event) => {
-      //   // if click is in Explanation title, collapse/expand it.
-      //   const id = event.target['id'];
-      //   if ('legendHeader') {
-      //       const classes = document.getElementById('legendDiv').classList;
-      //       if (classes.contains('legendDiv-collapsed')) {
-      //           classes.remove('legendDiv-collapsed');
-      //       } else {
-      //           classes.add('legendDiv-collapsed');
-      //       }
-      //   }
-      // });
-      return div;
-    };
-    this._mapService.legend.addTo(this._mapService.map);
-  }
-  */
 
   addTrendPoints() {
     let wrtdsTrendsBasin = esri.featureLayer({
