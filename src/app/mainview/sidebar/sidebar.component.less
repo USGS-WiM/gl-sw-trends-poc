@@ -280,6 +280,41 @@ hr.legendBreak {
 .wmm-inverse-triangle-legend:after {
   color: black;
 }
+
+.wmm-triangle-legend {
+  height: 0px !important;
+  width: 0px !important;
+  border-top: none !important;
+  background-color: transparent !important;
+  background-color: transparent;
+  position: absolute;
+  bottom: 1px;
+  padding: 0;
+  overflow: visible !important;
+  color: white !important;
+  font-size: 14px;
+  overflow: visible !important;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 20px solid white;
+  top: -2px;
+  left: -1px;
+}
+.wmm-size-20.wmm-triangle-legend:after {
+  content: "\25b2";
+  background-color: transparent;
+  font-size: 18px;
+  font-family: sans-serif;
+  position: relative;
+  left: -9px;
+  top: 2px;
+}
+.wmm-triangle-legend.wmm-red-hollow {
+  border-bottom-color: red;
+}
+.wmm-triangle-legend.wmm-red-hollow:after {
+  color: white;
+}
 .triangle-margin-large {
   margin-top: 13px;
 }
