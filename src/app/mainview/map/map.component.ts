@@ -386,10 +386,6 @@ export class MapComponent implements OnInit {
   }
 
   getZooms() {
-    this._mapService.map.on('overlayadd', (e) => {
-      console.log('this is e', e);
-    });
-
     //Get the value of the previous zoom
     this._mapService.map.on('zoomstart', () => {
       this.previousZoom = this._mapService.map.getZoom();

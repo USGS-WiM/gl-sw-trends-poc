@@ -1,6 +1,4 @@
-import { Variable } from '@angular/compiler/src/render3/r3_ast';
 import { Component, OnInit, Directive, Input } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { MapService } from 'src/app/shared/services/map.service';
 
 @Component({
