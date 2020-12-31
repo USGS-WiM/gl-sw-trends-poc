@@ -8,14 +8,13 @@
 		Page header
 		- Nav, links, branding, etc
 	-->
-  <header id="main">
+  <header id="main" style="background-color: #01579b">
     <!-- Branding / Logo -->
     <div id="branding">
       <i
         class="far"
         id="sidebarToggle"
         (click)="expandSidebar = !expandSidebar"
-        [ngClass]="{ 'fa-bars': !expandSidebar, 'fa-times': expandSidebar }"
       ></i>
       <!-- USGS Logo -->
       <a
