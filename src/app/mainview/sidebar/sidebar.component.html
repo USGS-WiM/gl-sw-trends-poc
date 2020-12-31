@@ -5,6 +5,17 @@
   [ngClass]="{ 'fa-bars': !expandSidebar, 'fa-times': expandSidebar }"
 ></i>
 
+<!-- Start legend -->
+<div class="leaflet-top leaflet-right legendStyle" *ngIf="activeLayers">
+  <span class="mapLayerTitle"> <b>Map Layers </b></span>
+  <div *ngIf="basinVisible">Great Lakes Basin Boundary</div>
+  <div *ngIf="subBasinVisible">Great Lakes Sub-Basins</div>
+  <div *ngIf="watershedsVisible">Watersheds</div>
+  <div *ngIf="streamVisible">Streams and Rivers</div>
+  <div *ngIf="gageVisible">Gages</div>
+</div>
+<!-- End legend -->
+
 <div
   id="sidebar"
   [ngClass]="{ expanded: expandSidebar }"

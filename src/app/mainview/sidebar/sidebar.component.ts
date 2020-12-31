@@ -16,11 +16,13 @@ export class SidebarComponent implements OnInit {
   chosenBaseLayer: any;
   chosenBaseId: any;
   displayedAuxLayers: string[] = [];
-  basinVisible: boolean = false;
+  basinVisible: boolean = true;
   subBasinVisible: boolean = false;
   watershedsVisible: boolean = false;
   streamVisible: boolean = false;
   gageVisible: boolean = false;
+  activeLayers: boolean = true;
+  layerCount: number = 1;
 
   constructor(private _mapService: MapService) {}
 
@@ -70,18 +72,48 @@ export class SidebarComponent implements OnInit {
   //when an Additional Layer is checked, add/remove that layer from the map
   public toggleMapLayer(mapLayer: string, layerID: string, visible: any) {
     let checkboxID = document.getElementById(layerID) as HTMLInputElement;
-    console.log('visible', visible);
     if (checkboxID.checked == false) {
       this._mapService.map.removeLayer(this._mapService.auxLayers[mapLayer]);
       if (layerID === 'gageID') {
         this.gageVisible = false;
       }
+      if (layerID === 'basinID') {
+        this.basinVisible = false;
+      }
+      if (layerID === 'subBasinID') {
+        this.subBasinVisible = false;
+      }
+      if (layerID === 'streamRiver') {
+        this.streamVisible = false;
+      }
+      if (layerID === 'waterID') {
+        this.watershedsVisible = false;
+      }
+      this.layerCount -= 1;
     }
     if (checkboxID.checked == true) {
       this._mapService.map.addLayer(this._mapService.auxLayers[mapLayer]);
       if (layerID === 'gageID') {
         this.gageVisible = true;
       }
+      if (layerID === 'basinID') {
+        this.basinVisible = true;
+      }
+      if (layerID === 'subBasinID') {
+        this.subBasinVisible = true;
+      }
+      if (layerID === 'streamRiver') {
+        this.streamVisible = true;
+      }
+      if (layerID === 'waterID') {
+        this.watershedsVisible = true;
+      }
+      this.layerCount += 1;
+    }
+    if (this.layerCount > 0) {
+      this.activeLayers = true;
+    } else if (this.layerCount === 0) {
+      this.activeLayers = false;
     }
   }
 }
