@@ -8,11 +8,27 @@
 <!-- Start legend -->
 <div class="leaflet-top leaflet-right legendStyle" *ngIf="activeLayers">
   <span class="mapLayerTitle"> <b>Map Layers </b></span>
-  <div *ngIf="basinVisible">Great Lakes Basin Boundary</div>
-  <div *ngIf="subBasinVisible">Great Lakes Sub-Basins</div>
-  <div *ngIf="watershedsVisible">Watersheds</div>
-  <div *ngIf="streamVisible">Streams and Rivers</div>
-  <div *ngIf="gageVisible">Gages</div>
+  <hr />
+  <div *ngIf="basinVisible" class="legend-icon">
+    <div class="wmm-square wmm-black wmm-size-20"></div>
+    <label>Great Lakes Basin Boundary</label>
+  </div>
+  <div *ngIf="subBasinVisible" class="legend-icon">
+    <div class="wmm-square wmm-black wmm-size-20"></div>
+    <label>Great Lakes Sub-Basins</label>
+  </div>
+  <div *ngIf="watershedsVisible" class="legend-icon">
+    <div class="wmm-square wmm-black wmm-size-20"></div>
+    <label>Watersheds</label>
+  </div>
+  <div *ngIf="streamVisible" class="legend-icon">
+    <div class="wmm-square wmm-black wmm-size-20"></div>
+    <label>Streams and Rivers</label>
+  </div>
+  <div *ngIf="gageVisible" class="legend-icon">
+    <div class="wmm-square wmm-black wmm-size-20"></div>
+    <label>Gages</label>
+  </div>
 </div>
 <!-- End legend -->
 
