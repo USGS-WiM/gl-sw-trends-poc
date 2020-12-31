@@ -1,172 +1,162 @@
 // Buttons
 // Buttons
 // Buttons
-button{
-    border: none;
-    box-sizing: border-box;
-    padding: 6px 16px;
-    font-family: poppins;
+button {
+  border: none;
+  box-sizing: border-box;
+  padding: 6px 16px;
+  font-family: poppins;
+  background-color: primary;
+  color: white;
+  letter-spacing: 0.15px;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: borderRadius;
+
+  &:hover {
+    cursor: pointer;
+    //background-color: darken(primary, 5%);
+  }
+
+  &:active {
     background-color: primary;
-    color: white;
-    letter-spacing: 0.15px;
-    font-weight: 600;
-    font-size: 14px;
-    border-radius: borderRadius;
+  }
 
-    &:hover{
-        cursor: pointer;
-        text-decoration: underline;
-        //background-color: darken(primary, 5%);
+  // Colors
+  // Red
+  &.red {
+    background-color: red;
+    &:hover {
+      background-color: darken(red, 5%);
     }
-
-    &:focus{
-        text-decoration: underline;
+    &:active {
+      background-color: red;
     }
-
-    &:active{
-        background-color: primary;
-    }
-
-
-    // Colors
-    // Red
-    &.red{
-        background-color: red;
-        &:hover{
-            background-color: darken(red, 5%);
-        }
-        &:active{
-            background-color: red;
-        }
-    }
+  }
 }
-
-
 
 // Sidebar Multi Select
 // Sidebar Multi Select
 // Sidebar Multi Select
 #sidebar ng-select {
-    margin-bottom: 14px;
+  margin-bottom: 14px;
 
-    >div {
-        >div.single {
-            >div.toggle {
-                color: white !important;
-                background: none;
-                &:hover {
-                    background-color: #4389a9;
-                }
-            }
-            >div.placeholder {
-                color: white;
-                font-size: 35px;
-                font-family: MontserratRegular;
-            }
-            >div.clear {
-                &:hover {
-                    background-color: #4389a9;
-                }
-            }
+  > div {
+    > div.single {
+      > div.toggle {
+        color: white !important;
+        background: none;
+        &:hover {
+          background-color: #4389a9;
         }
-        border: none !important;
+      }
+      > div.placeholder {
+        color: white;
+        font-size: 35px;
+        font-family: MontserratRegular;
+      }
+      > div.clear {
+        &:hover {
+          background-color: #4389a9;
+        }
+      }
+    }
+    border: none !important;
+  }
+
+  .ng-select-container {
+    border-radius: 0;
+    border-bottom: 1px solid fade-out(black, 0.8) !important;
+    box-shadow: none !important;
+    background-color: transparent;
+    transition: transition;
+
+    &:hover {
+      border-bottom: 1px solid fade-out(black, 0.25) !important;
+      transition: transition;
+    }
+  }
+
+  .ng-value-container {
+    padding-left: 0;
+    padding-top: 0;
+    min-height: 0;
+
+    // Text Placeholder
+    .ng-placeholder {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: -0.1px;
+      top: 11px;
+      padding-left: 0px;
+      padding-bottom: 0px;
+      color: fade-out(black, 0.4);
     }
 
-    .ng-select-container{
-        border-radius: 0;
-        border-bottom: 1px solid fade-out(black, 0.8) !important;
-        box-shadow: none !important;
-        background-color: transparent;
+    // Text Input
+    .ng-input {
+      padding: 0 0 4px 0;
+    }
+
+    // Value / tag boxes
+    .ng-value {
+      margin: 2px 4px;
+      background-color: fade-out(primary, 0.85);
+      font-size: 12.5px;
+      font-family: sans;
+      font-weight: 600;
+      color: text;
+      display: flex;
+
+      .ng-value-icon {
+        color: black;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         transition: transition;
+        border-right: 1px solid fade-out(primary, 0.5);
+        padding: 1px 5px;
 
-        &:hover{
-            border-bottom: 1px solid fade-out(black, 0.25) !important;
-            transition: transition;
+        &:hover {
+          color: red;
+          background-color: fade-out(primary, 0.85);
+          transition: transition;
         }
+      }
+
+      .ng-value-label {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0 3px 0.5px 3px;
+        letter-spacing: -0.2px;
+      }
     }
+  }
 
-    .ng-value-container{
-        padding-left: 0;
-        padding-top: 0;
-        min-height: 0;
-
-        // Text Placeholder
-        .ng-placeholder{
-            font-size: 13px;
-            font-weight: 500;
-            letter-spacing: -0.1px;
-            top: 11px;
-            padding-left: 0px;
-            padding-bottom: 0px;
-            color: fade-out(black, 0.4);
-        }
-
-        // Text Input
-        .ng-input{
-            padding: 0 0 4px 0;
-        }
-
-        // Value / tag boxes
-        .ng-value{
-            margin: 2px 4px;
-            background-color: fade-out(primary, 0.85);
-            font-size: 12.5px;
-            font-family: sans;
-            font-weight: 600;
-            color: text;
-            display: flex;
-
-            .ng-value-icon{
-                color: black;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                transition: transition;
-                border-right: 1px solid fade-out(primary, 0.5);
-                padding: 1px 5px;
-
-                &:hover{
-                    color: red;
-                    background-color: fade-out(primary, 0.85);
-                    transition: transition;
-                }
-            }
-
-            .ng-value-label{
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                padding: 0 3px 0.5px 3px;
-                letter-spacing: -0.2px;
-            }
-        }
-    }
-
-    // Dropdown arrow
-    .ng-arrow-wrapper{
-        padding: 0;
-    }
-
-    
+  // Dropdown arrow
+  .ng-arrow-wrapper {
+    padding: 0;
+  }
 }
 #sidebar select-dropdown {
-    display: none;
+  display: none;
 }
 
 // sidebar input (minimum result count)
 #sidebar input {
-    border: none;
-    padding: 5px !important;
+  border: none;
+  padding: 5px !important;
 }
 
 #sidebar .minResults {
-    padding-left: 0;
-    padding-top: 0;
-    min-height: 0;
-    border-radius: 0;
-    border-bottom: 1px solid rgba(16, 16, 16, 0.2) !important;
-    box-shadow: none !important;
-    background-color: transparent;
-    transition: 0.15s;
-    margin-bottom: 14px;
+  padding-left: 0;
+  padding-top: 0;
+  min-height: 0;
+  border-radius: 0;
+  border-bottom: 1px solid rgba(16, 16, 16, 0.2) !important;
+  box-shadow: none !important;
+  background-color: transparent;
+  transition: 0.15s;
+  margin-bottom: 14px;
 }
