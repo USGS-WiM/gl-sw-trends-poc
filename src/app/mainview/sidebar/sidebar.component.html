@@ -6,28 +6,59 @@
 ></i>
 
 <!-- Start legend -->
-<div class="leaflet-top leaflet-right legendStyle" *ngIf="activeLayers">
-  <span class="mapLayerTitle"> <b>Map Layers </b></span>
-  <hr />
-  <div *ngIf="basinVisible" class="legend-icon">
-    <div class="wmm-square wmm-black wmm-size-20"></div>
-    <label>Great Lakes Basin Boundary</label>
+<div class="leaflet-top leaflet-right legendStyle">
+  <div *ngIf="activeLayers">
+    <span class="mapLayerTitle"> <b>Map Layers</b></span>
+    <hr />
+    <div *ngIf="basinVisible" class="legend-icon">
+      <div class="wmm-square wmm-icon-circle wmm-size-20 basin-icon"></div>
+      <label>Great Lakes Basin Boundary</label>
+    </div>
+    <div *ngIf="subBasinVisible" class="legend-icon">
+      <div class="wmm-square wmm-icon-circle wmm-size-20 subbasin-icon"></div>
+      <label>Great Lakes Sub-Basins</label>
+    </div>
+    <div *ngIf="watershedsVisible" class="legend-icon">
+      <div class="wmm-square wmm-icon-circle wmm-size-20 watershed-icon"></div>
+      <label>Watersheds</label>
+    </div>
+    <div *ngIf="gageVisible" class="legend-icon">
+      <div
+        class="wmm-pin wmm-altblue wmm-icon-circle wmm-icon-white wmm-size-20"
+      ></div>
+      <label>Gages</label>
+    </div>
+    <div *ngIf="streamVisible" class="legend-icon streamAlign">
+      <div class="stream-icon"></div>
+      <label>Streams and Rivers</label>
+    </div>
+    <hr class="legendBreak" />
   </div>
-  <div *ngIf="subBasinVisible" class="legend-icon">
-    <div class="wmm-square wmm-black wmm-size-20"></div>
-    <label>Great Lakes Sub-Basins</label>
-  </div>
-  <div *ngIf="watershedsVisible" class="legend-icon">
-    <div class="wmm-square wmm-black wmm-size-20"></div>
-    <label>Watersheds</label>
-  </div>
-  <div *ngIf="streamVisible" class="legend-icon">
-    <div class="wmm-square wmm-black wmm-size-20"></div>
-    <label>Streams and Rivers</label>
-  </div>
-  <div *ngIf="gageVisible" class="legend-icon">
-    <div class="wmm-square wmm-black wmm-size-20"></div>
-    <label>Gages</label>
+  <div>
+    <span class="mapLayerTitle"> <b>Trends</b></span>
+    <hr />
+    <div *ngIf="basinVisible" class="legend-icon">
+      <div class="wmm-square wmm-icon-circle wmm-size-20 basin-icon"></div>
+      <label>Great Lakes Basin Boundary</label>
+    </div>
+    <div *ngIf="subBasinVisible" class="legend-icon">
+      <div class="wmm-square wmm-icon-circle wmm-size-20 subbasin-icon"></div>
+      <label>Great Lakes Sub-Basins</label>
+    </div>
+    <div *ngIf="watershedsVisible" class="legend-icon">
+      <div class="wmm-square wmm-icon-circle wmm-size-20 watershed-icon"></div>
+      <label>Watersheds</label>
+    </div>
+    <div *ngIf="gageVisible" class="legend-icon">
+      <div
+        class="wmm-pin wmm-altblue wmm-icon-circle wmm-icon-white wmm-size-20"
+      ></div>
+      <label>Gages</label>
+    </div>
+    <div *ngIf="streamVisible" class="legend-icon streamAlign">
+      <div class="stream-icon"></div>
+      <label>Streams and Rivers</label>
+    </div>
   </div>
 </div>
 <!-- End legend -->
@@ -123,17 +154,17 @@
           />Watersheds<br />
           <input
             type="checkbox"
+            id="gageID"
+            (click)="toggleMapLayer('gageSites', 'gageID', this.gageVisible)"
+          />Gages<br />
+          <input
+            type="checkbox"
             id="streamRiver"
             disabled
             (click)="
               toggleMapLayer('majorStreamlines', 'streamRiver', streamVisible)
             "
           />Streams and Rivers*<br />
-          <input
-            type="checkbox"
-            id="gageID"
-            (click)="toggleMapLayer('gageSites', 'gageID', this.gageVisible)"
-          />Gages<br />
           <div class="zoomWarning">*Available at zoom level 12 and greater</div>
         </label>
       </div>

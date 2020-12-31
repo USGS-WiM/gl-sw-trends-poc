@@ -873,3 +873,28 @@
 .wmm-triangle.wmm-002BFF:after {
   color: #002bff;
 }
+.basin-icon:after {
+  border: 3px solid black;
+  background-color: transparent;
+}
+.subbasin-icon:after {
+  border: 3px solid rgba(0, 128, 9, 0.65);
+  background-color: rgba(0, 128, 9, 0.25);
+}
+.watershed-icon:after {
+  border: 5px solid gray;
+  background-color: transparent;
+}
+.stream-icon {
+  border-top: 4px solid #73a8f3 !important;
+  border: transparent;
+  margin-top: 13px;
+  margin-left: -3px;
+  height: 2px !important;
+  width: 16px;
+  background-color: transparent;
+  position: absolute;
+}
+.streamAlign {
+  margin-top: -13px;
+}
