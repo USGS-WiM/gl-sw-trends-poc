@@ -13,37 +13,36 @@ import { polygon, point } from '@turf/helpers';
 export class MapComponent implements OnInit {
   collapsedMap: any;
   collapsedDataPanel: any;
-  legendExpanded = true;
+  //for displaying the lat/lng and zoom level
   mapZoomLevel: any;
   mapScale: any;
   latitude: any;
   longitude: any;
+  //most recent zoom level and current zoom level
   previousZoom: any;
   currentZoom: any;
 
   constructor(private _mapService: MapService) {}
 
   ngOnInit() {
-    this.expandCollapseDataPanel();
-
+    //center map on the Great Lakes basin
     this._mapService.map = L.map('map', {
       center: L.latLng(45.522, -82.4846), //[-82.4846, 45.0522] - GL Geo Center
       zoom: 6,
       renderer: L.canvas(),
     });
 
+    //Add default layers: basin outline and basemap
+    this._mapService.map.addLayer(this._mapService.auxLayers['basin']);
     this._mapService.map.addLayer(
       this._mapService.baseMaps[this._mapService.chosenBaseLayer]
     );
+
+    //set up initial features
+    this.expandCollapseDataPanel();
     this.addScale();
     this.addTrendPoints();
     this.getZooms();
-
-    //this._mapService.map.addLayer(this._mapService.auxLayers);
-
-    //this._mapService.basinLayer.addTo(this._mapService.map);
-    this._mapService.map.addLayer(this._mapService.auxLayers['basin']);
-    //L.control.layers(this._mapService.overlayLayers).addTo(this._mapService.map)
   }
 
   expandCollapseDataPanel() {
@@ -93,6 +92,7 @@ export class MapComponent implements OnInit {
     });
   }
 
+  //convert zoom levels to scale
   scaleLookup(mapZoom: any): any {
     switch (mapZoom) {
       case 19:
@@ -138,12 +138,15 @@ export class MapComponent implements OnInit {
     }
   }
 
+  //The trend points that appear on map load
+  //There are 4 layers in the REST service, but we only call these 2 because the others don't have points in the basin
   addTrendPoints() {
     let wrtdsTrendsBasin = esri.featureLayer({
       url:
         'https://gis.wim.usgs.gov/arcgis/rest/services/SWTrends/swTrendSites/MapServer/2',
       onEachFeature: function (feature: any, layer: any) {
         //Create very simplified outline of basin
+        //This should be updated to use the real basin outline
         let simpBasin = polygon([
           [
             [51.19, -90.9],
@@ -174,53 +177,73 @@ export class MapComponent implements OnInit {
         let pointInBasin = booleanPointInPolygon(coords, simpBasin);
         //if the feature is inside of the basin, plot it
         if (pointInBasin) {
-          if (feature.properties['wrtds_trends_wm_new.likeC'] <= -0.8500001) {
-            layer.setIcon(
-              L.divIcon({
-                className:
-                  'wmm-inverse-triangle wmm-black wmm-icon-inverse-triangle wmm-size-20 ',
-              })
-            );
-          } else if (
-            feature.properties['wrtds_trends_wm_new.likeC'] > -0.8500001 &&
-            feature.properties['wrtds_trends_wm_new.likeC'] <= -0.700001
+          if (
+            feature.properties['wrtds_trends_wm_new.yearStart'] === 2002 &&
+            feature.properties['wrtds_trends_wm_new.param_nm'] ===
+              'Total Phosphorus'
           ) {
-            layer.setIcon(
-              L.divIcon({
-                className:
-                  'wmm-inverse-triangle wmm-white wmm-icon-inverse-triangle wmm-size-20 ',
-              })
+            if (feature.properties['wrtds_trends_wm_new.likeC'] <= -0.8500001) {
+              layer.setIcon(
+                L.divIcon({
+                  className:
+                    'wmm-inverse-triangle wmm-black wmm-icon-inverse-triangle wmm-size-20 ',
+                })
+              );
+            } else if (
+              feature.properties['wrtds_trends_wm_new.likeC'] > -0.8500001 &&
+              feature.properties['wrtds_trends_wm_new.likeC'] <= -0.700001
+            ) {
+              layer.setIcon(
+                L.divIcon({
+                  className:
+                    'wmm-inverse-triangle wmm-white wmm-icon-inverse-triangle wmm-size-20 ',
+                })
+              );
+            } else if (
+              feature.properties['wrtds_trends_wm_new.likeC'] > -0.700001 &&
+              feature.properties['wrtds_trends_wm_new.likeC'] <= 0.7
+            ) {
+              layer.setIcon(
+                L.divIcon({
+                  className:
+                    'wmm-circle wmm-yellow wmm-icon-circle wmm-icon-black wmm-size-20',
+                })
+              );
+            } else if (
+              feature.properties['wrtds_trends_wm_new.likeC'] > 0.7 &&
+              feature.properties['wrtds_trends_wm_new.likeC'] <= 0.849999
+            ) {
+              layer.setIcon(
+                L.divIcon({
+                  className:
+                    'wmm-triangle wmm-red-hollow wmm-icon-triangle wmm-size-20',
+                })
+              );
+            } else if (
+              feature.properties['wrtds_trends_wm_new.likeC'] > 0.849999
+            ) {
+              layer.setIcon(
+                L.divIcon({
+                  className:
+                    'wmm-triangle wmm-red wmm-icon-triangle wmm-size-20',
+                })
+              );
+              //There are lots of sites that don't have a 'wrtds_trends_wm_new.likeC', but they do have
+              //'likeCDown' and 'likeCUp'. Not sure what to do with these, so skipping them for now.
+            } else {
+              layer.setIcon(
+                L.divIcon({
+                  className: 'wmm-triangle',
+                })
+              );
+              /* There are so many of these that, for now, I'm not flagging them
+            console.log(
+              'Skipped site ' +
+                feature.properties['wrtds_trends_wm_new.likeC'] +
+                ' due to null wrtds_trends_wm_new.likeC'
             );
-          } else if (
-            feature.properties['wrtds_trends_wm_new.likeC'] > -0.700001 &&
-            feature.properties['wrtds_trends_wm_new.likeC'] <= 0.7
-          ) {
-            layer.setIcon(
-              L.divIcon({
-                className:
-                  'wmm-circle wmm-yellow wmm-icon-circle wmm-icon-black wmm-size-20',
-              })
-            );
-          } else if (
-            feature.properties['wrtds_trends_wm_new.likeC'] > 0.7 &&
-            feature.properties['wrtds_trends_wm_new.likeC'] <= 0.849999
-          ) {
-            layer.setIcon(
-              L.divIcon({
-                className:
-                  'wmm-triangle wmm-red-hollow wmm-icon-triangle wmm-size-20',
-              })
-            );
-          } else if (
-            feature.properties['wrtds_trends_wm_new.likeC'] > 0.849999
-          ) {
-            layer.setIcon(
-              L.divIcon({
-                className: 'wmm-triangle wmm-red wmm-icon-triangle wmm-size-20',
-              })
-            );
-            //There are lots of sites that don't have a 'wrtds_trends_wm_new.likeC', but they do have
-            //'likeCDown' and 'likeCUp'. Not sure what to do with these, so skipping them for now.
+            */
+            }
           } else {
             layer.setIcon(
               L.divIcon({
@@ -228,12 +251,12 @@ export class MapComponent implements OnInit {
               })
             );
             /* There are so many of these that, for now, I'm not flagging them
-            console.log(
-              'Skipped site ' +
-                feature.properties['wrtds_trends_wm_new.likeC'] +
-                ' due to null wrtds_trends_wm_new.likeC'
-            );
-            */
+          console.log(
+            'Skipped site ' +
+              feature.properties['wrtds_trends_wm_new.likeC'] +
+              ' due to null wrtds_trends_wm_new.likeC'
+          );
+          */
           }
         } else {
           //If point is outside of the basin, plot an invisible marker
@@ -250,6 +273,8 @@ export class MapComponent implements OnInit {
       url:
         'https://gis.wim.usgs.gov/arcgis/rest/services/SWTrends/swTrendSites/MapServer/1',
       onEachFeature: function (feature: any, layer: any) {
+        //Create very simplified outline of basin
+        //This should be updated to use the real basin outline
         let simpBasin = polygon([
           [
             [51.19, -90.9],
@@ -279,7 +304,11 @@ export class MapComponent implements OnInit {
         //is the feature inside the basin?
         let pointInBasin = booleanPointInPolygon(coords, simpBasin);
         //if the feature is inside of the basin, plot it
-        if (pointInBasin) {
+        //if the feature has info about 'Average fish community tolerance to phosphorus', plot it
+        if (
+          pointInBasin &&
+          feature.properties.EcoTrendResults_y === 'FishPhos'
+        ) {
           if (feature.properties.EcoTrendResults_likelihood <= -0.8500001) {
             layer.setIcon(
               L.divIcon({
@@ -393,12 +422,4 @@ export class MapComponent implements OnInit {
       }
     });
   }
-
-  // When data or map is collapsed or expanded,
-  // invalidate size to refresh tiles and center map
-  // resizeMap() {
-  //   setTimeout(() => {
-  //       this._mapService.map.invalidateSize()
-  //   }, 150);
-  // }
 }
