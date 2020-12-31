@@ -24,7 +24,6 @@ export class MapService {
   public basinAreaStyle: any;
   public basinOutlineStyle: any;
   public basinOutline: any;
-  public gageSitesVisible: any;
 
   //   public siteColors = ['red', 'blue', 'green', 'gray'];
   //   public siteCategories = ['Active', 'Suspected', 'Closed', 'Other']
