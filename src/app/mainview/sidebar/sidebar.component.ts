@@ -16,11 +16,13 @@ export class SidebarComponent implements OnInit {
   chosenBaseLayer: any;
   chosenBaseId: any;
   displayedAuxLayers: string[] = [];
+  //If true, layer is on and corresponding layer will appear in legend
   basinVisible: boolean = true;
   subBasinVisible: boolean = false;
   watershedsVisible: boolean = false;
   streamVisible: boolean = false;
   gageVisible: boolean = false;
+  //If there are any map layers on, map legend section will appear
   activeLayers: boolean = true;
   layerCount: number = 1;
 
@@ -72,6 +74,7 @@ export class SidebarComponent implements OnInit {
   //when an Additional Layer is checked, add/remove that layer from the map
   public toggleMapLayer(mapLayer: string, layerID: string, visible: any) {
     let checkboxID = document.getElementById(layerID) as HTMLInputElement;
+    //when a checkbox is checked, add layer to map and icon to legend
     if (checkboxID.checked == false) {
       this._mapService.map.removeLayer(this._mapService.auxLayers[mapLayer]);
       if (layerID === 'gageID') {
@@ -91,6 +94,7 @@ export class SidebarComponent implements OnInit {
       }
       this.layerCount -= 1;
     }
+    //when a checkbox is unchecked, remove layer from map and icon from legend
     if (checkboxID.checked == true) {
       this._mapService.map.addLayer(this._mapService.auxLayers[mapLayer]);
       if (layerID === 'gageID') {
@@ -110,6 +114,7 @@ export class SidebarComponent implements OnInit {
       }
       this.layerCount += 1;
     }
+    //if there is at least one map layer, show map layer section of legend
     if (this.layerCount > 0) {
       this.activeLayers = true;
     } else if (this.layerCount === 0) {
