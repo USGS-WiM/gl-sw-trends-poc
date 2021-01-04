@@ -69,9 +69,19 @@ export class SidebarComponent implements OnInit {
     }
   }
 
+  //triggered with 'Filter Sites' button is pressed
+  //filters wrtdsTrendsBasin by the new consituent value
+  public filterSites() {
+    let constituent = document.getElementById('typeSelect') as HTMLInputElement;
+    this._mapService.map.removeLayer(this._mapService.wrtdsTrendsBasin);
+    this._mapService.map.removeLayer(this._mapService.allEcoTrendsBasin);
+    this._mapService.addTrendPoints(constituent.value, 2002);
+  }
+
   //when an Additional Layer is checked, add/remove that layer from the map
   public toggleMapLayer(mapLayer: string, layerID: string, visible: any) {
     let checkboxID = document.getElementById(layerID) as HTMLInputElement;
+
     //when a checkbox is checked, add layer to map and icon to legend
     if (checkboxID.checked == false) {
       this._mapService.map.removeLayer(this._mapService.auxLayers[mapLayer]);

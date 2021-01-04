@@ -201,7 +201,7 @@
           <div id="constDropdowns" style="padding: 2px 2px">
             <label for="typeSelect" class="constLabel">Constituent Group</label>
             <span>
-              <select id="typeSelect">
+              <select id="groupSelect">
                 <option value="Nutrients" select="#nutrientsSelect">
                   Nutrients
                 </option>
@@ -214,23 +214,50 @@
             <label class="constLabel">Constituent</label>
             <span>
               <select id="typeSelect">
-                <option value="TP" select="#tpSelect">
+                <option value="Total Phosphorus" select="#tpSelect">
                   Total Phosphorus (TP)
                 </option>
-                <option value="orthoP" select="#orthoPSelect">
-                  Dissolved Phosphorus (ortho P)
-                </option>
-                <option value="SS" select="#ssSelect">
+                <option
+                  value="Suspended sediment concentration"
+                  select="#ssSelect"
+                >
                   Suspended Sediment (SS)
                 </option>
-                <option value="NO3" select="#no3Select">Nitrate (NO3)</option>
-                <option value="KJ" select="#kjSelect">
-                  Kjedahl Nitrogen (KJ)
+                <option value="Total Nitrogen" select="#nitrogenSelect">
+                  Total Nitrogen
                 </option>
-                <option value="NH4" select="#nh4Select">Ammonia (NH4)</option>
-                <option value="Cl" select="#clSelect">Chloride (Cl)</option>
+                <option value="Chloride" select="#kjSelect">
+                  Chloride (Cl)
+                </option>
+                <option value="Ammonia" select="#nh4Select">
+                  Ammonia (NH4)
+                </option>
+                <option value="Alkalinity" select="#alkalinitySelect">
+                  Alkalinity
+                </option>
+                <option value="Nitrate" select="#no3Select">
+                  Nitrate (NO3)
+                </option>
+                <option value="Sulfate" select="sulfateSelect">
+                  Sulfate (NO3)
+                </option>
               </select>
             </span>
+          </div>
+          <div style="text-align: center; color: gainsboro">
+            <button
+              (click)="filterSites()"
+              style="
+                background-color: rgb(133, 164, 184);
+                font-size: 12px;
+                color: white;
+                margin-top: 10px;
+                font-weight: normal;
+                font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+              "
+            >
+              Filter Sites
+            </button>
           </div>
         </div>
       </div>
