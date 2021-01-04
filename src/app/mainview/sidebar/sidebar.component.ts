@@ -69,6 +69,8 @@ export class SidebarComponent implements OnInit {
     }
   }
 
+  //triggered with 'Filter Sites' button is pressed
+  //filters wrtdsTrendsBasin by the new consituent value
   public filterSites() {
     let constituent = document.getElementById('typeSelect') as HTMLInputElement;
     this._mapService.map.removeLayer(this._mapService.wrtdsTrendsBasin);
