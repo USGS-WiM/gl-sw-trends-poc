@@ -76,7 +76,7 @@ export class SidebarComponent implements OnInit {
     let trendStart = document.getElementById('yearSelect') as HTMLInputElement;
     let trendStartInput = Number(trendStart.value);
     this._mapService.map.removeLayer(this._mapService.wrtdsTrendsBasin);
-    this._mapService.map.removeLayer(this._mapService.allEcoTrendsBasin);
+    // this._mapService.map.removeLayer(this._mapService.allEcoTrendsBasin);
     this._mapService.addTrendPoints(constituent.value, trendStartInput);
   }
 
