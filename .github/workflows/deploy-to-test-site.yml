@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - dev
+      - gageUpdates
 name: Deploy to Test
 jobs:
   deployToTestSite:
