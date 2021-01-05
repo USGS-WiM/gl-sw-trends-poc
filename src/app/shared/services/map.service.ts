@@ -67,6 +67,9 @@ export class MapService {
         //is the feature inside the basin?
         let pointInBasin = booleanPointInPolygon(coords, simpBasin);
         //if the feature is inside of the basin, plot it with filter values
+        if (pointInBasin) {
+          console.log(feature.properties);
+        }
         if (
           pointInBasin &&
           feature.properties['wrtds_trends_wm_new.yearStart'] === year &&
@@ -272,7 +275,7 @@ export class MapService {
     });
     //Add the trend points that are inside of the basin to the map on load
     this.wrtdsTrendsBasin.addTo(this.map);
-    this.allEcoTrendsBasin.addTo(this.map);
+    // this.allEcoTrendsBasin.addTo(this.map);
   }
 
   public dataPanelCollapseSubject = new Subject();

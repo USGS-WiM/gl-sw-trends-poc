@@ -31,8 +31,9 @@ export class MapComponent implements OnInit {
       renderer: L.canvas(),
     });
 
-    //Add default layers: basin outline and basemap
+    //Add default layers: basin outline, gages, and basemap
     this._mapService.map.addLayer(this._mapService.auxLayers['basin']);
+    this._mapService.map.addLayer(this._mapService.auxLayers['gageSites']);
     this._mapService.map.addLayer(
       this._mapService.baseMaps[this._mapService.chosenBaseLayer]
     );
