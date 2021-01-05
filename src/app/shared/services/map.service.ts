@@ -27,7 +27,7 @@ export class MapService {
   public basinOutlineStyle: any;
   public basinOutline: any;
   public wrtdsTrendsBasin: any;
-  public allEcoTrendsBasin: any;
+  // public allEcoTrendsBasin: any;
 
   //The trend points that appear on map load
   //There are 4 layers in the REST service, but we only call these 2 because the others don't have points in the basin
@@ -157,6 +157,8 @@ export class MapService {
         }
       },
     });
+    //Commenting out, but leaving in case we want this layer later
+    /*
     this.allEcoTrendsBasin = esri.featureLayer({
       url:
         'https://gis.wim.usgs.gov/arcgis/rest/services/SWTrends/swTrendSites/MapServer/1',
@@ -270,9 +272,10 @@ export class MapService {
         }
       },
     });
+    */
     //Add the trend points that are inside of the basin to the map on load
     this.wrtdsTrendsBasin.addTo(this.map);
-    this.allEcoTrendsBasin.addTo(this.map);
+    // this.allEcoTrendsBasin.addTo(this.map);
   }
 
   public dataPanelCollapseSubject = new Subject();

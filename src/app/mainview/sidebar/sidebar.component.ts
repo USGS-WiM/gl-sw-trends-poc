@@ -19,10 +19,10 @@ export class SidebarComponent implements OnInit {
   subBasinVisible: boolean = false;
   watershedsVisible: boolean = false;
   streamVisible: boolean = false;
-  gageVisible: boolean = false;
+  gageVisible: boolean = true;
   //If there are any map layers on, map legend section will appear
   activeLayers: boolean = true;
-  layerCount: number = 1;
+  layerCount: number = 2;
 
   constructor(private _mapService: MapService) {}
 
@@ -76,7 +76,7 @@ export class SidebarComponent implements OnInit {
     let trendStart = document.getElementById('yearSelect') as HTMLInputElement;
     let trendStartInput = Number(trendStart.value);
     this._mapService.map.removeLayer(this._mapService.wrtdsTrendsBasin);
-    this._mapService.map.removeLayer(this._mapService.allEcoTrendsBasin);
+    // this._mapService.map.removeLayer(this._mapService.allEcoTrendsBasin);
     this._mapService.addTrendPoints(constituent.value, trendStartInput);
   }
 
