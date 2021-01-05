@@ -26,4 +26,4 @@ jobs:
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
         with:
-          args: Successfully deployed to [site]
+          args: Successfully deployed to glswDemo
