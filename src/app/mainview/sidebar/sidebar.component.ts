@@ -19,10 +19,10 @@ export class SidebarComponent implements OnInit {
   subBasinVisible: boolean = false;
   watershedsVisible: boolean = false;
   streamVisible: boolean = false;
-  gageVisible: boolean = false;
+  gageVisible: boolean = true;
   //If there are any map layers on, map legend section will appear
   activeLayers: boolean = true;
-  layerCount: number = 1;
+  layerCount: number = 2;
 
   constructor(private _mapService: MapService) {}
 
