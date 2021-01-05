@@ -191,11 +191,9 @@ export class MapService {
         ]);
         //is the feature inside the basin?
         let pointInBasin = booleanPointInPolygon(coords, simpBasin);
-        //if the feature is inside of the basin, plot it
-        //if the feature has info about 'Average fish community tolerance to phosphorus', plot it
         if (
           pointInBasin &&
-          feature.properties.EcoTrendResults_y === 'FishPhos'
+          feature.properties.EcoTrendResults_firstYear === year
         ) {
           layer.bindPopup(
             '<div style="font-weight: bold">Eco Trends Site</div>' +

@@ -73,9 +73,11 @@ export class SidebarComponent implements OnInit {
   //filters wrtdsTrendsBasin by the new consituent value
   public filterSites() {
     let constituent = document.getElementById('typeSelect') as HTMLInputElement;
+    let trendStart = document.getElementById('yearSelect') as HTMLInputElement;
+    let trendStartInput = Number(trendStart.value);
     this._mapService.map.removeLayer(this._mapService.wrtdsTrendsBasin);
     this._mapService.map.removeLayer(this._mapService.allEcoTrendsBasin);
-    this._mapService.addTrendPoints(constituent.value, 2002);
+    this._mapService.addTrendPoints(constituent.value, trendStartInput);
   }
 
   //when an Additional Layer is checked, add/remove that layer from the map
