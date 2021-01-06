@@ -218,15 +218,6 @@
                 <option value="Total Phosphorus" select="#tpSelect">
                   Total Phosphorus (TP)
                 </option>
-                <option
-                  value="Suspended sediment concentration"
-                  select="#ssSelect"
-                >
-                  Suspended Sediment (SS)
-                </option>
-                <option value="Total Nitrogen" select="#nitrogenSelect">
-                  Total Nitrogen
-                </option>
                 <option value="Chloride" select="#kjSelect">
                   Chloride (Cl)
                 </option>
@@ -258,17 +249,7 @@
             </span>
           </div>
           <div style="text-align: center; color: gainsboro">
-            <button
-              (click)="filterSites()"
-              style="
-                background-color: rgb(133, 164, 184);
-                font-size: 12px;
-                color: white;
-                margin-top: 10px;
-                font-weight: normal;
-                font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
-              "
-            >
+            <button (click)="filterSites()" class="blueButton">
               Filter Sites
             </button>
           </div>

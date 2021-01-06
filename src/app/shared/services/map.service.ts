@@ -29,6 +29,28 @@ export class MapService {
   public wrtdsTrendsBasin: any;
   // public allEcoTrendsBasin: any;
 
+  public dataPanelCollapseSubject = new Subject();
+  public get DataPanelCollapse(): Observable<any> {
+    return this.dataPanelCollapseSubject.asObservable();
+  }
+  public collapsedDataPanel: any;
+  public collapsedMap: any;
+
+  public expandCollapseDataPanel() {
+    console.log('expanded');
+    this.DataPanelCollapse.subscribe((collapse: any) => {
+      this.collapsedDataPanel = collapse;
+    });
+
+    this.dataPanelCollapseSubject.next(!this.collapsedDataPanel);
+
+    // When data or map is collapsed or expanded,
+    // invalidate size to refresh tiles and center map
+    setTimeout(() => {
+      this.map.invalidateSize();
+    }, 150);
+  }
+
   //The trend points that appear on map load
   //There are 4 layers in the REST service, but we only call these 2 because the others don't have points in the basin
   public addTrendPoints(filterValue: string, year: number) {
@@ -72,14 +94,53 @@ export class MapService {
           feature.properties['wrtds_trends_wm_new.yearStart'] === year &&
           feature.properties['wrtds_trends_wm_new.param_nm'] === filterValue
         ) {
-          layer.bindPopup(
-            '<div style="font-weight: bold">WRTDS Site</div>' +
-              'Site ID: ' +
-              feature.properties['wrtds_sites.Gage_number'] +
-              '<br>' +
-              'Site Name: ' +
-              feature.properties['wrtds_sites.Station_nm']
-          );
+          //get the site number (wrtds_sites.Gage_no is cleaner, but .Site_no is linked to the graphs)
+          let gageNum = feature.properties['wrtds_sites.Site_no'];
+          gageNum = gageNum.toString();
+          //bind popup with basic site info and graph
+          if (filterValue == 'Total Phosphorus') {
+            let plotConcTimeURL =
+              'https://s3.amazonaws.com/nawqatrends.wim.usgs.gov/charts/Total%20Phosphorus_' +
+              gageNum +
+              '/plotConcTime.png';
+            layer.bindPopup(
+              '<div style="font-weight: normal; font-size: 18px; color: gray">Site Information</div>' +
+                'Site ID: ' +
+                gageNum +
+                '<br>' +
+                'Site Name: ' +
+                feature.properties['wrtds_sites.Station_nm'] +
+                '<hr>' +
+                '<div style="font-size: 15px; text-align: center; margin-left: 20px; margin-bottom: -15px; font-weight: bold">Monitoring Data</div>' +
+                '<br>' +
+                '<img src=' +
+                plotConcTimeURL +
+                '>'
+              // "<button class='blueButton' (click)='this.expandCollapseDataPanel()'>View Data</button>"
+            );
+          } else {
+            let plotConcTimeURL =
+              'https://s3.amazonaws.com/nawqatrends.wim.usgs.gov/charts/' +
+              filterValue +
+              '_' +
+              gageNum +
+              '/plotConcTime.png';
+            layer.bindPopup(
+              '<div style="font-weight: normal; font-size: 18px; color: gray">Site Information</div>' +
+                'Site ID: ' +
+                gageNum +
+                '<br>' +
+                'Site Name: ' +
+                feature.properties['wrtds_sites.Station_nm'] +
+                '<hr>' +
+                '<div style="font-size: 15px; text-align: center; margin-left: 20px; margin-bottom: -15px; font-weight: bold">Monitoring Data</div>' +
+                '<br>' +
+                '<img src=' +
+                plotConcTimeURL +
+                '>'
+              // "<button class='blueButton' (click)='this.expandCollapseDataPanel()'>View Data</button>"
+            );
+          }
           if (feature.properties['wrtds_trends_wm_new.likeC'] <= -0.8500001) {
             layer.setIcon(
               L.divIcon({
@@ -276,11 +337,6 @@ export class MapService {
     //Add the trend points that are inside of the basin to the map on load
     this.wrtdsTrendsBasin.addTo(this.map);
     // this.allEcoTrendsBasin.addTo(this.map);
-  }
-
-  public dataPanelCollapseSubject = new Subject();
-  public get DataPanelCollapse(): Observable<any> {
-    return this.dataPanelCollapseSubject.asObservable();
   }
 
   constructor(private siteListService: SitelistService) {
