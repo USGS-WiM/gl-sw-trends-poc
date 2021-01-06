@@ -94,10 +94,10 @@ export class MapService {
           feature.properties['wrtds_trends_wm_new.yearStart'] === year &&
           feature.properties['wrtds_trends_wm_new.param_nm'] === filterValue
         ) {
+          //get the site number (wrtds_sites.Gage_no is cleaner, but .Site_no is linked to the graphs)
           let gageNum = feature.properties['wrtds_sites.Site_no'];
           gageNum = gageNum.toString();
-          //  let boxConcMonthURL =
-          //  'https://s3.amazonaws.com/nawqatrends.wim.usgs.gov/charts/Total%20Phosphorus_04137500/boxConcMonth.png';
+          //bind popup with basic site info and graph
           if (filterValue == 'Total Phosphorus') {
             let plotConcTimeURL =
               'https://s3.amazonaws.com/nawqatrends.wim.usgs.gov/charts/Total%20Phosphorus_' +
