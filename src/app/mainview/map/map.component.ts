@@ -10,8 +10,8 @@ import * as esri from 'esri-leaflet';
   styleUrls: ['./map.component.less'],
 })
 export class MapComponent implements OnInit {
-  collapsedMap: any;
-  collapsedDataPanel: any;
+  //collapsedMap: any;
+  //collapsedDataPanel: any;
   //for displaying the lat/lng and zoom level
   mapZoomLevel: any;
   mapScale: any;
@@ -21,7 +21,7 @@ export class MapComponent implements OnInit {
   previousZoom: any;
   currentZoom: any;
 
-  constructor(private _mapService: MapService) {}
+  constructor(public _mapService: MapService) {}
 
   ngOnInit() {
     //center map on the Great Lakes basin
@@ -39,12 +39,12 @@ export class MapComponent implements OnInit {
     );
 
     //set up initial features
-    this.expandCollapseDataPanel();
+    this._mapService.expandCollapseDataPanel();
     this.addScale();
     this._mapService.addTrendPoints('Total Phosphorus', 2002);
     this.getZooms();
   }
-
+  /*
   expandCollapseDataPanel() {
     this._mapService.DataPanelCollapse.subscribe((collapse: any) => {
       this.collapsedDataPanel = collapse;
@@ -58,6 +58,7 @@ export class MapComponent implements OnInit {
       this._mapService.map.invalidateSize();
     }, 150);
   }
+  */
 
   addScale() {
     this._mapService.map.whenReady(() => {
